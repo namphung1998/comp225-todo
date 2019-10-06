@@ -12,3 +12,5 @@ web-report/
 *.log
 .expo*/
 node_modules/
+.idea
+DS_Store
