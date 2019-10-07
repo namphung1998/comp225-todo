@@ -4,7 +4,7 @@ import { View, Text } from 'react-native';
 function TaskList() {
   return (
     <View style={styles.container}>
-      <Text>Hello</Text>
+      <Text>TaskList</Text>
     </View>
   );
 }
