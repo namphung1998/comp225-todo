@@ -1,13 +1,35 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
 import ProgressScreen from './screens/ProgressScreen';
 
-export default function App() {
-  return (
-    <View>
-      <ProgressScreen/>
-    </View>
-  );
+import * as Font from 'expo-font';
+
+export default class App extends Component {
+  state = {
+    loaded: false
+  };
+
+  componentDidMount() {
+    Font.loadAsync({
+      'gloria-hallelujah-regular': require('./assets/fonts/Gloria_Hallelujah/GloriaHallelujah-Regular.ttf')
+    })
+      .then(() => {
+        this.setState({ loaded: true })
+      });
+  }
+
+  render() {
+    if (!this.state.loaded) {
+      console.log('hello')
+      return <ActivityIndicator />
+    }
+    console.log('done')
+    return (
+      <View>
+        <ProgressScreen />
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -15,6 +37,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
-  },
+    justifyContent: 'center'
+  }
 });

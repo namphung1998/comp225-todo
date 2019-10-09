@@ -13,4 +13,4 @@ web-report/
 .expo*/
 node_modules/
 .idea
-DS_Store
+.DS_Store

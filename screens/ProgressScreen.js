@@ -1,10 +1,14 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import ProgressHeader from '../components/ProgressHeader';
 
 function ProgressScreen() {
   return (
     <View style={styles.container}>
-      <Text>Hello</Text>
+      <ProgressHeader
+        numCompleted={1}
+        numTotal={10}
+      />
     </View>
   );
 }
