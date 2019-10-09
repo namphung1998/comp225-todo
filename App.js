@@ -12,18 +12,16 @@ export default class App extends Component {
   componentDidMount() {
     Font.loadAsync({
       'gloria-hallelujah-regular': require('./assets/fonts/Gloria_Hallelujah/GloriaHallelujah-Regular.ttf')
-    })
-      .then(() => {
-        this.setState({ loaded: true })
-      });
+    }).then(() => {
+      this.setState({ loaded: true });
+    });
   }
 
   render() {
     if (!this.state.loaded) {
-      console.log('hello')
-      return <ActivityIndicator />
+      return <ActivityIndicator />;
     }
-    console.log('done')
+
     return (
       <View>
         <ProgressScreen />
