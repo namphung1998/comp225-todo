@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
+import TaskItem from './TaskItem.js';
 
 const data = [
   { title: 'Task1' },
@@ -20,7 +21,7 @@ function TaskList() {
     <View style={styles.container}>
       <FlatList
         data={data}
-        renderItem={({ item }) => <Text style={styles.item}>{item.title}</Text>}
+        renderItem={({ item }) => <TaskItem item={item}/>}
         keyExtractor={item => item.title}
       />
     </View>
@@ -39,19 +40,5 @@ const styles = StyleSheet.create({
     height: 44
   }
 });
-
-// function TaskList() {
-//   return (
-//     <View style={styles.container}>
-//       <Text>TaskList</Text>
-//     </View>
-//   );
-// }
-//
-// const styles = {
-//   container: {
-//     paddingTop: 24
-//   }
-// }
 
 export default TaskList;
