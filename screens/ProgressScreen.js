@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import ProgressHeader from '../components/ProgressHeader';
+import TaskList from '../components/TaskList';
 
 function ProgressScreen() {
   return (
@@ -9,6 +10,7 @@ function ProgressScreen() {
         numCompleted={1}
         numTotal={10}
       />
+      <TaskList/>
     </View>
   );
 }
