@@ -1,31 +1,24 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { createAppContainer } from 'react-navigation';
+
 import ProgressScreen from './screens/ProgressScreen';
 
 import * as Font from 'expo-font';
+import AddTask from './screens/AddTask';
+
+const tabNavigator = createBottomTabNavigator({
+  Progress: ProgressScreen,
+  AddTask: AddTask
+});
+
+const AppContainer = createAppContainer(tabNavigator);
 
 export default class App extends Component {
-  state = {
-    loaded: false
-  };
-
-  componentDidMount() {
-    Font.loadAsync({
-      'gloria-hallelujah-regular': require('./assets/fonts/Gloria_Hallelujah/GloriaHallelujah-Regular.ttf')
-    }).then(() => {
-      this.setState({ loaded: true });
-    });
-  }
-
   render() {
-    if (!this.state.loaded) {
-      return <ActivityIndicator />;
-    }
-
     return (
-      <View>
-        <ProgressScreen />
-      </View>
+      <AppContainer />
     );
   }
 }

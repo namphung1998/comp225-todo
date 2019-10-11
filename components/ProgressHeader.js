@@ -8,8 +8,7 @@ function ProgressHeader({ numCompleted, numTotal }) {
       <Header
         placement='left'
         leftComponent={{
-          text: 'PROGRESS',
-          style: { fontFamily: 'gloria-hallelujah-regular' }
+          text: 'PROGRESS'
         }}
         rightComponent={{ text: `${numCompleted}/${numTotal}` }}
       />
