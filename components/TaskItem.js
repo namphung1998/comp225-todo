@@ -2,15 +2,12 @@ import React, { Component } from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 import { CheckBox } from 'react-native-elements';
 
-function TaskItem({item}) {
+function TaskItem({ item }) {
   return (
     <View style={styles.container}>
       <View style={styles.checkboxContainer}>
-        <CheckBox
-          checked={true}
-        />
+        <CheckBox checked={true} />
       </View>
-
 
       <View style={styles.textContainer}>
         <Text> {item.title} </Text>
@@ -21,19 +18,19 @@ function TaskItem({item}) {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
+    flexDirection: 'row'
     // paddingTop: 50
   },
 
   checkboxContainer: {
-    paddingLeft: 10,
+    paddingLeft: 10
     // fontSize: 18,
     // height: 44
   },
 
   textContainer: {
     marginLeft: 10,
-    justifyContent: "center"
+    justifyContent: 'center'
   }
 });
 

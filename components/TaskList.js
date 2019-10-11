@@ -13,15 +13,15 @@ const data = [
   { title: 'Task8' },
   { title: 'Task9' },
   { title: 'Task10' }
-]
+];
 
 function TaskList() {
-  console.log('taskList')
+  console.log('taskList');
   return (
     <View style={styles.container}>
       <FlatList
         data={data}
-        renderItem={({ item }) => <TaskItem item={item}/>}
+        renderItem={({ item }) => <TaskItem item={item} />}
         keyExtractor={item => item.title}
       />
     </View>
