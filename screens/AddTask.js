@@ -17,6 +17,9 @@ function AddTask() {
      //    value={value}
      //  />
     </View>
+    <View>
+      <AddCancelButton/>
+    </View>
   );
 }
 
