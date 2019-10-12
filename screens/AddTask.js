@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, Button} from 'react-native';
+import { View, Text, TextInput, StyleSheet, Button, ScrollView, FlatList} from 'react-native';
+import TaskInput from '../components/TaskInput.js';
 
 function AddTask() {
   const [enteredTask, setEnteredTask] = useState('');
@@ -10,24 +11,28 @@ function AddTask() {
   };
 
   const addTaskHandler = () => {
-    setTasks(currentTasks => [...currentTasks, enteredTask]);
+    setTasks(currentTasks => [
+      ...currentTasks,
+      { id: Math.random().toString(), value: enteredTask }
+    ]);
   };
 
   return (
     <View style={styles.screen}>
       <View style={styles.inputContainer}>
         <TextInput
-          placeholder="Task Name"
+          placeholder="Enter Task Name"
           style={styles.input}
           onChangeText={taskInputHandler}
           value={enteredTask}
         />
         <Button title="ADD" onPress={addTaskHandler}/>
       </View>
-      <View>
-        {tasks.map((task) =>
-          <View><Text key={task}>{task}</Text></View>)}
-      </View>
+      <FlatList
+      keyExtractor={(item, index) => item.id}
+        data={tasks}
+        // renderItem={itemData => <TaskInput children = {item.data.value}/>}
+    />
     </View>
   );
 }
@@ -46,13 +51,15 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderWidth: 1,
     padding: 10
-  },
-  listItem: {
-    padding: 10,
-    backgroundColor: '#ccc',
-    borderColor: 'black',
-    borderWidth: 1
   }
+  // },
+  // listItem: {
+  //   padding: 10,
+  //   marginVertical: 10,
+  //   backgroundColor: '#ccc',
+  //   borderColor: 'black',
+  //   borderWidth: 1
+  // }
 });
 
 export default AddTask;
