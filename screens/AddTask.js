@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Button, ScrollView, FlatList} from 'react-native';
-import TaskInput from '../components/TaskInput.js';
+
+import TaskInput from '../components/TaskInput.js'
 
 function AddTask() {
   const [enteredTask, setEnteredTask] = useState('');
@@ -31,7 +32,11 @@ function AddTask() {
       <FlatList
       keyExtractor={(item, index) => item.id}
         data={tasks}
-        // renderItem={itemData => <TaskInput children = {item.data.value}/>}
+        renderItem={itemData => (
+          <View style={styles.listItem}>
+            <Text>{itemData.item.value}</Text>
+          </View>
+        )}
     />
     </View>
   );
@@ -51,15 +56,14 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderWidth: 1,
     padding: 10
+  },
+  listItem: {
+    padding: 10,
+    marginVertical: 10,
+    backgroundColor: '#ccc',
+    borderColor: 'black',
+    borderWidth: 1
   }
-  // },
-  // listItem: {
-  //   padding: 10,
-  //   marginVertical: 10,
-  //   backgroundColor: '#ccc',
-  //   borderColor: 'black',
-  //   borderWidth: 1
-  // }
 });
 
 export default AddTask;
