@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Button, ScrollView, FlatList} from 'react-native';
 
-import TaskInput from '../components/TaskInput.js'
+//import TaskInput from '../components/TaskInput.js'
 
 function AddTask() {
   const [enteredTask, setEnteredTask] = useState('');
@@ -11,6 +11,7 @@ function AddTask() {
     setEnteredTask(enteredTask);
   };
 
+  //This just prints right now...
   const addTaskHandler = () => {
     setTasks(currentTasks => [
       ...currentTasks,
