@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Button, ScrollView, FlatList} from 'react-native';
-
+import AddCancelButton from '../components/AddCancelButton';
 //import TaskInput from '../components/TaskInput.js'
+
 
 function AddTask() {
   const [enteredTask, setEnteredTask] = useState('');
@@ -38,7 +39,8 @@ function AddTask() {
             <Text>{itemData.item.value}</Text>
           </View>
         )}
-    />
+      />
+      <AddCancelButton/>      
     </View>
   );
 }
