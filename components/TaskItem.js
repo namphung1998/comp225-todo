@@ -1,16 +1,25 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 import { CheckBox } from 'react-native-elements';
 
 function TaskItem({ item }) {
+  const [checked, setCheckBox] = useState(false)
+
+  const checkboxInputHandler = () => {
+    setCheckBox(!checked);
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.checkboxContainer}>
-        <CheckBox checked={true} />
+        <CheckBox
+          checked={checked}
+          onIconPress={checkboxInputHandler}
+        />
       </View>
 
       <View style={styles.textContainer}>
-        <Text> {item.title} </Text>
+        <Text style={{ textDecorationLine: checked? 'line-through': null }}> {item.title} </Text>
       </View>
     </View>
   );
