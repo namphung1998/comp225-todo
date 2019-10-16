@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Button, ScrollView, FlatList} from 'react-native';
 import AddCancelButton from '../components/AddCancelButton';
 //import TaskInput from '../components/TaskInput.js'
-
+import DueDatePicker from '../components/DueDatePicker.js'
 
 function AddTask() {
   const [enteredTask, setEnteredTask] = useState('');
@@ -40,7 +40,11 @@ function AddTask() {
           </View>
         )}
       />
-      <AddCancelButton/>      
+      <AddCancelButton/>
+      <View>
+        <Text> Enter the due date here:</Text>
+        <DueDatePicker/>
+      </View>      
     </View>
   );
 }
@@ -66,6 +70,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#ccc',
     borderColor: 'black',
     borderWidth: 1
+  },
+  dueDate: {
+    
   }
 });
 
