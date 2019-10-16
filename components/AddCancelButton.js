@@ -9,18 +9,21 @@ import {
 } from 'react-native';
 import Constants from 'expo-constants';
 
-function AddCancelButton() {
+function AddCancelButton({onPress}) {
   return (
     <SafeAreaView style={styles.bottom}>
       <View>
         <View style={styles.fixToText}>
           <Button
             title="Add"
-            onPress={() => Alert.alert('Your task is added!')}
+            onPress={() => {
+              Alert.alert('Your task is added!')
+              onPress()
+            }}
           />
           <Button
             title="Cancel"
-            onPress={() => Alert.alert('Are you SURE??')}
+            onPress={onPress}
           />
         </View>
       </View>
@@ -29,16 +32,15 @@ function AddCancelButton() {
 }
 
 const styles = StyleSheet.create({
-  // fixToText: {
-  //   flexDirection: 'row',
-  //   justifyContent: 'space-between',
-  // },
-  // bottom: {
-  //   flex: 1,
-  //   justifyContent: 'flex-end',
-  //   marginBottom: 40,
-  //   marginHorizontal: 40,
-  // }
+  fixToText: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  bottom: {
+    justifyContent: 'flex-end',
+    marginBottom: 40,
+    marginHorizontal: 40,
+  }
   // #ffc0cb
 });
 

@@ -4,7 +4,7 @@ import AddCancelButton from '../components/AddCancelButton';
 //import TaskInput from '../components/TaskInput.js'
 import DueDatePicker from '../components/DueDatePicker.js'
 
-function AddTask() {
+function AddTask({onPress}) {
   const [enteredTask, setEnteredTask] = useState('');
   const [tasks, setTasks] = useState([]);
 
@@ -40,11 +40,11 @@ function AddTask() {
           </View>
         )}
       />
-      <AddCancelButton/>
       <View>
         <Text> Enter the due date here:</Text>
         <DueDatePicker/>
-      </View>      
+      </View>
+      <AddCancelButton onPress={onPress}/>      
     </View>
   );
 }
