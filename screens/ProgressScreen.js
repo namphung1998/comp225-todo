@@ -3,6 +3,7 @@ import { View, Text, Button, Modal } from 'react-native';
 import ProgressHeader from '../components/ProgressHeader';
 import TaskList from '../components/TaskList';
 import AddTask from './AddTask';
+import FloatingButton from '../components/FloatingButton';
 
 const data = [
   {
@@ -48,15 +49,16 @@ function ProgressScreen() {
       <Modal visible={visible}>
         <AddTask onPress={addTaskButtonPress} />
       </Modal>
-      <Button title='ADD TASK' onPress={addTaskButtonPress} />
       <TaskList onCheckBoxToggle={onCheckBoxToggle} tasks={tasks} />
+      <FloatingButton onPress={addTaskButtonPress}/>
     </View>
   );
 }
 
 const styles = {
   container: {
-    // paddingTop: 24
+    flex: 1,
+    // backgroundColor: '#f0f'
   }
 };
 

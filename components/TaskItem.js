@@ -3,12 +3,14 @@ import { View, Text, StyleSheet } from 'react-native';
 import { CheckBox, Card } from 'react-native-elements';
 
 function TaskItem({ item, onCheckBoxToggle }) {
+  const onIconPress = () => onCheckBoxToggle(item.id);
+
   return (
     <View style={styles.container}>
       <View style={styles.checkboxContainer}>
         <CheckBox
           checked={item.completed}
-          onIconPress={() => onCheckBoxToggle(item.id)}
+          onPress={onIconPress}
         />
       </View>
       <Card
