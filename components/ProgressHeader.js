@@ -7,6 +7,7 @@ function ProgressHeader({ numCompleted, numTotal }) {
     <View>
       <Header
         placement='left'
+        backgroundColor='#fff'
         leftComponent={{
           text: 'PROGRESS'
         }}

@@ -1,45 +1,44 @@
-import React, { Component, useState } from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
-import { CheckBox } from 'react-native-elements';
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { CheckBox, Card } from 'react-native-elements';
 
-function TaskItem({ item }) {
-  const [checked, setCheckBox] = useState(false)
-
-  const checkboxInputHandler = () => {
-    setCheckBox(!checked);
-  }
-
+function TaskItem({ item, onCheckBoxToggle }) {
   return (
     <View style={styles.container}>
       <View style={styles.checkboxContainer}>
         <CheckBox
-          checked={checked}
-          onIconPress={checkboxInputHandler}
+          checked={item.completed}
+          onIconPress={() => onCheckBoxToggle(item.id)}
         />
       </View>
-
-      <View style={styles.textContainer}>
-        <Text style={{ textDecorationLine: checked? 'line-through': null }}> {item.title} </Text>
-      </View>
+      <Card
+        titleStyle={{ textAlign: 'left' }}
+        containerStyle={styles.cardContainer}
+        title={item.title}
+        dividerStyle={{ display: 'none' }}
+      >
+        <Text>{item.deadline}</Text>
+      </Card>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row'
-    // paddingTop: 50
+    flexDirection: 'row',
+    // backgroundColor: '#00f',
+    marginTop: 16,
+    marginRight: 16
   },
 
   checkboxContainer: {
-    paddingLeft: 10
-    // fontSize: 18,
-    // height: 44
+    paddingLeft: 10,
+    alignSelf: 'center'
   },
 
-  textContainer: {
-    marginLeft: 10,
-    justifyContent: 'center'
+  cardContainer: {
+    flex: 1,
+    margin: 0
   }
 });
 
