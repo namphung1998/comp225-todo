@@ -4,8 +4,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 function FloatingButton({ onPress }) {
   return (
-    <TouchableOpacity onPress={onPress}>
-      <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
+      <View>
         <Icon name='add' color='white' size={24} />
       </View>
     </TouchableOpacity>
