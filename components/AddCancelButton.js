@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   bottom: {
+    position: 'absolute',
     justifyContent: 'flex-end',
     marginBottom: 40,
     marginHorizontal: 40,

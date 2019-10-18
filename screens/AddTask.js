@@ -31,27 +31,21 @@ function AddTask({onPress}) {
         />
         <Button title="ADD" onPress={addTaskHandler}/>
       </View>
-      <FlatList
-      keyExtractor={(item, index) => item.id}
-        data={tasks}
-        renderItem={itemData => (
-          <View style={styles.listItem}>
-            <Text>{itemData.item.value}</Text>
-          </View>
-        )}
-      />
-      <View>
-        <Text> Enter the due date here:</Text>
+      <View style={{flexDirection: 'row', padding: 10}}>
+        <Text> Due date:</Text>
         <DueDatePicker/>
       </View>
-      <AddCancelButton onPress={onPress}/>      
+      <View>
+        <AddCancelButton onPress={onPress}/>  
+      </View>    
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   screen: {
-    padding: 50
+    padding: 50,
+    height: '100%',
   },
   inputContainer: {
     flexDirection: 'row',
