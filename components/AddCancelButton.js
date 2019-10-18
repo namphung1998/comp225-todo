@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import Constants from 'expo-constants';
 
-function AddCancelButton({onPress}) {
+function AddCancelButton({onAddPress, onCancelPress}) {
   return (
     <SafeAreaView style={styles.bottom}>
       <View>
@@ -18,12 +18,12 @@ function AddCancelButton({onPress}) {
             title="Add"
             onPress={() => {
               Alert.alert('Your task is added!')
-              onPress()
+              onAddPress()
             }}
           />
           <Button
             title="Cancel"
-            onPress={onPress}
+            onPress={onCancelPress}
           />
         </View>
       </View>

@@ -30,9 +30,16 @@ function ProgressScreen() {
   const [visible, setVisible] = useState(false);
   const [tasks, setTasks] = useState(data);
 
-  const addTaskButtonPress = () => {
+  const floatingButtonPress = () => { setVisible(!visible) }
+
+  const addTaskButtonPress = (task, deadline) => {
+    const id = tasks.length + 1;
+    const newTask = {id: id, title: task, completed: false, deadline: deadline};
+    setTasks([...tasks, newTask]);
     setVisible(!visible);
   };
+
+  const cancelButtonPress = () => { setVisible(!visible) };
 
   const onCheckBoxToggle = id => {
     const newTasks = tasks.map(item => {
@@ -53,10 +60,10 @@ function ProgressScreen() {
         numTotal={tasks.length}
       />
       <Modal visible={visible}>
-        <AddTask onPress={addTaskButtonPress} />
+        <AddTask addTaskButtonPress={addTaskButtonPress} cancelButtonPress={cancelButtonPress} />
       </Modal>
-      <TaskList addTaskButtonPress={addTaskButtonPress} onCheckBoxToggle={onCheckBoxToggle} tasks={tasks} />
-      <FloatingButton onPress={addTaskButtonPress} />
+      <TaskList onCheckBoxToggle={onCheckBoxToggle} tasks={tasks} />
+      <FloatingButton onPress={floatingButtonPress} />
     </View>
   );
 }

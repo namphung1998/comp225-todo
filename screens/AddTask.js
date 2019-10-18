@@ -1,23 +1,20 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, Button, ScrollView, FlatList} from 'react-native';
+import { View, Text, TextInput, StyleSheet, Button, ScrollView, FlatList } from 'react-native';
 import AddCancelButton from '../components/AddCancelButton';
-//import TaskInput from '../components/TaskInput.js'
-import DueDatePicker from '../components/DueDatePicker.js'
+import DatePicker from 'react-native-datepicker';
 
-function AddTask({onPress}) {
+function AddTask({ addTaskButtonPress, cancelButtonPress }) {
   const [enteredTask, setEnteredTask] = useState('');
-  const [tasks, setTasks] = useState([]);
+
+  var date = new Date().getDate(); //Current Date
+  var month = new Date().getMonth() + 1; //Current Month
+  var year = new Date().getFullYear(); //Current Year
+  var todayDate = year + '-' + month + '-' + date;
+
+  const [currentDate, setCurrentDate] = useState(todayDate);
 
   const taskInputHandler = (enteredTask) => {
     setEnteredTask(enteredTask);
-  };
-
-  //This just prints right now...
-  const addTaskHandler = () => {
-    setTasks(currentTasks => [
-      ...currentTasks,
-      { id: Math.random().toString(), value: enteredTask }
-    ]);
   };
 
   return (
@@ -29,15 +26,43 @@ function AddTask({onPress}) {
           onChangeText={taskInputHandler}
           value={enteredTask}
         />
-        <Button title="ADD" onPress={addTaskHandler}/>
       </View>
-      <View style={{flexDirection: 'row', padding: 10}}>
+      <View style={{ flexDirection: 'row', padding: 10 }}>
         <Text> Due date:</Text>
-        <DueDatePicker/>
+        <DatePicker
+          style={{ width: 200 }}
+          date={currentDate}
+          mode='date'
+          placeholder='select date'
+          format='YYYY-MM-DD'
+          //minDate="2016-05-15"
+          //maxDate="2016-06-01"
+          confirmBtnText='Confirm'
+          cancelBtnText='Cancel'
+          customStyles={{
+            dateIcon: {
+              position: 'absolute',
+              left: 0,
+              top: 4,
+              marginLeft: 0
+            },
+            dateInput: {
+              marginLeft: 36
+            }
+          }}
+          onDateChange={date => {
+            setCurrentDate(date);
+          }}
+        />
       </View>
       <View>
-        <AddCancelButton onPress={onPress}/>  
-      </View>    
+        <AddCancelButton
+          onAddPress={() => {
+            addTaskButtonPress(enteredTask, currentDate);
+          }}
+          onCancelPress={cancelButtonPress}
+          />
+      </View>
     </View>
   );
 }
@@ -57,16 +82,6 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderWidth: 1,
     padding: 10
-  },
-  listItem: {
-    padding: 10,
-    marginVertical: 10,
-    backgroundColor: '#ccc',
-    borderColor: 'black',
-    borderWidth: 1
-  },
-  dueDate: {
-    
   }
 });
 
