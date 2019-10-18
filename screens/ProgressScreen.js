@@ -55,7 +55,7 @@ function ProgressScreen() {
       <Modal visible={visible}>
         <AddTask onPress={addTaskButtonPress} />
       </Modal>
-      <TaskList onCheckBoxToggle={onCheckBoxToggle} tasks={tasks} />
+      <TaskList addTaskButtonPress={addTaskButtonPress} onCheckBoxToggle={onCheckBoxToggle} tasks={tasks} />
       <FloatingButton onPress={addTaskButtonPress} />
     </View>
   );
@@ -63,8 +63,8 @@ function ProgressScreen() {
 
 const styles = {
   container: {
-    height: '100%'
-    // backgroundColor: '#f0f'
+    height: '100%',
+    backgroundColor: '#fff'
   },
   button: {
     backgroundColor: 'red'

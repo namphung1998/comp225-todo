@@ -22,7 +22,7 @@ const styles = {
     borderRadius: 144,
     backgroundColor: 'blue',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   }
 };
 

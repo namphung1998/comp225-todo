@@ -7,8 +7,18 @@ import ProgressScreen from './screens/ProgressScreen';
 import AddTask from './screens/AddTask';
 
 const tabNavigator = createBottomTabNavigator({
-  Progress: ProgressScreen,
-  AddTask: AddTask
+  Progress: {
+    screen: ProgressScreen,
+    navigationOptions: {
+      tabBarVisible: true
+    }
+  },
+  AddTask: {
+    screen: AddTask,
+    navigationOptions: {
+      tabBarVisible: true
+    }
+  } 
 });
 
 const AppContainer = createAppContainer(tabNavigator);
