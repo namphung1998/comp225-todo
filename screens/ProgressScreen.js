@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { View, Text, Modal, Button, Platform } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, Modal, Button, Platform, AsyncStorage } from 'react-native';
+
 import ProgressHeader from '../components/ProgressHeader';
 import TaskList from '../components/TaskList';
 import AddTask from './AddTask';
@@ -28,15 +29,23 @@ const data = [
 
 function ProgressScreen() {
   const [visible, setVisible] = useState(false);
-  const [tasks, setTasks] = useState(data);
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    AsyncStorage.getItem('tasks')
+      .then(_tasks => JSON.parse(_tasks))
+      .then(_tasks => setTasks(_tasks))
+  }, [])
 
   const floatingButtonPress = () => { setVisible(!visible) }
 
   const addTaskButtonPress = (task, deadline) => {
     const id = tasks.length + 1;
     const newTask = {id: id, title: task, completed: false, deadline: deadline};
-    setTasks([...tasks, newTask]);
+    const updatedTasks = [...tasks, newTask];
+    setTasks(updatedTasks);
     setVisible(!visible);
+    AsyncStorage.setItem('tasks', JSON.stringify(updatedTasks));
   };
 
   const cancelButtonPress = () => { setVisible(!visible) };

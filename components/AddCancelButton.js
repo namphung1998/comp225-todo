@@ -7,7 +7,6 @@ import {
   Text,
   Alert,
 } from 'react-native';
-import Constants from 'expo-constants';
 
 function AddCancelButton({onAddPress, onCancelPress}) {
   return (
@@ -17,7 +16,7 @@ function AddCancelButton({onAddPress, onCancelPress}) {
           <Button
             title="Add"
             onPress={() => {
-              Alert.alert('Your task is added!')
+              {/* Alert.alert('Your task is added!') */}
               onAddPress()
             }}
           />
