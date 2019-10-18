@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Button, Modal } from 'react-native';
+import { View, Text, Modal, Button, Platform } from 'react-native';
 import ProgressHeader from '../components/ProgressHeader';
 import TaskList from '../components/TaskList';
 import AddTask from './AddTask';
@@ -16,6 +16,12 @@ const data = [
     id: 2,
     title: 'CS Homework',
     completed: true,
+    deadline: '2019-10-20'
+  },
+  {
+    id: 3,
+    title: 'Buy Snacks',
+    completed: false,
     deadline: '2019-10-20'
   }
 ];
@@ -50,15 +56,18 @@ function ProgressScreen() {
         <AddTask onPress={addTaskButtonPress} />
       </Modal>
       <TaskList onCheckBoxToggle={onCheckBoxToggle} tasks={tasks} />
-      <FloatingButton onPress={addTaskButtonPress}/>
+      <FloatingButton onPress={addTaskButtonPress} />
     </View>
   );
 }
 
 const styles = {
   container: {
-    flex: 1,
+    height: '100%'
     // backgroundColor: '#f0f'
+  },
+  button: {
+    backgroundColor: 'red'
   }
 };
 

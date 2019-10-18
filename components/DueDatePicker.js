@@ -1,28 +1,28 @@
-import React, { Component } from 'react'
-import DatePicker from 'react-native-datepicker'
- 
+import React, { Component } from 'react';
+import DatePicker from 'react-native-datepicker';
+
 export default class DueDatePicker extends Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
     var date = new Date().getDate(); //Current Date
     var month = new Date().getMonth() + 1; //Current Month
     var year = new Date().getFullYear(); //Current Year
-    var currentDate = year + "-" + month + "-" + date;
-    this.state = {date: currentDate}
+    var currentDate = year + '-' + month + '-' + date;
+    this.state = { date: currentDate };
   }
- 
-  render(){
+
+  render() {
     return (
       <DatePicker
-        style={{width: 200}}
+        style={{ width: 200 }}
         date={this.state.date}
-        mode="date"
-        placeholder="select date"
-        format="YYYY-MM-DD"
+        mode='date'
+        placeholder='select date'
+        format='YYYY-MM-DD'
         //minDate="2016-05-15"
         //maxDate="2016-06-01"
-        confirmBtnText="Confirm"
-        cancelBtnText="Cancel"
+        confirmBtnText='Confirm'
+        cancelBtnText='Cancel'
         customStyles={{
           dateIcon: {
             position: 'absolute',
@@ -35,8 +35,10 @@ export default class DueDatePicker extends Component {
           }
           // ... You can check the source to find the other keys.
         }}
-        onDateChange={(date) => {this.setState({date: date})}}
+        onDateChange={date => {
+          this.setState({ date: date });
+        }}
       />
-    )
+    );
   }
 }
