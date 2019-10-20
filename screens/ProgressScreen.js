@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, Modal, Button, Platform, AsyncStorage } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { View, Modal, AsyncStorage } from 'react-native';
 
 import ProgressHeader from '../components/ProgressHeader';
 import TaskList from '../components/TaskList';
@@ -30,25 +30,43 @@ const data = [
 function ProgressScreen() {
   const [visible, setVisible] = useState(false);
   const [tasks, setTasks] = useState([]);
+  const init = useRef(true);
+
+  useEffect(() => {
+    if (init.current) {
+      init.current = false;
+      return;
+    }
+
+    AsyncStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks]);
 
   useEffect(() => {
     AsyncStorage.getItem('tasks')
-      .then(_tasks => JSON.parse(_tasks))
-      .then(_tasks => setTasks(_tasks))
-  }, [])
+      .then(_tasks => (_tasks ? JSON.parse(_tasks) : tasks))
+      .then(_tasks => setTasks(_tasks));
+  }, []);
 
-  const floatingButtonPress = () => { setVisible(!visible) }
+  const floatingButtonPress = () => {
+    setVisible(!visible);
+  };
 
   const addTaskButtonPress = (task, deadline) => {
     const id = tasks.length + 1;
-    const newTask = {id: id, title: task, completed: false, deadline: deadline};
+    const newTask = {
+      id: id,
+      title: task,
+      completed: false,
+      deadline: deadline
+    };
     const updatedTasks = [...tasks, newTask];
     setTasks(updatedTasks);
     setVisible(!visible);
-    AsyncStorage.setItem('tasks', JSON.stringify(updatedTasks));
   };
 
-  const cancelButtonPress = () => { setVisible(!visible) };
+  const cancelButtonPress = () => {
+    setVisible(!visible);
+  };
 
   const onCheckBoxToggle = id => {
     const newTasks = tasks.map(item => {
@@ -69,9 +87,15 @@ function ProgressScreen() {
         numTotal={tasks.length}
       />
       <Modal visible={visible}>
-        <AddTask addTaskButtonPress={addTaskButtonPress} cancelButtonPress={cancelButtonPress} />
+        <AddTask
+          addTaskButtonPress={addTaskButtonPress}
+          cancelButtonPress={cancelButtonPress}
+        />
       </Modal>
-      <TaskList onCheckBoxToggle={onCheckBoxToggle} tasks={tasks} />
+      <TaskList
+        onCheckBoxToggle={onCheckBoxToggle}
+        tasks={tasks ? tasks : []}
+      />
       <FloatingButton onPress={floatingButtonPress} />
     </View>
   );
