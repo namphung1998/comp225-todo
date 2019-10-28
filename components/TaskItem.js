@@ -2,25 +2,33 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { CheckBox, Card } from 'react-native-elements';
 
+import FloatingButton from './FloatingButton';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
 function TaskItem({ item, onCheckBoxToggle }) {
-  const onIconPress = () => onCheckBoxToggle(item.id);
+  const { id, completed, title, deadline } = item;
+
+  const onIconPress = () => onCheckBoxToggle(id);
 
   return (
     <View style={styles.container}>
       <View style={styles.checkboxContainer}>
         <CheckBox
-          checkedColor= {'pink'}
-          checked={item.completed}
+          checkedColor='pink'
+          checked={completed}
           onPress={onIconPress}
         />
       </View>
       <Card
         titleStyle={{ textAlign: 'left' }}
         containerStyle={styles.cardContainer}
-        title={item.title}
+        title={title}
         dividerStyle={{ display: 'none' }}
       >
-        <Text>{item.deadline}</Text>
+        <FloatingButton style={styles.removeButton}>
+          <Icon name='highlight-off' size={16} />
+        </FloatingButton>
+        <Text>{deadline}</Text>
       </Card>
     </View>
   );
@@ -42,6 +50,16 @@ const styles = StyleSheet.create({
   cardContainer: {
     flex: 1,
     margin: 0
+  },
+
+  removeButton: {
+    top: 1,
+    right: 1,
+    bottom: null,
+    height: 16,
+    width: 16,
+    borderRadius: 32,
+    backgroundColor: null
   }
 });
 

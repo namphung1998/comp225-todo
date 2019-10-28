@@ -1,4 +1,4 @@
-import React, { useState, Component } from 'react';
+import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Button, ScrollView, FlatList } from 'react-native';
 import AddCancelButton from '../components/AddCancelButton';
 import DatePicker from 'react-native-datepicker';
@@ -59,8 +59,7 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
       <View>
         <DifficultyRating/>
       </View>
-      <View>
-        
+      <View> 
         <AddCancelButton
           onAddPress={() => {
             addTaskButtonPress(enteredTask, currentDate);

@@ -1,31 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Modal, AsyncStorage } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import ProgressHeader from '../components/ProgressHeader';
 import TaskList from '../components/TaskList';
 import AddTask from './AddTask';
 import FloatingButton from '../components/FloatingButton';
 
-const data = [
-  {
-    id: 1,
-    title: 'Project Meeting',
-    completed: false,
-    deadline: '2019-10-18'
-  },
-  {
-    id: 2,
-    title: 'CS Homework',
-    completed: true,
-    deadline: '2019-10-20'
-  },
-  {
-    id: 3,
-    title: 'Buy Snacks',
-    completed: false,
-    deadline: '2019-10-20'
-  }
-];
 
 function ProgressScreen() {
   const [visible, setVisible] = useState(false);
@@ -96,7 +77,9 @@ function ProgressScreen() {
         onCheckBoxToggle={onCheckBoxToggle}
         tasks={tasks ? tasks : []}
       />
-      <FloatingButton onPress={floatingButtonPress} />
+      <FloatingButton onPress={floatingButtonPress}>
+        <Icon name='add' color='white' size={24} />
+      </FloatingButton>
     </View>
   );
 }

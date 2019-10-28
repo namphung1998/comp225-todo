@@ -3,7 +3,7 @@ import { View, Text, Button, StyleSheet } from 'react-native';
 
 
 //Attempting to separate out this component from AddTask
-const TaskInput = props => {
+function TaskInput() {
   const [enteredTask, setEnteredTask] = useState('')
 
   const taskInputHandler = enteredTask => {
