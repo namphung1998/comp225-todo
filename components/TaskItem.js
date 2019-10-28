@@ -9,6 +9,7 @@ function TaskItem({ item, onCheckBoxToggle }) {
     <View style={styles.container}>
       <View style={styles.checkboxContainer}>
         <CheckBox
+          checkedColor= {'pink'}
           checked={item.completed}
           onPress={onIconPress}
         />
@@ -30,12 +31,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     // backgroundColor: '#00f',
     marginTop: 16,
-    marginRight: 16
+    marginRight: 16,
   },
 
   checkboxContainer: {
     paddingLeft: 10,
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
 
   cardContainer: {

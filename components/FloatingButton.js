@@ -20,7 +20,7 @@ const styles = {
     height: 72,
     width: 72,
     borderRadius: 144,
-    backgroundColor: 'blue',
+    backgroundColor: 'pink',
     alignItems: 'center',
     justifyContent: 'center',
   }

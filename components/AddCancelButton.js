@@ -15,6 +15,7 @@ function AddCancelButton({onAddPress, onCancelPress}) {
         <View style={styles.fixToText}>
           <Button
             title="Add"
+            color="#ffc0cb"
             onPress={() => {
               {/* Alert.alert('Your task is added!') */}
               onAddPress()
@@ -22,6 +23,7 @@ function AddCancelButton({onAddPress, onCancelPress}) {
           />
           <Button
             title="Cancel"
+            color="#ffc0cb"
             onPress={onCancelPress}
           />
         </View>
@@ -41,7 +43,6 @@ const styles = StyleSheet.create({
     marginBottom: 40,
     marginHorizontal: 40,
   }
-  // #ffc0cb
 });
 
 export default AddCancelButton;
