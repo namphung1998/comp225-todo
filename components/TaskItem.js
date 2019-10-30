@@ -5,10 +5,11 @@ import { CheckBox, Card } from 'react-native-elements';
 import FloatingButton from './FloatingButton';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-function TaskItem({ item, onCheckBoxToggle }) {
+function TaskItem({ item, onCheckBoxToggle, onDelete }) {
   const { id, completed, title, deadline } = item;
 
   const onIconPress = () => onCheckBoxToggle(id);
+  const onDeletePress = () => onDelete(id);
 
   return (
     <View style={styles.container}>
@@ -25,7 +26,7 @@ function TaskItem({ item, onCheckBoxToggle }) {
         title={title}
         dividerStyle={{ display: 'none' }}
       >
-        <FloatingButton style={styles.removeButton}>
+        <FloatingButton onPress={onDeletePress} style={styles.removeButton}>
           <Icon name='highlight-off' size={16} />
         </FloatingButton>
         <Text>{deadline}</Text>

@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
-import { AsyncStorage } from 'react-native';
+import React from 'react';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createAppContainer } from 'react-navigation';
 
 import ProgressScreen from './screens/ProgressScreen';
-
 import AddTask from './screens/AddTask';
 
 const tabNavigator = createBottomTabNavigator({
@@ -17,15 +15,13 @@ const tabNavigator = createBottomTabNavigator({
   AddTask: {
     screen: AddTask,
     navigationOptions: {
-      tabBarVisible: true
+      tabBarVisible: true,
     }
   } 
 });
 
 const AppContainer = createAppContainer(tabNavigator);
 
-export default class App extends Component {
-  render() {
-    return <AppContainer />;
-  }
+export default function App() {
+  return <AppContainer />;
 }

@@ -7,10 +7,10 @@ import TaskList from '../components/TaskList';
 import AddTask from './AddTask';
 import FloatingButton from '../components/FloatingButton';
 
-
 function ProgressScreen() {
   const [visible, setVisible] = useState(false);
   const [tasks, setTasks] = useState([]);
+  const [archivedTasks, setArchivedTasks] = useState([]);
   const init = useRef(true);
 
   useEffect(() => {
@@ -19,13 +19,27 @@ function ProgressScreen() {
       return;
     }
 
-    AsyncStorage.setItem('tasks', JSON.stringify(tasks));
-  }, [tasks]);
+    Promise.all([
+      AsyncStorage.setItem('tasks', JSON.stringify(tasks)),
+      AsyncStorage.setItem('archived', JSON.stringify(archivedTasks))
+    ]);
+  }, [tasks, archivedTasks]);
 
   useEffect(() => {
-    AsyncStorage.getItem('tasks')
-      .then(_tasks => (_tasks ? JSON.parse(_tasks) : tasks))
-      .then(_tasks => setTasks(_tasks));
+    Promise.all([
+      AsyncStorage.getItem('tasks'),
+      AsyncStorage.getItem('archived')
+    ]).then(([_tasks, _archivedTasks]) => {
+      if (_tasks) {
+        console.log(_tasks);
+        setTasks(JSON.parse(_tasks));
+      }
+
+      if (_archivedTasks) {
+        console.log(_archivedTasks);
+        setArchivedTasks(JSON.parse(_archivedTasks));
+      }
+    });
   }, []);
 
   const floatingButtonPress = () => {
@@ -61,6 +75,13 @@ function ProgressScreen() {
     setTasks(newTasks);
   };
 
+  const onDeleteTask = id => {
+    const toDelete = tasks.find(item => item.id === id);
+    const newTasks = tasks.filter(item => item.id !== id);
+    setTasks(newTasks);
+    setArchivedTasks([...archivedTasks, toDelete]);
+  };
+
   return (
     <View style={styles.container}>
       <ProgressHeader
@@ -75,7 +96,8 @@ function ProgressScreen() {
       </Modal>
       <TaskList
         onCheckBoxToggle={onCheckBoxToggle}
-        tasks={tasks ? tasks : []}
+        onDeleteTask={onDeleteTask}
+        tasks={tasks}
       />
       <FloatingButton onPress={floatingButtonPress}>
         <Icon name='add' color='white' size={24} />

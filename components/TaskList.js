@@ -2,9 +2,9 @@ import React from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 import TaskItem from './TaskItem.js';
 
-function TaskList({ tasks, onCheckBoxToggle }) {
+function TaskList({ tasks, onCheckBoxToggle, onDeleteTask }) {
   const renderItem = ({ item }) => (
-    <TaskItem onCheckBoxToggle={onCheckBoxToggle} item={item} />
+    <TaskItem onCheckBoxToggle={onCheckBoxToggle} onDelete={onDeleteTask} item={item} />
   );
   const keyExtractor = item => String(item.id);
 
