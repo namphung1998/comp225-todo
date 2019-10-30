@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Button, ScrollView, FlatList } from 'react-native';
 import AddCancelButton from '../components/AddCancelButton';
 import DatePicker from 'react-native-datepicker';
-import DifficultyRating from '../components/DifficultyRating';
+import StarRating from 'react-native-star-rating';
 
 function AddTask({ addTaskButtonPress, cancelButtonPress }) {
   const [enteredTask, setEnteredTask] = useState('');
@@ -13,6 +13,7 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
   var todayDate = year + '-' + month + '-' + date;
 
   const [currentDate, setCurrentDate] = useState(todayDate);
+  const [starRating, setStarRating] = useState(0);
 
   const taskInputHandler = (enteredTask) => {
     setEnteredTask(enteredTask);
@@ -57,12 +58,22 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
         />
       </View>
       <View>
-        <DifficultyRating/>
+        <StarRating        
+          disabled={false}
+          maxStars={5}
+          rating={starRating}
+          selectedStar={rating => {
+            setStarRating(rating) 
+          }}
+          halfStarEnabled={true}
+          emptyStarColor={'pink'}
+          fullStarColor={'pink'}
+        />
       </View>
       <View> 
         <AddCancelButton
           onAddPress={() => {
-            addTaskButtonPress(enteredTask, currentDate);
+            addTaskButtonPress(enteredTask, currentDate, starRating);
           }}
           onCancelPress={cancelButtonPress}
           />
