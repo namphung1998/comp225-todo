@@ -10,20 +10,17 @@ class DifficultyRating extends Component {
     };
   }
 
-  onStarRatingPress(rating) {
-    this.setState({
-      starCount: rating
-    });
-  }
-
   render() {
     return (
       <StarRating
         disabled={false}
         maxStars={5}
         rating={this.state.starCount}
-        selectedStar={(rating) => this.onStarRatingPress(rating)}
+        selectedStar={(rating) => this.setState({
+          starCount: rating
+        })}
         halfStarEnabled={true}
+        emptyStarColor={'pink'}
         fullStarColor={'pink'}
       />
     );
