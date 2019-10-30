@@ -4,6 +4,7 @@ import { createAppContainer } from 'react-navigation';
 
 import ProgressScreen from './screens/ProgressScreen';
 import AddTask from './screens/AddTask';
+import GalleryScreen from './screens/GalleryScreen';
 
 const tabNavigator = createBottomTabNavigator({
   Progress: {
@@ -17,7 +18,13 @@ const tabNavigator = createBottomTabNavigator({
     navigationOptions: {
       tabBarVisible: true,
     }
-  } 
+  },
+  Gallery: {
+    screen: GalleryScreen,
+    navigationOptions: {
+      tabBarVisible: true,
+    }
+  }
 });
 
 const AppContainer = createAppContainer(tabNavigator);
