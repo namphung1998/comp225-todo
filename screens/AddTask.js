@@ -70,7 +70,10 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
           fullStarColor={'pink'}
         />
       </View>
-      <View> 
+      <View 
+        flex={1}  
+        justifyContent= {'flex-end'}
+        marginBottom= {0}> 
         <AddCancelButton
           onAddPress={() => {
             addTaskButtonPress(enteredTask, currentDate, starRating);

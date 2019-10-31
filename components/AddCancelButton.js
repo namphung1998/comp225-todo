@@ -10,11 +10,11 @@ import {
 
 function AddCancelButton({onAddPress, onCancelPress}) {
   return (
-    <SafeAreaView style={styles.bottom}>
+    <SafeAreaView>
       <View>
         <View style={styles.fixToText}>
           <Button
-            title="Add"
+            title="Add Task"
             color="#ffc0cb"
             onPress={() => {
               {/* Alert.alert('Your task is added!') */}
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   bottom: {
-    position: 'absolute',
+    //position: 'absolute',
     justifyContent: 'flex-end',
     marginBottom: 40,
     marginHorizontal: 40,
