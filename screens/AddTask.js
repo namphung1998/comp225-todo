@@ -8,9 +8,10 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
   const [enteredTask, setEnteredTask] = useState('');
 
   var date = new Date().getDate(); //Current Date
-  var month = new Date().getMonth() + 1; //Current Month
+  var month = new Date().getMonth(); //Current Month
   var year = new Date().getFullYear(); //Current Year
-  var todayDate = year + '-' + month + '-' + date;
+  var todayDate = new Date(year, month, date);
+  todayDate.toString;
 
   const [currentDate, setCurrentDate] = useState(todayDate);
   const [starRating, setStarRating] = useState(0);
