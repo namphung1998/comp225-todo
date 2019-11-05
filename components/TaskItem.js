@@ -29,7 +29,7 @@ function TaskItem({ item, onCheckBoxToggle, onDelete }) {
         <FloatingButton onPress={onDeletePress} style={styles.removeButton}>
           <Icon name='highlight-off' size={16} />
         </FloatingButton>
-        <Text>{deadline}</Text>
+        <Text>{deadline.toString()}</Text>
       </Card>
     </View>
   );

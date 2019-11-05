@@ -57,11 +57,12 @@ function ProgressScreen() {
     };
     const updatedTasks = [...tasks, newTask];
     console.log(updatedTasks);
-    if(updatedTasks.length > 1) {
+    if (updatedTasks.length > 1) {
       updatedTasks.sort(function(a, b) {
         var d1 = a.deadline.split('-').join('');
         var d2 = b.deadline.split('-').join('');
-        return d1 - d2})
+        return d1 - d2;
+      });
     }
     console.log(updatedTasks);
     setTasks(updatedTasks);
@@ -96,6 +97,7 @@ function ProgressScreen() {
       <ProgressHeader
         numCompleted={tasks.filter(item => item.completed).length}
         numTotal={tasks.length}
+        numHearts={500}
       />
       <Modal visible={visible}>
         <AddTask
