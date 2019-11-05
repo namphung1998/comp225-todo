@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Animated, LayoutAnimation } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet, Animated } from 'react-native';
 
 function ProgressBar({ numCompleted, numTotal, width }) {
-
   const widthStyle = width.interpolate({
     inputRange: [0, 100],
     outputRange: ['0%', '100%'],
     extrapolate: 'clamp'
-  })
+  });
 
   return (
     <View>
@@ -17,7 +16,7 @@ function ProgressBar({ numCompleted, numTotal, width }) {
           style={[
             StyleSheet.absoluteFill,
             styles.progress,
-            { width: widthStyle}
+            { width: widthStyle }
           ]}
         ></Animated.View>
       </View>

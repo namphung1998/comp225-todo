@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, Button, ScrollView, FlatList } from 'react-native';
+import { View, Text, TextInput, StyleSheet } from 'react-native';
 import AddCancelButton from '../components/AddCancelButton';
 import DatePicker from 'react-native-datepicker';
 import StarRating from 'react-native-star-rating';
@@ -16,7 +16,7 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
   const [currentDate, setCurrentDate] = useState(todayDate);
   const [starRating, setStarRating] = useState(0);
 
-  const taskInputHandler = (enteredTask) => {
+  const taskInputHandler = enteredTask => {
     setEnteredTask(enteredTask);
   };
 
@@ -24,7 +24,7 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
     <View style={styles.screen}>
       <View style={styles.inputContainer}>
         <TextInput
-          placeholder="Enter Task Name"
+          placeholder='Enter Task Name'
           style={styles.input}
           onChangeText={taskInputHandler}
           value={enteredTask}
@@ -59,28 +59,25 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
         />
       </View>
       <View>
-        <StarRating        
+        <StarRating
           disabled={false}
           maxStars={5}
           rating={starRating}
           selectedStar={rating => {
-            setStarRating(rating) 
+            setStarRating(rating);
           }}
           halfStarEnabled={true}
           emptyStarColor={'pink'}
           fullStarColor={'pink'}
         />
       </View>
-      <View 
-        flex={1}  
-        justifyContent= {'flex-end'}
-        marginBottom= {0}> 
+      <View flex={1} justifyContent={'flex-end'} marginBottom={0}>
         <AddCancelButton
           onAddPress={() => {
             addTaskButtonPress(enteredTask, currentDate, starRating);
           }}
           onCancelPress={cancelButtonPress}
-          />
+        />
       </View>
     </View>
   );
@@ -89,7 +86,7 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
 const styles = StyleSheet.create({
   screen: {
     padding: 50,
-    height: '100%',
+    height: '100%'
   },
   inputContainer: {
     flexDirection: 'row',
