@@ -10,6 +10,7 @@ import FloatingButton from '../components/FloatingButton';
 function ProgressScreen() {
   const [visible, setVisible] = useState(false);
   const [tasks, setTasks] = useState([]);
+  const [index, setIndex] = useState(1);
   const [archivedTasks, setArchivedTasks] = useState([]);
   const init = useRef(true);
 
@@ -21,23 +22,27 @@ function ProgressScreen() {
 
     Promise.all([
       AsyncStorage.setItem('tasks', JSON.stringify(tasks)),
-      AsyncStorage.setItem('archived', JSON.stringify(archivedTasks))
+      AsyncStorage.setItem('archived', JSON.stringify(archivedTasks)),
+      AsyncStorage.setItem('index', String(index))
     ]);
-  }, [tasks, archivedTasks]);
+  }, [tasks, archivedTasks, index]);
 
   useEffect(() => {
     Promise.all([
       AsyncStorage.getItem('tasks'),
-      AsyncStorage.getItem('archived')
-    ]).then(([_tasks, _archivedTasks]) => {
+      AsyncStorage.getItem('archived'),
+      AsyncStorage.getItem('index')
+    ]).then(([_tasks, _archivedTasks, _index]) => {
       if (_tasks) {
-        //console.log(_tasks);
         setTasks(JSON.parse(_tasks));
       }
 
       if (_archivedTasks) {
-        //console.log(_archivedTasks);
         setArchivedTasks(JSON.parse(_archivedTasks));
+      }
+
+      if (_index) {
+        setIndex(parseInt(_index));
       }
     });
   }, []);
@@ -47,22 +52,24 @@ function ProgressScreen() {
   };
 
   const addTaskButtonPress = (task, deadline, rating) => {
-    const id = tasks.length + 1;
     const newTask = {
-      id: id,
+      id: index,
       title: task,
       completed: false,
       deadline: deadline,
       rating: rating
     };
     const updatedTasks = [...tasks, newTask];
-    if(updatedTasks.length > 1) {
+
+    if (updatedTasks.length > 1) {
       updatedTasks.sort(function(a, b) {
         var d1 = a.deadline.split('-').join('');
         var d2 = b.deadline.split('-').join('');
-        return d1 - d2})
+        return d1 - d2;
+      });
     }
     setTasks(updatedTasks);
+    setIndex(index + 1);
     setVisible(!visible);
   };
 
@@ -94,6 +101,7 @@ function ProgressScreen() {
       <ProgressHeader
         numCompleted={tasks.filter(item => item.completed).length}
         numTotal={tasks.length}
+        numHearts={500}
       />
       <Modal visible={visible}>
         <AddTask
