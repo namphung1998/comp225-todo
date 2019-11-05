@@ -20,8 +20,16 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
     setEnteredTask(enteredTask);
   };
 
+  const [enteredDescription, setEnteredDescription] = useState("Optional Description");
+  const descriptionInputHandler = (enteredDescription) => {
+    setEnteredDescription(enteredDescription);
+  }
+
   return (
     <View style={styles.screen}>
+      <Text style={{fontSize: 36, color: "pink", alignSelf: "center", padding: 10}}>
+        Add Task
+      </Text>
       <View style={styles.inputContainer}>
         <TextInput
           placeholder="Enter Task Name"
@@ -30,8 +38,8 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
           value={enteredTask}
         />
       </View>
-      <View style={{ flexDirection: 'row', padding: 10 }}>
-        <Text> Due date:</Text>
+      <View style={{ flexDirection: 'row', padding: 15 }}>
+        <Text style={{ color: 'pink', fontSize: 20, left: -20, top: 7}}> Deadline</Text>
         <DatePicker
           style={{ width: 200 }}
           date={currentDate}
@@ -45,12 +53,16 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
           customStyles={{
             dateIcon: {
               position: 'absolute',
-              left: 0,
+              right: 0,
               top: 4,
-              marginLeft: 0
+              marginRight: -15
             },
             dateInput: {
-              marginLeft: 36
+              marginLeft: -10,
+              marginRight: 25,
+              borderColor: 'black',
+              borderWidth: 1,
+              
             }
           }}
           onDateChange={date => {
@@ -58,8 +70,9 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
           }}
         />
       </View>
-      <View>
-        <StarRating        
+      <Text style={{ color: 'pink', fontSize: 20, left: -5}}> Difficulty </Text>
+      <View style={{padding: 10}}>
+        <StarRating     
           disabled={false}
           maxStars={5}
           rating={starRating}
@@ -69,6 +82,16 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
           halfStarEnabled={true}
           emptyStarColor={'pink'}
           fullStarColor={'pink'}
+        />
+      </View>
+      <Text style={{ color: 'pink', fontSize: 20, left: -5}}> This task will take about... min </Text>
+      <View style={{padding: 10}}>
+        <TextInput
+          
+          numberOfLines={4}
+          style={{width: '100%', borderColor: 'black', borderWidth: 1, padding: 10}}
+          onChangeText={descriptionInputHandler}
+          value={enteredDescription}
         />
       </View>
       <View 
@@ -97,7 +120,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   input: {
-    width: '80%',
+    width: '100%',
     borderColor: 'black',
     borderWidth: 1,
     padding: 10

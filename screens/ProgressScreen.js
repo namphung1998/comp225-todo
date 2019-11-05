@@ -56,14 +56,12 @@ function ProgressScreen() {
       rating: rating
     };
     const updatedTasks = [...tasks, newTask];
-    console.log(updatedTasks);
     if(updatedTasks.length > 1) {
       updatedTasks.sort(function(a, b) {
         var d1 = a.deadline.split('-').join('');
         var d2 = b.deadline.split('-').join('');
         return d1 - d2})
     }
-    console.log(updatedTasks);
     setTasks(updatedTasks);
     setVisible(!visible);
   };
