@@ -13,6 +13,11 @@ function AddCancelButton({onAddPress, onCancelPress}) {
     <SafeAreaView>
       <View>
         <View style={styles.fixToText}>
+        <Button
+            title="Cancel"
+            color="#ffc0cb"
+            onPress={onCancelPress}
+          />
           <Button
             title="Add Task"
             color="#ffc0cb"
@@ -20,11 +25,6 @@ function AddCancelButton({onAddPress, onCancelPress}) {
               {/* Alert.alert('Your task is added!') */}
               onAddPress()
             }}
-          />
-          <Button
-            title="Cancel"
-            color="#ffc0cb"
-            onPress={onCancelPress}
           />
         </View>
       </View>

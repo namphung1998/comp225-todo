@@ -7,11 +7,16 @@ import StarRating from 'react-native-star-rating';
 function AddTask({ addTaskButtonPress, cancelButtonPress }) {
   const [enteredTask, setEnteredTask] = useState('');
 
-  var date = new Date().getDate(); //Current Date
-  var month = new Date().getMonth(); //Current Month
+  var day = new Date().getDate(); //Current Date
+  var month = new Date().getMonth() + 1; //Current Month
   var year = new Date().getFullYear(); //Current Year
-  var todayDate = new Date(year, month, date);
-  todayDate.toString;
+  if (month < 10) {
+    month = '0' + month;
+  }
+  if (day < 10) {
+    day = '0' + day;
+  }
+  var todayDate = year + "-" + month + "-" + day;
 
   const [currentDate, setCurrentDate] = useState(todayDate);
   const [starRating, setStarRating] = useState(0);
