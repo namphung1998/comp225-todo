@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
 
   progress: {
-    backgroundColor: 'blue'
+    backgroundColor: 'pink'
   }
 });
 
