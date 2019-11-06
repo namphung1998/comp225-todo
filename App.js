@@ -13,12 +13,12 @@ const tabNavigator = createBottomTabNavigator({
       tabBarVisible: true
     }
   },
-  AddTask: {
-    screen: AddTask,
-    navigationOptions: {
-      tabBarVisible: true,
-    }
-  },
+  // AddTask: {
+  //   screen: AddTask,
+  //   navigationOptions: {
+  //     tabBarVisible: true,
+  //   }
+  // },
   Gallery: {
     screen: GalleryScreen,
     navigationOptions: {

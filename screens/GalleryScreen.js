@@ -29,19 +29,13 @@ function GalleryScreen() {
               //     // it will throw an error.
               //     dimensions: { width: 1080, height: 1920 } },
               { URI: "https://images.unsplash.com/photo-1442530792250-81629236fe54?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=980&h=980&fit=crop&s=9631adb2d2f752e3a0734f393fef634b",
-                  id: "1" },
+                  id: "1"},
               { URI: "https://images.unsplash.com/photo-1468851508491-4f854ec88aa0?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=900&h=900&fit=crop&s=b1222b6a1d3694cac76d2a23c3a02254",
                   id: "2" },
           ]}
+          spacing={10}
       />
   );
 }
-
-const styles = {
-  image: {
-    height: '77',
-    width: '77'
-  }
-};
 
 export default GalleryScreen;
