@@ -1,23 +1,10 @@
 import React from 'react';
 import { View } from 'react-native';
 import ImageLayout from "react-native-image-layout";
-import ProgressHeader from"../components/ProgressHeader";
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
-_renderPageHeader = (image, index, onClose) => {
-    // Individual image object data.
-    console.log(image);
-    return (
-        <View>
-            <TouchableWithoutFeedback onPress={() => {onClose();}}>
-                <Image
-                    source={backIcon}
-                    style={{marginLeft: 10, height: 30, width: 30}}
-                />
-            </TouchableWithoutFeedback>
-            <Text>{image.filename}</Text>
-        </View>
-    );
-}
+import ProgressHeader from"../components/ProgressHeader";
+import DrawButton from"../components/DrawButton";
 
 _renderMainHeader = () => {
     return (
@@ -29,6 +16,16 @@ _renderMainHeader = () => {
     );
 }
 
+_renderMainFooter = () => {
+    return (
+        <View>
+          <DrawButton>
+            <Icon name='add' color='white' size={24}/>
+          </DrawButton>
+        </View>
+    );
+}
+
 
 
 function GalleryScreen() {
@@ -36,6 +33,7 @@ function GalleryScreen() {
       <ImageLayout
           // renderPageHeader={this._renderPageHeader}
           renderMainHeader={this._renderMainHeader}
+          renderMainFooter={this._renderMainFooter}
           images={[
               // { source: require("images/beach.png"),
               //     // IMPORTANT: It is REQUIRED for LOCAL IMAGES
