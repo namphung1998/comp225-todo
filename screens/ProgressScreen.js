@@ -51,13 +51,14 @@ function ProgressScreen() {
     setVisible(!visible);
   };
 
-  const addTaskButtonPress = (task, deadline, rating) => {
+  const addTaskButtonPress = (task, deadline, rating, desc) => {
     const newTask = {
       id: index,
       title: task,
       completed: false,
       deadline: deadline,
-      rating: rating
+      rating: rating,
+      desc: desc
     };
     const updatedTasks = [...tasks, newTask];
 

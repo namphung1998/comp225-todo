@@ -91,9 +91,10 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
       </View>
       <Text style={{ color: 'pink', fontSize: 20, left: -5}}> This task will take about... min </Text>
       <View style={{padding: 10}}>
-        <TextInput
-          
+        <TextInput 
           numberOfLines={4}
+          multiline={true}
+          textAlignVertical={'top'}
           style={{width: '100%', borderColor: 'black', borderWidth: 1, padding: 10}}
           onChangeText={descriptionInputHandler}
           value={enteredDescription}
@@ -105,7 +106,7 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
         marginBottom= {0}> 
         <AddCancelButton
           onAddPress={() => {
-            addTaskButtonPress(enteredTask, currentDate, starRating);
+            addTaskButtonPress(enteredTask, currentDate, starRating, enteredDescription);
           }}
           onCancelPress={cancelButtonPress}
         />
