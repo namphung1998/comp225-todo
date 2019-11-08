@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Modal, AsyncStorage } from 'react-native';
+import { View, Text, Modal, AsyncStorage } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import ProgressHeader from '../components/ProgressHeader';
@@ -9,7 +9,7 @@ import FloatingButton from '../components/FloatingButton';
 
 function ProgressScreen() {
   const [visible, setVisible] = useState(false);
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(null);
   const [index, setIndex] = useState(1);
   const [archivedTasks, setArchivedTasks] = useState([]);
   const init = useRef(true);
@@ -35,6 +35,8 @@ function ProgressScreen() {
     ]).then(([_tasks, _archivedTasks, _index]) => {
       if (_tasks) {
         setTasks(JSON.parse(_tasks));
+      } else {
+        setTasks([]);
       }
 
       if (_archivedTasks) {
@@ -96,6 +98,8 @@ function ProgressScreen() {
     setArchivedTasks([...archivedTasks, toDelete]);
   };
 
+  if (!tasks) return <Text>Loading...</Text>
+
   return (
     <View style={styles.container}>
       <ProgressHeader
@@ -109,6 +113,9 @@ function ProgressScreen() {
           cancelButtonPress={cancelButtonPress}
         />
       </Modal>
+      <View style={{ backgroundColor: 'rgba(0, 0, 255, 0.5)'}}>
+        <Text>Calendar goes here</Text>
+      </View>
       <TaskList
         onCheckBoxToggle={onCheckBoxToggle}
         onDeleteTask={onDeleteTask}

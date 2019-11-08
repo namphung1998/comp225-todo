@@ -3,7 +3,6 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createAppContainer } from 'react-navigation';
 
 import ProgressScreen from './screens/ProgressScreen';
-import AddTask from './screens/AddTask';
 import GalleryScreen from './screens/GalleryScreen';
 
 const tabNavigator = createBottomTabNavigator({
@@ -13,12 +12,6 @@ const tabNavigator = createBottomTabNavigator({
       tabBarVisible: true
     }
   },
-  // AddTask: {
-  //   screen: AddTask,
-  //   navigationOptions: {
-  //     tabBarVisible: true,
-  //   }
-  // },
   Gallery: {
     screen: GalleryScreen,
     navigationOptions: {

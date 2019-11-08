@@ -1,12 +1,14 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { CheckBox, Card } from 'react-native-elements';
+import { Card } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import StarRating from 'react-native-star-rating';
 
 import FloatingButton from './FloatingButton';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import CheckBox from './CheckBox';
 
 function TaskItem({ item, onCheckBoxToggle, onDelete }) {
-  const { id, completed, title, deadline } = item;
+  const { id, completed, title, deadline, rating } = item;
 
   const onIconPress = () => onCheckBoxToggle(id);
   const onDeletePress = () => onDelete(id);
@@ -29,7 +31,12 @@ function TaskItem({ item, onCheckBoxToggle, onDelete }) {
         <FloatingButton onPress={onDeletePress} style={styles.removeButton}>
           <Icon name='highlight-off' size={16} />
         </FloatingButton>
-        <Text>{deadline.toString()}</Text>
+        <StarRating     
+          disabled={true}
+          maxStars={5}
+          rating={rating}
+          halfStarEnabled={true}
+        />
       </Card>
     </View>
   );
@@ -40,11 +47,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     // backgroundColor: '#00f',
     marginTop: 16,
+    marginBottom: 16,
     marginRight: 16,
   },
 
   checkboxContainer: {
     paddingLeft: 10,
+    paddingRight: 10,
     alignSelf: 'center',
   },
 
