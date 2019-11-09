@@ -17,7 +17,6 @@ function TaskItem({ item, onCheckBoxToggle, onDelete }) {
     <View style={styles.container}>
       <View style={styles.checkboxContainer}>
         <CheckBox
-          checkedColor='pink'
           checked={completed}
           onPress={onIconPress}
         />
@@ -31,7 +30,9 @@ function TaskItem({ item, onCheckBoxToggle, onDelete }) {
         <FloatingButton onPress={onDeletePress} style={styles.removeButton}>
           <Icon name='highlight-off' size={16} />
         </FloatingButton>
-        <StarRating     
+        <StarRating
+          containerStyle={styles.starContainer}
+          starSize={24}
           disabled={true}
           maxStars={5}
           rating={rating}
@@ -48,13 +49,13 @@ const styles = StyleSheet.create({
     // backgroundColor: '#00f',
     marginTop: 16,
     marginBottom: 16,
-    marginRight: 16,
+    marginRight: 16
   },
 
   checkboxContainer: {
     paddingLeft: 10,
     paddingRight: 10,
-    alignSelf: 'center',
+    alignSelf: 'center'
   },
 
   cardContainer: {
@@ -70,6 +71,10 @@ const styles = StyleSheet.create({
     width: 16,
     borderRadius: 32,
     backgroundColor: null
+  },
+
+  starContainer: {
+    width: '50%'
   }
 });
 

@@ -13,22 +13,14 @@ function TaskList({ tasks, onCheckBoxToggle, onDeleteTask }) {
     return obj;
   }, {});
 
-  const renderItem = ({ item }) => (
-    <TaskItem
-      onCheckBoxToggle={onCheckBoxToggle}
-      onDelete={onDeleteTask}
-      item={item}
-    />
-  );
+  const keyExtractor = item => item;
 
-  const keyExtractor = item => String(item);
-
-  const renderList = ({ item }) => {
-    const data = tasksByDate[item];
+  const renderList = ({ item: date }) => {
+    const data = tasksByDate[date];
     return (
-      <View key={item}>
+      <View key={date}>
         <View style={{ backgroundColor: '	rgb(220,220,220)', height: 24 }}>
-          <Text>{item}</Text>
+          <Text>{date}</Text>
         </View>
         {data.map(task => (
           <TaskItem
