@@ -45,11 +45,11 @@ function ProgressScreen() {
 
       if (_archivedTasks) {
         setArchivedTasks(JSON.parse(_archivedTasks));
-      }
+      } 
 
       if (_index) {
         setIndex(parseInt(_index));
-      }
+      } 
     });
   }, []);
 
@@ -102,7 +102,9 @@ function ProgressScreen() {
     setArchivedTasks([...archivedTasks, toDelete]);
   };
 
-  if (!tasks) return <Text>Loading...</Text>;
+  if (!tasks ) {
+    return <Text>Loading...</Text>;
+  } 
 
   return (
     <View style={styles.container}>

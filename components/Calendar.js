@@ -1,10 +1,22 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+
 import { MONTHS, DAYS_OF_WEEK, getFullWeek } from '../utils';
 
 class Calendar extends Component {
+  isChosen = day => {
+    const { chosenDate } = this.props;
+
+    return (
+      day.date === chosenDate.date() &&
+      day.months === chosenDate.month() &&
+      day.years === chosenDate.year()
+    );
+  };
+
   render() {
     const { chosenDate } = this.props;
+
     const daysInWeek = getFullWeek(chosenDate);
 
     return (
@@ -18,7 +30,9 @@ class Calendar extends Component {
             return (
               <View key={day.date} style={styles.dayContainer}>
                 <Text>{DAYS_OF_WEEK[i][0]}</Text>
-                <View>
+                <View
+                  style={{ backgroundColor: this.isChosen(day) ? 'red' : null }}
+                >
                   <Text>{day.date}</Text>
                 </View>
               </View>
