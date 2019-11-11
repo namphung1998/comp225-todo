@@ -1,28 +1,36 @@
 import React from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Button, View, SafeAreaView, Text, Alert } from 'react-native';
 
-function DrawButton(props) {
+
+function DrawButton({onDrawPress}) {
   return (
-    <TouchableOpacity style={[styles.container, props.style]} onPress={props.onPress}>
+    <SafeAreaView>
       <View>
-        {props.children}
+        <View style={styles.fixToText}>
+        <Button
+            title="Draw"
+            color="#ffc0cb"
+            onPress={onDrawPress}
+          />
+        </View>
       </View>
-    </TouchableOpacity>
+    </SafeAreaView>
   );
 }
 
-const styles = {
-  container: {
-    position: 'absolute',
-    bottom: 24,
-    right: 24,
-    height: 72,
-    width: 72,
-    borderRadius: 144,
-    backgroundColor: 'pink',
-    alignItems: 'center',
+const styles = StyleSheet.create({
+  fixToText: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  bottom: {
+    //position: 'absolute',
     justifyContent: 'center',
+    marginBottom: 40,
+    marginHorizontal: 40,
   }
-};
+});
+
+
 
 export default DrawButton;

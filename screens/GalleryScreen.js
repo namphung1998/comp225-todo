@@ -6,6 +6,10 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import ProgressHeader from"../components/ProgressHeader";
 import DrawButton from"../components/DrawButton";
 
+function drawButtonPress() {
+
+}
+
 _renderMainHeader = () => {
     return (
         <View>
@@ -18,11 +22,16 @@ _renderMainHeader = () => {
 
 _renderMainFooter = () => {
     return (
-        <View>
-          <DrawButton>
-            <Icon name='add' color='white' size={24}/>
-          </DrawButton>
-        </View>
+      <View
+        // flex={1}
+        alignItems= {'center'}
+        marginBottom= {0}>
+        <DrawButton
+          onDrawPress={() => {
+            drawButtonPress();
+          }}
+        />
+      </View>
     );
 }
 
