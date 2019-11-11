@@ -15,6 +15,16 @@ const MONTHS = [
   'December'
 ];
 
+const DAYS_OF_WEEK = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday'
+];
+
 const getFullWeek = (date = moment()) => {
   date.startOf('week');
   const res = [];
@@ -26,4 +36,4 @@ const getFullWeek = (date = moment()) => {
   return res;
 };
 
-export { MONTHS, getFullWeek };
+export { MONTHS, DAYS_OF_WEEK, getFullWeek };
