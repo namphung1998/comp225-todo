@@ -15,7 +15,7 @@ function AddCancelButton({onAddPress, onCancelPress}) {
         <View style={styles.fixToText}>
         <Button
             title="Cancel"
-            color="#ffc0cb"
+            color="#dfc1ff"
             onPress={onCancelPress}
           />
           <Button

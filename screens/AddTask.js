@@ -37,7 +37,7 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
 
   return (
     <View style={styles.screen}>
-      <Text style={{fontSize: 36, color: "pink", alignSelf: "center", padding: 10}}>
+      <Text style={styles.titleStyle}>
         Add Task
       </Text>
       <View style={styles.inputContainer}>
@@ -49,7 +49,7 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
         />
       </View>
       <View style={{ flexDirection: 'row', padding: 15 }}>
-        <Text style={{ color: 'pink', fontSize: 20, left: -20, top: 7}}> Deadline</Text>
+        <Text style={styles.textStyle2}> Deadline</Text>
         <DatePicker
           style={{ width: 200 }}
           date={currentDate}
@@ -61,7 +61,7 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
           confirmBtnText='Confirm'
           cancelBtnText='Cancel'
           customStyles={{
-            dateIcon: {
+            dateIcon: { 
               position: 'absolute',
               right: 0,
               top: 4,
@@ -70,9 +70,8 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
             dateInput: {
               marginLeft: -10,
               marginRight: 25,
-              borderColor: 'black',
-              borderWidth: 1,
-              
+              borderColor: '#6283c9',
+              borderWidth: 2.5,
             }
           }}
           onDateChange={date => {
@@ -80,8 +79,9 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
           }}
         />
       </View>
-      <Text style={{ color: 'pink', fontSize: 20, left: -5}}> Difficulty </Text>
-      <View style={{padding: 10}}>
+      <View style = {{borderColor: '#6283c9', borderWidth: 2.5, padding: 5}}>
+        <Text style={styles.textStyle}> Difficulty </Text>
+        <View style={{padding: 10}}>
         <StarRating     
           
           disabled={false}
@@ -91,30 +91,30 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
             setStarRating(rating);
           }}
           halfStarEnabled={true}
-          emptyStarColor={'pink'}
-          fullStarColor={'pink'}
+          emptyStarColor={'#87c0f4'}
+          fullStarColor={'#87c0f4'}
         />
       </View>
-      <View style={{flexDirection: 'row'}}>
-      <Text style={{ color: 'pink', fontSize: 20, left: -5}}> This task will take about</Text>
+      </View>
+      <View style={{flexDirection: 'row', paddingTop: 10}}>
+      <Text style={styles.textStyle3}> This task will take about</Text>
       <TextInput
-        
-          style={{width: '15%', borderColor: 'black', borderWidth: 1}}
-          placeholder={'130'}
+          style={styles.duration}
+          placeholder={'0'}
           keyboardType={'numeric'}
           onChangeText={durationInputHandler}
           value={enteredDuration}
           textAlign={'center'}
         />
-        <Text style={{ color: 'pink', fontSize: 20, left: -5}}>  min </Text>
+        <Text style={styles.textStyle3}>   min </Text>
         </View>
-      <View style={{padding: 10}}>
+      <View style={{paddingTop: 10}}>
         <TextInput 
           placeholder={"Optional Description"}
-          numberOfLines={4}
+          numberOfLines={5}
           multiline={true}
           textAlignVertical={'top'}
-          style={{width: '100%', borderColor: 'black', borderWidth: 1, padding: 10}}
+          style={styles.description}
           onChangeText={descriptionInputHandler}
           value={enteredDescription}
         />
@@ -146,8 +146,44 @@ const styles = StyleSheet.create({
   },
   input: {
     width: '100%',
-    borderColor: 'black',
-    borderWidth: 1,
+    borderColor: '#6283c9',
+    borderWidth: 2.5,
+    padding: 10
+  },
+  textStyle: {
+    color: 'black', 
+    fontSize: 16, 
+    left: -5, 
+  },
+  textStyle2: {
+    color: 'black', 
+    fontSize: 16, 
+    left: -20, 
+    top: 7
+  },
+  textStyle3: {
+    color: 'black',
+    fontSize: 16,
+    left: -5,
+    top: 5
+  },
+  titleStyle: {
+    fontSize: 36, 
+    color: 'pink', 
+    alignSelf: 'center', 
+    padding: 10,
+    fontWeight: 'bold'
+  },
+  duration: {
+    width: '15%', 
+    borderColor: '#6283c9', 
+    borderWidth: 2.5
+  },
+  description:{
+    width: '100%', 
+    height: 150, 
+    borderColor: '#6283c9', 
+    borderWidth: 2.5, 
     padding: 10
   }
 });
