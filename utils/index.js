@@ -1,6 +1,6 @@
-const moment = require('moment');
+import moment from 'moment';
 
-const MONTHS = [
+export const MONTHS = [
   'January',
   'February',
   'March',
@@ -15,15 +15,25 @@ const MONTHS = [
   'December'
 ];
 
-const getFullWeek = (date = moment()) => {
-  date.startOf('week');
+export const DAYS_OF_WEEK = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday'
+];
+
+export const getFullWeek = (date = moment()) => {
+  const clonedDate = moment(date);
+  clonedDate.startOf('week');
   const res = [];
   for (let i = 0; i < 7; i += 1) {
-    res.push(date.toObject());
-    date.add(1, 'day');
+    res.push(clonedDate.toObject());
+    clonedDate.add(1, 'day');
   }
 
   return res;
 };
 
-export { MONTHS, getFullWeek };

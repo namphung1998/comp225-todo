@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import ProgressBar from './ProgressBar';
 
 function ProgressHeader({ numCompleted, numTotal, numHearts }) {
-  const width = new Animated.Value(numTotal === 0 ? 0 : numCompleted * 100 / numTotal)
+  const width = numTotal === 0 ? 0 : numCompleted * 100 / numTotal;
 
   return (
     <View style={styles.container}>

@@ -1,17 +1,26 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, Animated } from 'react-native';
 
 function ProgressBar({ numCompleted, numTotal, width }) {
-  const widthStyle = width.interpolate({
+  let animation = useRef(new Animated.Value(0));
+
+  const widthStyle = animation.current.interpolate({
     inputRange: [0, 100],
     outputRange: ['0%', '100%'],
     extrapolate: 'clamp'
   });
 
+  useEffect(() => {
+    Animated.timing(animation.current, {
+      toValue: width,
+      duration: 250
+    }).start();
+  }, [width]);
+
   return (
     <View>
       <View style={styles.bar}>
-        <Text>{`${numCompleted}/${numTotal}`}</Text>
+        <Text style={styles.progressText}>{`${numCompleted}/${numTotal}`}</Text>
         <Animated.View
           style={[
             StyleSheet.absoluteFill,
@@ -34,7 +43,11 @@ const styles = StyleSheet.create({
   },
 
   progress: {
-    backgroundColor: 'pink'
+    backgroundColor: 'rgba(255, 0, 0, 0.2)'
+  },
+
+  progressText: {
+    textAlign: 'center'
   }
 });
 
