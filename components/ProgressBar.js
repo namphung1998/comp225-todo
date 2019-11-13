@@ -1,12 +1,21 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, Animated } from 'react-native';
 
 function ProgressBar({ numCompleted, numTotal, width }) {
-  const widthStyle = width.interpolate({
+  let animation = useRef(new Animated.Value(0));
+
+  const widthStyle = animation.current.interpolate({
     inputRange: [0, 100],
     outputRange: ['0%', '100%'],
     extrapolate: 'clamp'
   });
+
+  useEffect(() => {
+    Animated.timing(animation.current, {
+      toValue: width,
+      duration: 250
+    }).start();
+  }, [width]);
 
   return (
     <View>
