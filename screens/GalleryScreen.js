@@ -1,7 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
 import ImageLayout from "react-native-image-layout";
-import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import ProgressHeader from"../components/ProgressHeader";
 import DrawButton from"../components/DrawButton";
@@ -22,15 +21,14 @@ _renderMainHeader = () => {
 
 _renderMainFooter = () => {
     return (
-      <View
-        // flex={1}
-        alignItems= {'center'}
-        marginBottom= {0}>
+      <View alignItems= {'center'}>
         <DrawButton
           onDrawPress={() => {
             drawButtonPress();
           }}
-        />
+        >
+
+        </DrawButton>
       </View>
     );
 }

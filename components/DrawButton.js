@@ -6,10 +6,9 @@ function DrawButton({onDrawPress}) {
   return (
     <SafeAreaView>
       <View>
-        <View style={styles.fixToText}>
+        <View style={[styles.container]}>
         <Button
             title="Draw"
-            color="#ffc0cb"
             onPress={onDrawPress}
           />
         </View>
@@ -18,19 +17,16 @@ function DrawButton({onDrawPress}) {
   );
 }
 
-const styles = StyleSheet.create({
-  fixToText: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  bottom: {
-    //position: 'absolute',
+const styles = {
+  container: {
+    bottom: 45,
+    height: 55,
+    width: 120,
+    borderRadius: 22,
+    backgroundColor: 'pink',
+    alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 40,
-    marginHorizontal: 40,
   }
-});
-
-
+};
 
 export default DrawButton;
