@@ -19,15 +19,20 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
   var todayDate = year + "-" + month + "-" + day;
 
   const [currentDate, setCurrentDate] = useState(todayDate);
-  const [starRating, setStarRating] = useState(0);
+  const [starRating, setStarRating] = useState(3.5);
 
   const taskInputHandler = enteredTask => {
     setEnteredTask(enteredTask);
   };
 
-  const [enteredDescription, setEnteredDescription] = useState("Optional Description");
+  const [enteredDescription, setEnteredDescription] = useState('');
   const descriptionInputHandler = (enteredDescription) => {
     setEnteredDescription(enteredDescription);
+  }
+
+  const [enteredDuration, setEnteredDuration] = useState('');
+  const durationInputHandler = (enteredDuration) => {
+    setEnteredDuration(enteredDuration);
   }
 
   return (
@@ -78,6 +83,7 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
       <Text style={{ color: 'pink', fontSize: 20, left: -5}}> Difficulty </Text>
       <View style={{padding: 10}}>
         <StarRating     
+          
           disabled={false}
           maxStars={5}
           rating={starRating}
@@ -89,9 +95,22 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
           fullStarColor={'pink'}
         />
       </View>
-      <Text style={{ color: 'pink', fontSize: 20, left: -5}}> This task will take about... min </Text>
+      <View style={{flexDirection: 'row'}}>
+      <Text style={{ color: 'pink', fontSize: 20, left: -5}}> This task will take about</Text>
+      <TextInput
+        
+          style={{width: '15%', borderColor: 'black', borderWidth: 1}}
+          placeholder={'130'}
+          keyboardType={'numeric'}
+          onChangeText={durationInputHandler}
+          value={enteredDuration}
+          textAlign={'center'}
+        />
+        <Text style={{ color: 'pink', fontSize: 20, left: -5}}>  min </Text>
+        </View>
       <View style={{padding: 10}}>
         <TextInput 
+          placeholder={"Optional Description"}
           numberOfLines={4}
           multiline={true}
           textAlignVertical={'top'}
