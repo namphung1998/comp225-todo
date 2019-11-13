@@ -37,22 +37,4 @@ const styles = StyleSheet.create({
   }
 });
 
-// const TaskItem = props => {
-//   return (
-//     <View style={styles.listItem}>
-//       <Text>{props.children}</Text>
-//     </View>
-//   );
-// };
-//
-// const styles = StyleSheet.create({
-//   listItem: {
-//     padding: 10,
-//     marginVertical: 10,
-//     backgroundColor: '#ccc',
-//     borderColor: 'black',
-//     borderWidth: 1
-//   }
-// })
-
 export default TaskInput;

@@ -1,6 +1,6 @@
-import React from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
-import TaskItem from './TaskItem.js';
+import React from "react";
+import { View, Text, FlatList, StyleSheet } from "react-native";
+import TaskItem from "./TaskItem.js";
 
 function TaskList({ tasks, onCheckBoxToggle, onDeleteTask }) {
   const tasksByDate = tasks.reduce((obj, item) => {
@@ -17,10 +17,16 @@ function TaskList({ tasks, onCheckBoxToggle, onDeleteTask }) {
 
   const renderList = ({ item: date }) => {
     const data = tasksByDate[date];
+    const options = {
+      weekday: "short",
+      month: "short",
+      day: "2-digit"
+    };
+
     return (
       <View key={date}>
-        <View style={{ backgroundColor: '	rgb(220,220,220)', height: 24 }}>
-          <Text>{date}</Text>
+        <View style={{ backgroundColor: "rgb(220,220,220)", height: 24 }}>
+          <Text>{new Date(date).toLocaleDateString("en-US", options)}</Text>
         </View>
         {data.map(task => (
           <TaskItem
@@ -32,7 +38,7 @@ function TaskList({ tasks, onCheckBoxToggle, onDeleteTask }) {
         ))}
       </View>
     );
-  };  
+  };
 
   return (
     <View style={styles.container}>

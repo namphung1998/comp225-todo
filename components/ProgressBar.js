@@ -11,7 +11,7 @@ function ProgressBar({ numCompleted, numTotal, width }) {
   return (
     <View>
       <View style={styles.bar}>
-        <Text>{`${numCompleted}/${numTotal}`}</Text>
+        <Text style={styles.progressText}>{`${numCompleted}/${numTotal}`}</Text>
         <Animated.View
           style={[
             StyleSheet.absoluteFill,
@@ -34,7 +34,11 @@ const styles = StyleSheet.create({
   },
 
   progress: {
-    backgroundColor: 'pink'
+    backgroundColor: 'rgba(255, 0, 0, 0.2)'
+  },
+
+  progressText: {
+    textAlign: 'center'
   }
 });
 

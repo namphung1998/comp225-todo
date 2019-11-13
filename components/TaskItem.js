@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Card } from 'react-native-elements';
+import { View, StyleSheet } from 'react-native';
+import { Card, Divider } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import StarRating from 'react-native-star-rating';
 
@@ -60,7 +60,8 @@ const styles = StyleSheet.create({
 
   cardContainer: {
     flex: 1,
-    margin: 0
+    margin: 0,
+    borderRadius: 10
   },
 
   removeButton: {
