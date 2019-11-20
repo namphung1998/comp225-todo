@@ -1,11 +1,10 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Alert } from 'react-native';
 import ImageLayout from "react-native-image-layout";
 
 import ProgressHeader from"../components/ProgressHeader";
 import DrawButton from"../components/DrawButton";
 
-//TODO: create an image array with booleans
 //??: is there a way to populate the uri from stickers folder?
 
 masterImageArray=[
@@ -37,6 +36,22 @@ imageArray = masterImageArray.map(image => {
   });
 
 function drawButtonPress() {
+  // if(fish < 500) {
+  //   Alert.alert("Try again later", "You don't have enough fish to draw in any cats!");
+  // } else {
+  //   fish -= 500;
+  //   rarity = Math.random();
+  //   if (rarity < 1) {
+  //     return urArray[Math.floor(Math.random()*urArray.length)];
+  //   } else if (rarity < 5) {
+  //     return ssrArray[Math.floor(Math.random()*ssrArray.length)];
+  //   } else if (rarity < 15) {
+  //     return srArray[Math.floor(Math.random()*srArray.length)]; 
+  //   }
+  //   return rArray[Math.floor(Math.random()*rArray.length)];
+  };
+
+  //access money to decrement 500
   //choosen random image
     //random number generator decides from which array:
       //80: rare (R)
