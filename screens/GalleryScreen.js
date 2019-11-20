@@ -36,32 +36,32 @@ imageArray = masterImageArray.map(image => {
   });
 
 function drawButtonPress() {
-  // if(fish < 500) {
-  //   Alert.alert("Try again later", "You don't have enough fish to draw in any cats!");
-  // } else {
-  //   fish -= 500;
-  //   rarity = Math.random();
-  //   if (rarity < 1) {
-  //     return urArray[Math.floor(Math.random()*urArray.length)];
-  //   } else if (rarity < 5) {
-  //     return ssrArray[Math.floor(Math.random()*ssrArray.length)];
-  //   } else if (rarity < 15) {
-  //     return srArray[Math.floor(Math.random()*srArray.length)]; 
-  //   }
-  //   return rArray[Math.floor(Math.random()*rArray.length)];
-  };
+  if(fish < 500) {
+    Alert.alert("Try again later", "You don't have enough fish to draw in any cats!");
+  } else {
+    fish -= 500;
+    rarity = Math.random();
+    if (rarity < 1) {
+      return urArray[Math.floor(Math.random()*urArray.length)];
+    } else if (rarity < 5) {
+      return ssrArray[Math.floor(Math.random()*ssrArray.length)];
+    } else if (rarity < 15) {
+      return srArray[Math.floor(Math.random()*srArray.length)]; 
+    }
+    return rArray[Math.floor(Math.random()*rArray.length)];
+  }
+};
 
-  //access money to decrement 500
-  //choosen random image
-    //random number generator decides from which array:
-      //80: rare (R)
-      //15: super rare (SR)
-      //4:  super super rare (SSR)
-      //1:  ultra rare (UR)
-    //randomly choose from within that array
-      //image boolean open == true
-      //replace URI with new one
-}
+  // access money to decrement 500
+  // choosen random image
+  //   random number generator decides from which array:
+  //     80: rare (R)
+  //     15: super rare (SR)
+  //     4:  super super rare (SSR)
+  //     1:  ultra rare (UR)
+  //   randomly choose from within that array
+  //     image boolean open == true
+  //     replace URI with new one
 
 _renderMainHeader = () => {
     return (
@@ -117,7 +117,7 @@ function GalleryScreen() {
           //         id: "6" },
           // ]}
           columns={3}
-          spacing={10}
+          spacing={5}
       />
   );
 }

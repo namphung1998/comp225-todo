@@ -34,6 +34,7 @@ function ProgressScreen() {
   }, [tasks, archivedTasks, index, coins]);
 
   useEffect(() => {
+    AsyncStorage.clear();
     Promise.all([
       AsyncStorage.getItem('tasks'),
       AsyncStorage.getItem('archived'),

@@ -70,7 +70,7 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
             dateInput: {
               marginLeft: -10,
               marginRight: 25,
-              borderColor: '#6283c9',
+              borderColor: '#6280c1',
               borderWidth: 2.5,
             }
           }}
@@ -79,7 +79,7 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
           }}
         />
       </View>
-      <View style = {{borderColor: '#6283c9', borderWidth: 2.5, padding: 5}}>
+      <View style = {{borderColor: '#6280c1', borderWidth: 2.5, padding: 5}}>
         <Text style={styles.textStyle}> Difficulty </Text>
         <View style={{padding: 10}}>
         <StarRating     
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
   },
   input: {
     width: '100%',
-    borderColor: '#6283c9',
+    borderColor: '#6280c1',
     borderWidth: 2.5,
     padding: 10
   },
@@ -181,13 +181,13 @@ const styles = StyleSheet.create({
   },
   duration: {
     width: '15%', 
-    borderColor: '#6283c9', 
+    borderColor: '#6280c1', 
     borderWidth: 2.5
   },
   description:{
     width: '100%', 
     height: 150, 
-    borderColor: '#6283c9', 
+    borderColor: '#6280c1', 
     borderWidth: 2.5, 
     padding: 10
   }

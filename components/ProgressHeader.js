@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Platform } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import ProgressBar from './ProgressBar';
 
 function ProgressHeader({ numCompleted, numTotal, numHearts }) {
@@ -9,8 +9,8 @@ function ProgressHeader({ numCompleted, numTotal, numHearts }) {
   return (
     <View style={styles.container}>
       <View style={styles.heartContainer}>
-        <Icon name='favorite' color='#ffd700'/>
-      <Text>{numHearts}</Text>
+        <Icon name='fish' color='#6280c1' size={30}/>
+      <Text style = {{textAlignVertical: 'center', fontSize: 15}}>{numHearts}</Text>
       </View>
         <ProgressBar 
           width={width}
@@ -33,7 +33,10 @@ const styles = StyleSheet.create({
   },
 
   heartContainer: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    padding: 10,
+    justifyContent: 'center', 
+    alignItems: 'center'
   }
 })
 
