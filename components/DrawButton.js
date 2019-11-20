@@ -8,7 +8,7 @@ function DrawButton({onDrawPress}) {
     // <SafeAreaView>
         <TouchableOpacity 
           onPress={onDrawPress}
-          style={[styles.container]}>
+          style={styles.container}>
             <Text>
               Draw
             </Text>
@@ -17,16 +17,16 @@ function DrawButton({onDrawPress}) {
   );
 }
 
-const styles = {
+const styles =  StyleSheet.create({
   container: {
-    bottom: 45,
     height: 55,
     width: 120,
     borderRadius: 22,
     backgroundColor: 'pink',
     alignItems: 'center',
     justifyContent: 'center',
+    alignSelf: 'center'
   }
-};
+});
 
 export default DrawButton;
