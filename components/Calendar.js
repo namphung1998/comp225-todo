@@ -30,7 +30,7 @@ class Calendar extends Component {
               <View key={day.date} style={styles.dayContainer}>
                 <Text>{DAYS_OF_WEEK[i][0]}</Text>
                 <View
-                  style={{borderRadius: 50, borderWidth: this.isChosen(day) ? 2 : null, borderColor: this.isChosen(day) ? '#674ea7' : null }}
+                  style={{marginTop: 6, borderRadius: 10, borderWidth: this.isChosen(day) ? 2 : null, borderColor: this.isChosen(day) ? '#674ea7' : null }}
                 >
                   <Text>{day.date}</Text>
                 </View>
