@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Card, Divider } from 'react-native-elements';
+import { Card, Divider, CheckBox } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import StarRating from 'react-native-star-rating';
 
 import DeleteButton from './DeleteButton';
-import CheckBox from './CheckBox';
+// import CheckBox from './CheckBox';
 
 function TaskItem({ item, onCheckBoxToggle, onDelete }) {
   const { id, completed, title, deadline, rating } = item;
@@ -18,6 +18,8 @@ function TaskItem({ item, onCheckBoxToggle, onDelete }) {
       <View style={styles.checkboxContainer}>
         <CheckBox
           checked={completed}
+          checkedColor='black'
+          uncheckedColor='black'
           onPress={onIconPress}
         />
       </View>
@@ -53,8 +55,8 @@ const styles = StyleSheet.create({
   },
 
   checkboxContainer: {
-    paddingLeft: 10,
-    paddingRight: 10,
+    paddingLeft: 6,
+    paddingRight: 6,
     alignSelf: 'center'
   },
 
