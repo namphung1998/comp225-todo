@@ -1,19 +1,19 @@
 import React from 'react';
 import { StyleSheet, Button, View, SafeAreaView, Text, Alert } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 function DrawButton({onDrawPress}) {
   return (
-    <SafeAreaView>
-      <View>
-        <View style={[styles.container]}>
-        <Button
-            title="Draw"
-            onPress={onDrawPress}
-          />
-        </View>
-      </View>
-    </SafeAreaView>
+    // <SafeAreaView>
+        <TouchableOpacity 
+          onPress={onDrawPress}
+          style={[styles.container]}>
+            <Text>
+              Draw
+            </Text>
+          </TouchableOpacity>
+    // </SafeAreaView>
   );
 }
 

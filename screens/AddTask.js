@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Alert } from 'react-native';
 import AddCancelButton from '../components/AddCancelButton';
 import DatePicker from 'react-native-datepicker';
 import StarRating from 'react-native-star-rating';
@@ -125,7 +125,12 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
         marginBottom= {0}> 
         <AddCancelButton
           onAddPress={() => {
+            if(enteredTask == '') {
+              Alert.alert('Please give your task a name!', 'Enter a name for your task before continuing.');
+            }
+            else {
             addTaskButtonPress(enteredTask, currentDate, starRating, enteredDescription);
+            }
           }}
           onCancelPress={cancelButtonPress}
         />
