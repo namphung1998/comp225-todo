@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Animated } from 'react-native';
+import { View, Text, StyleSheet, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import ProgressBar from './ProgressBar';
 
@@ -9,7 +9,7 @@ function ProgressHeader({ numCompleted, numTotal, numHearts }) {
   return (
     <View style={styles.container}>
       <View style={styles.heartContainer}>
-        <Icon name='favorite' color='#ff0'/>
+        <Icon name='favorite' color='#ffd700'/>
       <Text>{numHearts}</Text>
       </View>
         <ProgressBar 
@@ -24,12 +24,12 @@ function ProgressHeader({ numCompleted, numTotal, numHearts }) {
 const styles = StyleSheet.create({
   container: {
     height: 64,
-    // backgroundColor: 'rgba(255, 0, 0, 0.2)',
     flexDirection: 'row',
     alignItems: 'flex-end',
     justifyContent: 'space-between',
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#f2f2f2'
+    borderBottomColor: '#f2f2f2',
+    marginTop: Platform.OS === 'android' ? 24 : null
   },
 
   heartContainer: {

@@ -6,7 +6,7 @@ function CheckBox({ checked, onPress }) {
   const name = checked ? 'favorite' : 'favorite-border'
 
   return (
-    <Icon name={name} color='#f5d442' size={24} onPress={onPress}/>
+    <Icon name={name} color='#ffd700' size={24} onPress={onPress}/>
   );
 }
 
