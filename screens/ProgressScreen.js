@@ -50,11 +50,11 @@ function ProgressScreen() {
 
       if (_archivedTasks) {
         setArchivedTasks(JSON.parse(_archivedTasks));
-      } 
+      }
 
       if (_index) {
         setIndex(parseInt(_index));
-      } 
+      }
 
       if (_coins) {
         setCoins(parseInt(_coins));
@@ -117,7 +117,7 @@ function ProgressScreen() {
 
   if (!tasks ) {
     return <Text>Loading...</Text>;
-  } 
+  }
 
   return (
     <View style={styles.container}>
@@ -141,7 +141,7 @@ function ProgressScreen() {
         tasks={tasks}
       />
       <FloatingButton onPress={floatingButtonPress}>
-        <Icon name='add' color='white' size={24} />
+        <Icon name='add' color='black' size={40} />
       </FloatingButton>
     </View>
   );
