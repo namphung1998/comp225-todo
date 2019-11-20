@@ -12,7 +12,7 @@ masterImageArray=[
       id: "1",
       open: false},
   { URI: "https://images.unsplash.com/photo-1468851508491-4f854ec88aa0?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=900&h=900&fit=crop&s=b1222b6a1d3694cac76d2a23c3a02254",
-      id: "2", 
+      id: "2",
       open: false},
   { URI: "https://images.unsplash.com/photo-1454991727061-be514eae86f7?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=900&h=900&fit=crop&s=3c55430f01fe9ac9a9ccb3383d1416ff",
       id: "3",
@@ -30,7 +30,7 @@ masterImageArray=[
 
 imageArray = masterImageArray.map(image => {
     if (image.open == false) {
-      return { source: require('../assets/stickers/blank_cat.jpg'), dimensions: { width: 300, height: 300}, id: image.id}
+      return { source: require('../assets/stickers/sleepy_cat.jpg'), dimensions: { width: 300, height: 300}, id: image.id}
     }
     return image;
   });
