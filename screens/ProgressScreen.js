@@ -15,6 +15,7 @@ function ProgressScreen() {
   const [visible, setVisible] = useState(false);
   const [tasks, setTasks] = useState(null);
   const [index, setIndex] = useState(1);
+  const [coins, setCoins] = useState(0);
   const [archivedTasks, setArchivedTasks] = useState([]);
   const init = useRef(true);
 
@@ -27,18 +28,21 @@ function ProgressScreen() {
     Promise.all([
       AsyncStorage.setItem('tasks', JSON.stringify(tasks)),
       AsyncStorage.setItem('archived', JSON.stringify(archivedTasks)),
-      AsyncStorage.setItem('index', String(index))
+      AsyncStorage.setItem('index', String(index)),
+      AsyncStorage.setItem('coins', String(coins))
     ]);
-  }, [tasks, archivedTasks, index]);
+  }, [tasks, archivedTasks, index, coins]);
 
   useEffect(() => {
     Promise.all([
       AsyncStorage.getItem('tasks'),
       AsyncStorage.getItem('archived'),
-      AsyncStorage.getItem('index')
-    ]).then(([_tasks, _archivedTasks, _index]) => {
+      AsyncStorage.getItem('index'),
+      AsyncStorage.getItem('coins')
+    ]).then(([_tasks, _archivedTasks, _index, _coins]) => {
       if (_tasks) {
         setTasks(JSON.parse(_tasks));
+        console.log(_tasks)
       } else {
         setTasks([]);
       }
@@ -50,6 +54,10 @@ function ProgressScreen() {
       if (_index) {
         setIndex(parseInt(_index));
       } 
+
+      if (_coins) {
+        setCoins(parseInt(_coins));
+      }
     });
   }, []);
 
@@ -77,7 +85,7 @@ function ProgressScreen() {
       });
     }
     setTasks(updatedTasks);
-    setIndex(index + 1);
+    setIndex(i => i + 1);
     setVisible(!visible);
   };
 
@@ -88,12 +96,14 @@ function ProgressScreen() {
   const onCheckBoxToggle = id => {
     const newTasks = tasks.map(item => {
       if (item.id === id) {
+        setCoins(curr => {
+          return curr + (item.completed ? - 1 : 1) * 100 * item.rating
+        });
         return { ...item, completed: !item.completed };
       }
 
       return item;
     });
-
     setTasks(newTasks);
   };
 
@@ -113,7 +123,7 @@ function ProgressScreen() {
       <ProgressHeader
         numCompleted={tasks.filter(item => item.completed).length}
         numTotal={tasks.length}
-        numHearts={500}
+        numHearts={coins}
       />
       <Modal visible={visible}>
         <AddTask
