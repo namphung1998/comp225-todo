@@ -59,11 +59,11 @@ function drawButtonPress() {
   } else {
     fish -= 500;
     rarity = Math.random();
-    if (rarity < 1) {
+    if (rarity < .01) {
       return urArray[Math.floor(Math.random()*urArray.length)];
-    } else if (rarity < 5) {
+    } else if (rarity < .05) {
       return ssrArray[Math.floor(Math.random()*ssrArray.length)];
-    } else if (rarity < 15) {
+    } else if (rarity < .15) {
       return srArray[Math.floor(Math.random()*srArray.length)]; 
     }
     return rArray[Math.floor(Math.random()*rArray.length)];
@@ -93,7 +93,9 @@ _renderMainHeader = () => {
 
 _renderMainFooter = () => {
     return (
-      <DrawButton onDrawPress={drawButtonPress} />
+      <View style= {{padding: 20}}>
+        <DrawButton onDrawPress={drawButtonPress} />
+      </View>
     );
 }
 
@@ -108,6 +110,7 @@ function GalleryScreen() {
           images = {imageArray}
           columns={3}
           spacing={5}
+          
       />
   );
 }

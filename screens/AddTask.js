@@ -91,8 +91,8 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
             setStarRating(rating);
           }}
           halfStarEnabled={true}
-          emptyStarColor={'#87c0f4'}
-          fullStarColor={'#87c0f4'}
+          emptyStarColor={'#87acf4'}
+          fullStarColor={'#87acf4'}
         />
       </View>
       </View>
@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
   },
   titleStyle: {
     fontSize: 36, 
-    color: 'pink', 
+    color: '#eaabbe', 
     alignSelf: 'center', 
     padding: 10,
     fontWeight: 'bold'

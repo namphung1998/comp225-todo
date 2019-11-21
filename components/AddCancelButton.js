@@ -15,12 +15,12 @@ function AddCancelButton({onAddPress, onCancelPress}) {
         <View style={styles.fixToText}>
         <Button
             title="Cancel"
-            color="#dfc1ff"
+            color="#e0ddff"
             onPress={onCancelPress}
           />
           <Button
             title="Add Task"
-            color="#ffc0cb"
+            color="#f4cbd9"
             onPress={() => {
               {/* Alert.alert('Your task is added!') */}
               onAddPress()

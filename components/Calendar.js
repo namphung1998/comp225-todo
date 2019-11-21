@@ -30,7 +30,7 @@ class Calendar extends Component {
               <View key={day.date} style={styles.dayContainer}>
                 <Text>{DAYS_OF_WEEK[i][0]}</Text>
                 <View
-                  style={{ marginTop: 8, backgroundColor: this.isChosen(day) ? 'red' : null }}
+                  style={{ marginTop: 8, backgroundColor: this.isChosen(day) ? 'pink' : null }}
                 >
                   <Text>{day.date}</Text>
                 </View>
@@ -45,7 +45,7 @@ class Calendar extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'rgba(0, 0, 255, 0.5)',
+    backgroundColor: '#d8d7f4',
     padding: 16
   },
 

@@ -141,7 +141,7 @@ function ProgressScreen() {
         tasks={tasks}
       />
       <FloatingButton onPress={floatingButtonPress}>
-        <Icon name='add' color='white' size={24} />
+        <Icon name='add' color='white' size={40} />
       </FloatingButton>
     </View>
   );
