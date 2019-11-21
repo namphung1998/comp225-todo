@@ -1,7 +1,7 @@
 import React from "react";
 import { View, TouchableOpacity } from "react-native";
 
-function FloatingButton(props) {
+function DeleteButton(props) {
   return (
     <TouchableOpacity
       style={[styles.container, props.style]}
@@ -20,12 +20,10 @@ const styles = {
     height: 60,
     width: 60,
     borderRadius: 100,
-    backgroundColor: "#ffe599",
-    borderColor: 'black',
-    borderWidth: 3,
+    backgroundColor: "white",
     alignItems: "center",
     justifyContent: "center"
   }
 };
 
-export default FloatingButton;
+export default DeleteButton;

@@ -8,11 +8,11 @@ function ProgressHeader({ numCompleted, numTotal, numHearts }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.heartContainer}>
+      <View style={styles.fishContainer}>
         <Icon name='fish' color='#6280c1' size={30}/>
       <Text style = {{textAlignVertical: 'center', fontSize: 15}}>{numHearts}</Text>
       </View>
-        <ProgressBar 
+        <ProgressBar
           width={width}
           numCompleted={numCompleted}
           numTotal={numTotal}
@@ -32,10 +32,10 @@ const styles = StyleSheet.create({
     marginTop: Platform.OS === 'android' ? 24 : null
   },
 
-  heartContainer: {
+  fishContainer: {
     flexDirection: 'row',
     padding: 10,
-    justifyContent: 'center', 
+    justifyContent: 'center',
     alignItems: 'center'
   }
 })

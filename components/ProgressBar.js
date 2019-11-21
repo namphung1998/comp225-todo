@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   },
 
   progress: {
-    backgroundColor: 'rgba(255, 0, 0, 0.2)'
+    backgroundColor: '#f9cb9c'
   },
 
   progressText: {
