@@ -4,7 +4,7 @@ import { Card, Divider, CheckBox } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import StarRating from 'react-native-star-rating';
 
-import DeleteButton from './DeleteButton';
+import FloatingButton from './FloatingButton';
 // import CheckBox from './CheckBox';
 
 function TaskItem({ item, onCheckBoxToggle, onDelete }) {
@@ -29,9 +29,9 @@ function TaskItem({ item, onCheckBoxToggle, onDelete }) {
         title={title}
         dividerStyle={{ display: 'none' }}
       >
-        <DeleteButton onPress={onDeletePress} style={styles.removeButton}>
+        <FloatingButton onPress={onDeletePress} style={styles.removeButton}>
           <Icon name='highlight-off' size={16} />
-        </DeleteButton>
+        </FloatingButton>
         <StarRating
           containerStyle={styles.starContainer}
           starSize={24}
@@ -48,7 +48,6 @@ function TaskItem({ item, onCheckBoxToggle, onDelete }) {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    // backgroundColor: '#00f',
     marginTop: 16,
     marginBottom: 16,
     marginRight: 16

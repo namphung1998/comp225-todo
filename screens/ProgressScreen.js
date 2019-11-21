@@ -11,7 +11,7 @@ import FloatingButton from '../components/FloatingButton';
 import Calendar from '../components/Calendar';
 
 
-function ProgressScreen() {
+function ProgressScreen({ screenProps }) {
   const [visible, setVisible] = useState(false);
   const [tasks, setTasks] = useState(null);
   const [index, setIndex] = useState(1);
@@ -34,7 +34,6 @@ function ProgressScreen() {
   }, [tasks, archivedTasks, index, coins]);
 
   useEffect(() => {
-    AsyncStorage.clear();
     Promise.all([
       AsyncStorage.getItem('tasks'),
       AsyncStorage.getItem('archived'),
@@ -43,7 +42,6 @@ function ProgressScreen() {
     ]).then(([_tasks, _archivedTasks, _index, _coins]) => {
       if (_tasks) {
         setTasks(JSON.parse(_tasks));
-        console.log(_tasks)
       } else {
         setTasks([]);
       }

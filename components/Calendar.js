@@ -30,7 +30,10 @@ class Calendar extends Component {
               <View key={day.date} style={styles.dayContainer}>
                 <Text>{DAYS_OF_WEEK[i][0]}</Text>
                 <View
-                  style={{marginTop: 6, borderRadius: 10, borderWidth: this.isChosen(day) ? 2 : null, borderColor: this.isChosen(day) ? '#674ea7' : null }}
+                  style={[
+                    styles.dateContainer,
+                    this.isChosen(day) ? styles.chosenContainer : null
+                  ]}
                 >
                   <Text>{day.date}</Text>
                 </View>
@@ -57,6 +60,16 @@ const styles = StyleSheet.create({
   dayContainer: {
     flexDirection: 'column',
     alignItems: 'center'
+  },
+
+  dateContainer: {
+    marginTop: 6,
+    borderRadius: 10
+  },
+
+  chosenContainer: {
+    borderWidth: 2,
+    borderColor: '#674ea7'
   }
 });
 
