@@ -85,6 +85,8 @@ _renderMainHeader = () => {
     return (
         <View>
           <ProgressHeader
+            numCompleted={0}
+            numTotal={0}
             numHearts={500}
           />
         </View>

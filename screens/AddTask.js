@@ -19,7 +19,7 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
   var todayDate = year + "-" + month + "-" + day;
 
   const [currentDate, setCurrentDate] = useState(todayDate);
-  const [starRating, setStarRating] = useState(3.5);
+  const [starRating, setStarRating] = useState(2.5);
 
   const taskInputHandler = enteredTask => {
     setEnteredTask(enteredTask);
@@ -83,7 +83,6 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
         <Text style={styles.textStyle}> Difficulty </Text>
         <View style={{padding: 10}}>
         <StarRating     
-          
           disabled={false}
           maxStars={5}
           rating={starRating}
