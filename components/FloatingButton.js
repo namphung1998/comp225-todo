@@ -1,5 +1,5 @@
 import React from "react";
-import { View, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 
 function FloatingButton(props) {
   return (
@@ -7,14 +7,14 @@ function FloatingButton(props) {
       style={[styles.container, props.style]}
       onPress={props.onPress}
     >
-      <View>{props.children}</View>
+      {props.children}
     </TouchableOpacity>
   );
 }
 
 const styles = {
   container: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 24,
     right: 24,
     height: 72,

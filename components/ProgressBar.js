@@ -47,7 +47,8 @@ const styles = StyleSheet.create({
   },
 
   progressText: {
-    textAlign: 'center'
+    textAlign: 'center',
+    zIndex: 1
   }
 });
 
