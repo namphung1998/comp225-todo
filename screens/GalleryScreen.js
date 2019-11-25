@@ -121,18 +121,11 @@ _renderMainHeader = () => {
 }
 
 
+_renderMainFooter = () => {
+  return <DrawButton onDrawPress={drawButtonPress} />;
+};
+
 function GalleryScreen({ screenProps: { fish } }) {
-  const _renderMainHeader = () => {
-    return (
-      <View style= {{padding: 20}}>
-        <DrawButton onDrawPress={drawButtonPress} />
-      </View>
-    );
-  };
-  
-  const _renderMainFooter = () => {
-    return <DrawButton onDrawPress={drawButtonPress} />;
-  };
 
   const imageArray = masterImageArray.map(image => {
     if (!image.open) {

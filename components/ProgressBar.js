@@ -43,12 +43,16 @@ const styles = StyleSheet.create({
   },
 
   progress: {
+<<<<<<< Updated upstream
     backgroundColor: '#f9cb9c'
   },
 
   progressText: {
     textAlign: 'center',
     zIndex: 1
+=======
+    backgroundColor: 'pink'
+>>>>>>> Stashed changes
   }
 });
 
