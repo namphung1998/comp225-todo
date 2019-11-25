@@ -17,7 +17,7 @@ const tabNavigator = createBottomTabNavigator({
   Gallery: {
     screen: GalleryScreen,
     navigationOptions: {
-      tabBarVisible: true,
+      tabBarVisible: true
     }
   }
 });
@@ -26,20 +26,45 @@ const AppContainer = createAppContainer(tabNavigator);
 
 class App extends Component {
   state = {
-    fish: null
-  }
+    fish: null,
+    tasks: [],
+    archivedTask: [],
+    index: 1,
+    init: true
+  };
 
   componentDidMount() {
-    AsyncStorage.getItem('coins')
-      .then(coins => this.setState({ fish: coins ? coins : 0 }))
-      .catch(console.log)
+    Promise.all([
+      AsyncStorage.getItem('tasks'),
+      AsyncStorage.getItem('archived'),
+      AsyncStorage.getItem('index'),
+      AsyncStorage.getItem('coins')
+    ]).then(([tasks, archivedTask, index, coins]) => {
+      this.setState(
+        {
+          fish: coins ? parseInt(coins) : 0,
+          archivedTask: archivedTask ? JSON.parse(archivedTask) : this.state.archivedTask,
+          index: index ? parseInt(index) : this.state.index,
+          tasks: tasks ? JSON.parse(tasks) : this.state.tasks
+        },
+        () => this.setState({ init: false })
+      );
+    });
+  }
+
+  componentDidUpdate(_, prevState) {
+    console.log('update', prevState);
   }
 
   render() {
-    if (!this.state.fish) {
-      return <ActivityIndicator />
+    if (this.state.init) {
+      return <ActivityIndicator />;
     }
-    return <AppContainer />
+    return (
+      <AppContainer screenProps={{
+        fish: this.state.fish
+      }} />
+    );
   }
 }
 

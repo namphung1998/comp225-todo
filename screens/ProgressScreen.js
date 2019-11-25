@@ -11,7 +11,7 @@ import FloatingButton from '../components/FloatingButton';
 import Calendar from '../components/Calendar';
 
 
-function ProgressScreen({ screenProps }) {
+function ProgressScreen({ screenProps: { fish } }) {
   const [visible, setVisible] = useState(false);
   const [tasks, setTasks] = useState(null);
   const [index, setIndex] = useState(1);
