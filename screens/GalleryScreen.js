@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Alert } from 'react-native';
-import ImageLayout from "react-native-image-layout";
+import ImageLayout from 'react-native-image-layout';
 
-import ProgressHeader from"../components/ProgressHeader";
-import DrawButton from"../components/DrawButton";
+import ProgressHeader from '../components/ProgressHeader';
+import DrawButton from '../components/DrawButton';
 
 //??: is there a way to populate the uri from stickers folder?
 
@@ -93,19 +93,20 @@ function drawButtonPress() {
   } else {
     sticker = masterImageArray[0];
     openSticker(sticker);
-  }
-};
 
-  // access money to decrement 500
-  // choosen random image
-  //   random number generator decides from which array:
-  //     80: rare (R)
-  //     15: super rare (SR)
-  //     4:  super super rare (SSR)
-  //     1:  ultra rare (UR)
-  //   randomly choose from within that array
-  //     image boolean open == true
-  //     replace URI with new one
+  }
+}
+
+// access money to decrement 500
+// choosen random image
+//   random number generator decides from which array:
+//     80: rare (R)
+//     15: super rare (SR)
+//     4:  super super rare (SSR)
+//     1:  ultra rare (UR)
+//   randomly choose from within that array
+//     image boolean open == true
+//     replace URI with new one
 
 _renderMainHeader = () => {
     return (
@@ -119,17 +120,32 @@ _renderMainHeader = () => {
     );
 }
 
-_renderMainFooter = () => {
+
+function GalleryScreen({ screenProps: { fish } }) {
+  const _renderMainHeader = () => {
     return (
       <View style= {{padding: 20}}>
         <DrawButton onDrawPress={drawButtonPress} />
       </View>
     );
-}
+  };
+  
+  const _renderMainFooter = () => {
+    return <DrawButton onDrawPress={drawButtonPress} />;
+  };
+
+  const imageArray = masterImageArray.map(image => {
+    if (!image.open) {
+      return {
+        source: require('../assets/stickers/sleepy_cat.jpg'),
+        dimensions: { width: 300, height: 300 },
+        id: image.id
+      };
+    }
+    return image;
+  });
 
 
-
-function GalleryScreen() {
   return (
       <ImageLayout
           // renderPageHeader={this._renderPageHeader}
@@ -140,6 +156,7 @@ function GalleryScreen() {
           spacing={5}
           
       />
+
   );
 }
 
