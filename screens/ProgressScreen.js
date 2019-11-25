@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, Modal, AsyncStorage } from 'react-native';
+import React, { useState } from 'react';
+import { View, Modal } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import moment from 'moment';
@@ -10,119 +10,31 @@ import AddTask from './AddTask';
 import FloatingButton from '../components/FloatingButton';
 import Calendar from '../components/Calendar';
 
-
-function ProgressScreen({ screenProps: { fish } }) {
+function ProgressScreen({
+  screenProps: { fish, onAddButtonPress, onCheckBoxToggle, tasks, onDeleteTask }
+}) {
   const [visible, setVisible] = useState(false);
-  const [tasks, setTasks] = useState(null);
-  const [index, setIndex] = useState(1);
-  const [coins, setCoins] = useState(0);
-  const [archivedTasks, setArchivedTasks] = useState([]);
-  const init = useRef(true);
-
-  useEffect(() => {
-    if (init.current) {
-      init.current = false;
-      return;
-    }
-
-    Promise.all([
-      AsyncStorage.setItem('tasks', JSON.stringify(tasks)),
-      AsyncStorage.setItem('archived', JSON.stringify(archivedTasks)),
-      AsyncStorage.setItem('index', String(index)),
-      AsyncStorage.setItem('coins', String(coins))
-    ]);
-  }, [tasks, archivedTasks, index, coins]);
-
-  useEffect(() => {
-    Promise.all([
-      AsyncStorage.getItem('tasks'),
-      AsyncStorage.getItem('archived'),
-      AsyncStorage.getItem('index'),
-      AsyncStorage.getItem('coins')
-    ]).then(([_tasks, _archivedTasks, _index, _coins]) => {
-      if (_tasks) {
-        setTasks(JSON.parse(_tasks));
-      } else {
-        setTasks([]);
-      }
-
-      if (_archivedTasks) {
-        setArchivedTasks(JSON.parse(_archivedTasks));
-      }
-
-      if (_index) {
-        setIndex(parseInt(_index));
-      }
-
-      if (_coins) {
-        setCoins(parseInt(_coins));
-      }
-    });
-  }, []);
 
   const floatingButtonPress = () => {
     setVisible(!visible);
   };
 
-  const addTaskButtonPress = (task, deadline, rating, desc, duration) => {
-    const newTask = {
-      id: index,
-      title: task,
-      completed: false,
-      deadline: deadline,
-      rating: rating,
-      desc: desc,
-      duration: duration
-    };
-    const updatedTasks = [...tasks, newTask];
-
-    if (updatedTasks.length > 1) {
-      updatedTasks.sort(function(a, b) {
-        var d1 = a.deadline.split('-').join('');
-        var d2 = b.deadline.split('-').join('');
-        return d1 - d2;
-      });
-    }
-    setTasks(updatedTasks);
-    setIndex(i => i + 1);
-    setVisible(!visible);
+  const addTaskButtonPress = (title, deadline, rating, desc, duration) => {
+    onAddButtonPress({ title, deadline, rating, desc, duration }, () =>
+      setVisible(!visible)
+    );
   };
 
   const cancelButtonPress = () => {
     setVisible(!visible);
   };
 
-  const onCheckBoxToggle = id => {
-    const newTasks = tasks.map(item => {
-      if (item.id === id) {
-        setCoins(curr => {
-          return curr + (item.completed ? - 1 : 1) * 100 * item.rating
-        });
-        return { ...item, completed: !item.completed };
-      }
-
-      return item;
-    });
-    setTasks(newTasks);
-  };
-
-  const onDeleteTask = id => {
-    const toDelete = tasks.find(item => item.id === id);
-    const newTasks = tasks.filter(item => item.id !== id);
-    setTasks(newTasks);
-    setArchivedTasks([...archivedTasks, toDelete]);
-  };
-
-  if (!tasks ) {
-    return <Text>Loading...</Text>;
-  }
-
   return (
     <View style={styles.container}>
       <ProgressHeader
         numCompleted={tasks.filter(item => item.completed).length}
         numTotal={tasks.length}
-        numHearts={coins}
+        numHearts={fish}
       />
       <Modal visible={visible}>
         <AddTask
@@ -131,7 +43,7 @@ function ProgressScreen({ screenProps: { fish } }) {
         />
       </Modal>
 
-      <Calendar chosenDate={moment()}/>
+      <Calendar chosenDate={moment()} />
 
       <TaskList
         onCheckBoxToggle={onCheckBoxToggle}

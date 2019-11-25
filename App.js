@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage, TouchableHighlightBase } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createAppContainer } from 'react-navigation';
 
@@ -30,7 +30,71 @@ class App extends Component {
     tasks: [],
     archivedTask: [],
     index: 1,
-    init: true
+    loading: true
+  };
+
+  onDeleteTask = id => {
+    const { tasks } = this.state;
+    const toDelete = tasks.find(item => item.id === id);
+    const newTasks = tasks.filter(item => item.id !== id);
+
+    this.setState(state => {
+      return {
+        tasks: newTasks,
+        archivedTask: [...state.archivedTask, toDelete]
+      }
+    });
+  }
+
+  onCheckBoxToggle = id => {
+    this.setState(({ tasks, fish }) => {
+      const newTasks = tasks.map(item => {
+        if (item.id === id) {
+          return { ...item, completed: !item.completed };
+        }
+
+        return item;
+      });
+
+      const newFish = tasks.reduce((result, item) => {
+        if (item.id === id) {
+          return result + (item.completed ? -1 : 1) * 100 * item.rating;
+        }
+
+        return result;
+      }, fish)
+
+      return {
+        tasks: newTasks,
+        fish: newFish
+      };
+    });
+  };
+
+  onAddButtonPress = (
+    { title, deadline, rating, desc, duration },
+    callback
+  ) => {
+    const task = {
+      id: this.state.index,
+      complete: false,
+      title,
+      rating,
+      deadline,
+      desc,
+      duration
+    };
+
+    this.setState(state => {
+      return {
+        tasks: [...state.tasks, task].sort((a, b) => {
+          var d1 = a.deadline.split('-').join('');
+          var d2 = b.deadline.split('-').join('');
+          return d1 - d2;
+        }),
+        index: state.index + 1
+      };
+    }, callback);
   };
 
   componentDidMount() {
@@ -43,27 +107,48 @@ class App extends Component {
       this.setState(
         {
           fish: coins ? parseInt(coins) : 0,
-          archivedTask: archivedTask ? JSON.parse(archivedTask) : this.state.archivedTask,
+          archivedTask: archivedTask
+            ? JSON.parse(archivedTask)
+            : this.state.archivedTask,
           index: index ? parseInt(index) : this.state.index,
           tasks: tasks ? JSON.parse(tasks) : this.state.tasks
         },
-        () => this.setState({ init: false })
+        () => this.setState({ loading: false })
       );
     });
   }
 
   componentDidUpdate(_, prevState) {
-    console.log('update', prevState);
+    const { index } = prevState;
+
+    if (index !== this.state.index) {
+      AsyncStorage.setItem('index', String(this.state.index))
+        .catch(console.log);
+    }
+
+    AsyncStorage.setItem('tasks', JSON.stringify(this.state.tasks))
+      .catch(console.log);
   }
 
   render() {
-    if (this.state.init) {
+    if (this.state.loading) {
       return <ActivityIndicator />;
     }
+
+    const { fish, tasks, archivedTask, index } = this.state;
+
     return (
-      <AppContainer screenProps={{
-        fish: this.state.fish
-      }} />
+      <AppContainer
+        screenProps={{
+          fish,
+          tasks,
+          archivedTask,
+          index,
+          onAddButtonPress: this.onAddButtonPress,
+          onCheckBoxToggle: this.onCheckBoxToggle,
+          onDeleteTask: this.onDeleteTask
+        }}
+      />
     );
   }
 }
