@@ -39,7 +39,8 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     height: 16,
     width: 150,
-    borderWidth: 1
+    borderWidth: 1,
+    justifyContent: 'center'
   },
 
   progress: {

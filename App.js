@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { AsyncStorage, TouchableHighlightBase } from 'react-native';
+import { AsyncStorage, ActivityIndicator } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createAppContainer } from 'react-navigation';
 
 import ProgressScreen from './screens/ProgressScreen';
 import GalleryScreen from './screens/GalleryScreen';
-import { ActivityIndicator } from 'react-native-paper';
 
 const tabNavigator = createBottomTabNavigator({
   Progress: {
@@ -104,6 +103,8 @@ class App extends Component {
   };
 
   componentDidMount() {
+    // AsyncStorage.clear();
+    // return;
     Promise.all([
       AsyncStorage.getItem('tasks'),
       AsyncStorage.getItem('archived'),
@@ -125,15 +126,25 @@ class App extends Component {
   }
 
   componentDidUpdate(_, prevState) {
-    const { index } = prevState;
+    if (this.state.loading) return;
+    
+    const { index, fish, tasks } = prevState;
 
     if (index !== this.state.index) {
       AsyncStorage.setItem('index', String(this.state.index))
         .catch(console.log);
     }
 
-    AsyncStorage.setItem('tasks', JSON.stringify(this.state.tasks))
+    if (tasks !== this.state.tasks) {
+      AsyncStorage.setItem('tasks', JSON.stringify(this.state.tasks))
       .catch(console.log);
+    }
+    
+
+    if (fish !== this.state.fish) {
+      AsyncStorage.setItem('coins', String(this.state.fish))
+        .catch(console.log);
+    }
   }
 
   render() {

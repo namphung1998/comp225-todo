@@ -1,50 +1,45 @@
-import React from "react";
-import { View, Text, FlatList, StyleSheet } from "react-native";
-import TaskItem from "./TaskItem.js";
+import React, { useRef } from 'react';
+import { View, Text, StyleSheet, SectionList, Button } from 'react-native';
+import moment from 'moment';
 
-function TaskList({ tasks, onCheckBoxToggle, onDeleteTask }) {
-  const tasksByDate = tasks.reduce((obj, item) => {
-    if (obj[item.deadline]) {
-      obj[item.deadline].push(item);
-    } else {
-      obj[item.deadline] = [item];
-    }
+import TaskItem from './TaskItem.js';
 
-    return obj;
-  }, {});
+function TaskList({ tasksByDate, onCheckBoxToggle, onDeleteTask }) {
+  const listRef = useRef(null);
 
-  const keyExtractor = item => item;
+  const data = Object.keys(tasksByDate).map(date => {
+    return { title: date, data: tasksByDate[date] };
+  });
 
-  const renderList = ({ item: date }) => {
-    const data = tasksByDate[date];
-    const options = {
-      weekday: "short",
-      month: "short",
-      day: "2-digit"
-    };
+  const keyExtractor = item => String(item.id);
 
+  const renderItem = ({ item: task }) => (
+    <TaskItem
+      key={task.id}
+      onCheckBoxToggle={onCheckBoxToggle}
+      onDelete={onDeleteTask}
+      item={task}
+    />
+  );
+
+  const renderSectionHeader = ({ section: { title: date } }) => {
+    const currDate = moment(date);
+    const dateString = (currDate.isSame(new Date(), 'day') ? 'Today - ' : '') + currDate.format('ddd, MMM D');
+    
     return (
-      <View key={date}>
-        <View style={{ backgroundColor: "rgb(220,220,220)", height: 24 }}>
-          <Text>{new Date(date).toLocaleDateString("en-US", options)}</Text>
-        </View>
-        {data.map(task => (
-          <TaskItem
-            key={task.id}
-            onCheckBoxToggle={onCheckBoxToggle}
-            onDelete={onDeleteTask}
-            item={task}
-          />
-        ))}
+      <View style={styles.dateContainer}>
+        <Text>{dateString}</Text>
       </View>
-    );
-  };
+    )
+  }
 
   return (
     <View style={styles.container}>
-      <FlatList
-        data={Object.keys(tasksByDate)}
-        renderItem={renderList}
+      <SectionList
+        ref={listRef}
+        sections={data}
+        renderItem={renderItem}
+        renderSectionHeader={renderSectionHeader}
         keyExtractor={keyExtractor}
       />
     </View>
@@ -61,6 +56,12 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 18,
     height: 44
+  },
+  dateContainer: {
+    backgroundColor: '#dddddd',
+    height: 24,
+    borderWidth: 2,
+    borderColor: '#cccccc'
   }
 });
 

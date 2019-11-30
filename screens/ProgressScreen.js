@@ -9,11 +9,14 @@ import TaskList from '../components/TaskList';
 import AddTask from './AddTask';
 import FloatingButton from '../components/FloatingButton';
 import Calendar from '../components/Calendar';
+import { getFullWeek } from '../utils';
 
 function ProgressScreen({
   screenProps: { fish, onAddButtonPress, onCheckBoxToggle, tasks, onDeleteTask }
 }) {
   const [visible, setVisible] = useState(false);
+  const today = moment();
+  const [chosenDate, setChosenDate] = useState(today);
 
   const floatingButtonPress = () => {
     setVisible(!visible);
@@ -29,6 +32,22 @@ function ProgressScreen({
     setVisible(!visible);
   };
 
+  const tasksByDate = tasks.reduce((obj, item) => {
+    if (obj[item.deadline]) {
+      obj[item.deadline].push(item);
+    } else {
+      obj[item.deadline] = [item];
+    }
+
+    return obj;
+  }, {});
+
+  const daysInWeek = getFullWeek(chosenDate);
+  const daysToShow = daysInWeek.map(day => {
+    const key = moment(day).format('YYYY-MM-DD');
+    return { ...day, disabled: tasksByDate[key] ? false : true } 
+  });
+
   return (
     <View style={styles.container}>
       <ProgressHeader
@@ -43,12 +62,17 @@ function ProgressScreen({
         />
       </Modal>
 
-      <Calendar chosenDate={moment()} />
+      <Calendar 
+        chosenDate={chosenDate} 
+        today={today} 
+        setChosenDate={setChosenDate}
+        daysToShow={daysToShow}
+      />
 
       <TaskList
         onCheckBoxToggle={onCheckBoxToggle}
         onDeleteTask={onDeleteTask}
-        tasks={tasks}
+        tasksByDate={tasksByDate}
       />
       <FloatingButton onPress={floatingButtonPress}>
         <Icon name='add' color='black' size={40} />

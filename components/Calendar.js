@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import moment from 'moment';
 
 import { MONTHS, DAYS_OF_WEEK, getFullWeek } from '../utils';
 
-class Calendar extends Component {
-  isChosen = day => {
-    const { chosenDate } = this.props;
-
+function Calendar({ chosenDate, setChosenDate, daysToShow }) {
+  const isChosen = day => {
     return (
       day.date === chosenDate.date() &&
       day.months === chosenDate.month() &&
@@ -14,47 +13,52 @@ class Calendar extends Component {
     );
   };
 
-  render() {
-    const { chosenDate } = this.props;
-
-    const daysInWeek = getFullWeek(chosenDate);
-
-    return (
-      <View style={styles.container}>
-        <Text style={{ textAlign: 'center' }}>
-          {MONTHS[chosenDate.month()]}
-        </Text>
-        <View style={styles.weekContainer}>
-          {daysInWeek.map((day, i) => {
-            return (
-              <View key={day.date} style={styles.dayContainer}>
-                <Text>{DAYS_OF_WEEK[i][0]}</Text>
-                <View
-                  style={[
-                    styles.dateContainer,
-                    this.isChosen(day) ? styles.chosenContainer : null
-                  ]}
-                >
-                  <Text>{day.date}</Text>
-                </View>
-              </View>
-            );
-          })}
-        </View>
+  return (
+    <View style={styles.container}>
+      <Text style={styles.monthText}>{MONTHS[chosenDate.month()]}</Text>
+      <View style={styles.weekContainer}>
+        {daysToShow.map((day, i) => {
+          return (
+            <Day
+              disabled={day.disabled}
+              key={day.date}
+              day={day}
+              dayIndex={i}
+              style={[
+                styles.dateContainer,
+                isChosen(day) ? styles.chosenContainer : null
+              ]}
+            />
+          );
+        })}
       </View>
-    );
-  }
+    </View>
+  );
+}
+
+function Day({ day, dayIndex, style, disabled }) {
+  return (
+    <View style={styles.dayContainer}>
+      <Text>{DAYS_OF_WEEK[dayIndex][0]}</Text>
+      <TouchableOpacity disabled={disabled} style={style}>
+        <Text style={styles.monthText}>{day.date}</Text>
+      </TouchableOpacity>
+      {!disabled && <View style={styles.dot}></View>}
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#d8d7f4',
-    padding: 16
+    paddingTop: 8,
+    paddingBottom: 2
   },
 
   weekContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    marginTop: 16
   },
 
   dayContainer: {
@@ -64,12 +68,30 @@ const styles = StyleSheet.create({
 
   dateContainer: {
     marginTop: 6,
-    borderRadius: 10
+    height: 24,
+    width: 24,
+    borderRadius: 12,
+    justifyContent: 'center'
   },
 
   chosenContainer: {
-    borderWidth: 2,
-    borderColor: '#674ea7'
+    borderColor: '#674ea7',
+    borderWidth: 2
+  },
+
+  monthText: {
+    textAlign: 'center',
+    fontWeight: 'bold'
+  },
+
+  dot: {
+    height: 8,
+    width: 8,
+    borderRadius: 4,
+    backgroundColor: '#8e7cc3',
+    borderWidth: 1,
+    borderColor: '#fff',
+    marginTop: 6,
   }
 });
 

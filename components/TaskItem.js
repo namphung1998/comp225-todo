@@ -18,8 +18,8 @@ function TaskItem({ item, onCheckBoxToggle, onDelete }) {
       <View style={styles.checkboxContainer}>
         <CheckBox
           checked={completed}
-          checkedColor='black'
-          uncheckedColor='black'
+          checkedColor='#ffd966'
+          uncheckedColor='#ffd966'
           onPress={onIconPress}
         />
       </View>

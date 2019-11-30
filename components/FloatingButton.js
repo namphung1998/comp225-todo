@@ -19,8 +19,8 @@ const styles = {
     right: 24,
     height: 72,
     width: 72,
-    borderRadius: 144,
-    backgroundColor: "pink",
+    borderRadius: 36,
+    backgroundColor: "#ffe599",
     alignItems: "center",
     justifyContent: "center"
   }
