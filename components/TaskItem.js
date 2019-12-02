@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Card, Divider, CheckBox } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import StarRating from 'react-native-star-rating';
@@ -7,14 +7,14 @@ import StarRating from 'react-native-star-rating';
 import FloatingButton from './FloatingButton';
 // import CheckBox from './CheckBox';
 
-function TaskItem({ item, onCheckBoxToggle, onDelete }) {
+function TaskItem({ item, onCheckBoxToggle, onDelete, onPress }) {
   const { id, completed, title, deadline, rating } = item;
 
   const onIconPress = () => onCheckBoxToggle(id);
   const onDeletePress = () => onDelete(id);
 
   return (
-    <View style={styles.container}>
+    <TouchableOpacity onPress={onPress} style={styles.container}>
       <View style={styles.checkboxContainer}>
         <CheckBox
           checked={completed}
@@ -41,7 +41,7 @@ function TaskItem({ item, onCheckBoxToggle, onDelete }) {
           halfStarEnabled={true}
         />
       </Card>
-    </View>
+    </TouchableOpacity>
   );
 }
 

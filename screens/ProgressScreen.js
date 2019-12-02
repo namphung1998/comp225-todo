@@ -7,6 +7,7 @@ import moment from 'moment';
 import ProgressHeader from '../components/ProgressHeader';
 import TaskList from '../components/TaskList';
 import AddTask from './AddTask';
+import TaskDetail from '../components/TaskDetail';
 import FloatingButton from '../components/FloatingButton';
 import Calendar from '../components/Calendar';
 import { getFullWeek } from '../utils';
@@ -15,11 +16,16 @@ function ProgressScreen({
   screenProps: { fish, onAddButtonPress, onCheckBoxToggle, tasks, onDeleteTask }
 }) {
   const [visible, setVisible] = useState(false);
+  const [detailVisible, setDetailVisible] = useState(false);
   const today = moment();
   const [chosenDate, setChosenDate] = useState(today);
 
   const floatingButtonPress = () => {
     setVisible(!visible);
+  };
+
+  const taskDetailPress = () => {
+    setDetailVisible(!detailVisible);
   };
 
   const addTaskButtonPress = (title, deadline, rating, desc, duration) => {
@@ -62,6 +68,13 @@ function ProgressScreen({
         />
       </Modal>
 
+      <Modal visible={detailVisible}>
+        <TaskDetail
+          // addTaskButtonPress={addTaskButtonPress}
+          // cancelButtonPress={cancelButtonPress}
+        />
+      </Modal>
+
       <Calendar 
         chosenDate={chosenDate} 
         today={today} 
@@ -73,7 +86,9 @@ function ProgressScreen({
         onCheckBoxToggle={onCheckBoxToggle}
         onDeleteTask={onDeleteTask}
         tasksByDate={tasksByDate}
+        onPress={taskDetailPress}
       />
+
       <FloatingButton onPress={floatingButtonPress}>
         <Icon name='add' color='black' size={40} />
       </FloatingButton>

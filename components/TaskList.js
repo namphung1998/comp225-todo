@@ -4,7 +4,7 @@ import moment from 'moment';
 
 import TaskItem from './TaskItem.js';
 
-function TaskList({ tasksByDate, onCheckBoxToggle, onDeleteTask }) {
+function TaskList({ tasksByDate, onCheckBoxToggle, onDeleteTask, onPress }) {
   const listRef = useRef(null);
 
   const data = Object.keys(tasksByDate).map(date => {
@@ -19,6 +19,7 @@ function TaskList({ tasksByDate, onCheckBoxToggle, onDeleteTask }) {
       onCheckBoxToggle={onCheckBoxToggle}
       onDelete={onDeleteTask}
       item={task}
+      onPress={onPress}
     />
   );
 
