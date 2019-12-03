@@ -51,7 +51,7 @@ function ProgressScreen({
   const daysInWeek = getFullWeek(chosenDate);
   const daysToShow = daysInWeek.map(day => {
     const key = moment(day).format('YYYY-MM-DD');
-    return { ...day, disabled: tasksByDate[key] ? false : true } 
+    return { ...day, disabled: tasksByDate[key] ? false : true }
   });
 
   return (
@@ -75,9 +75,9 @@ function ProgressScreen({
         />
       </Modal>
 
-      <Calendar 
-        chosenDate={chosenDate} 
-        today={today} 
+      <Calendar
+        chosenDate={chosenDate}
+        today={today}
         setChosenDate={setChosenDate}
         daysToShow={daysToShow}
       />
@@ -89,7 +89,7 @@ function ProgressScreen({
         onPress={taskDetailPress}
       />
 
-      <FloatingButton onPress={floatingButtonPress}>
+      <FloatingButton onPress={floatingButtonPress} style={styles.addTaskButton}>
         <Icon name='add' color='black' size={40} />
       </FloatingButton>
     </View>
@@ -103,6 +103,9 @@ const styles = {
   },
   button: {
     backgroundColor: 'red'
+  },
+  addTaskButton: {
+    borderWidth: 1.5
   }
 };
 
