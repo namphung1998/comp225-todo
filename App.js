@@ -5,6 +5,7 @@ import { createAppContainer } from 'react-navigation';
 
 import ProgressScreen from './screens/ProgressScreen';
 import GalleryScreen from './screens/GalleryScreen';
+import HistoryScreen from './screens/HistoryScreen';
 
 const tabNavigator = createBottomTabNavigator({
   Progress: {
@@ -21,6 +22,13 @@ const tabNavigator = createBottomTabNavigator({
   // },
   Gallery: {
     screen: GalleryScreen,
+    navigationOptions: {
+      tabBarVisible: true
+    }
+  },
+
+  History: {
+    screen: HistoryScreen,
     navigationOptions: {
       tabBarVisible: true
     }
@@ -127,7 +135,7 @@ class App extends Component {
 
   componentDidUpdate(_, prevState) {
     if (this.state.loading) return;
-    
+
     const { index, fish, tasks } = prevState;
 
     if (index !== this.state.index) {
@@ -139,7 +147,7 @@ class App extends Component {
       AsyncStorage.setItem('tasks', JSON.stringify(this.state.tasks))
       .catch(console.log);
     }
-    
+
 
     if (fish !== this.state.fish) {
       AsyncStorage.setItem('coins', String(this.state.fish))
