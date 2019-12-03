@@ -5,7 +5,6 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import StarRating from 'react-native-star-rating';
 
 import FloatingButton from './FloatingButton';
-// import CheckBox from './CheckBox';
 
 function TaskItem({ item, onCheckBoxToggle, onDelete, onPress }) {
   const { id, completed, title, deadline, rating } = item;
@@ -18,8 +17,8 @@ function TaskItem({ item, onCheckBoxToggle, onDelete, onPress }) {
       <View style={styles.checkboxContainer}>
         <CheckBox
           checked={completed}
-          checkedColor='#ffd966'
-          uncheckedColor='#ffd966'
+          checkedColor='black'
+          uncheckedColor='black'
           onPress={onIconPress}
         />
       </View>
