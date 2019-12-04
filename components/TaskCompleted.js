@@ -4,14 +4,8 @@ import { Card, Divider, CheckBox } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import StarRating from 'react-native-star-rating';
 
-import FloatingButton from './FloatingButton';
-// import CheckBox from './CheckBox';
-
-function TaskItem({ item, onCheckBoxToggle, onDelete, onPress }) {
+function TaskCompleted({ item }) {
   const { id, completed, title, deadline, rating } = item;
-
-  const onIconPress = () => onCheckBoxToggle(id);
-  const onDeletePress = () => onDelete(id);
 
   return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
@@ -30,12 +24,13 @@ function TaskItem({ item, onCheckBoxToggle, onDelete, onPress }) {
           halfStarEnabled={true}
         />
       </Card>
+
+      <View style={styles.fishContainer}>
+        <Icon name='add' color='black' size={40} />
+        <Text style={styles.count}>{numHearts}</Text>
+        <Icon name='fish' color='#6280c1' size={30}/>
+      </View>
     </TouchableOpacity>
-    <View style={styles.fishContainer}>
-      <Icon name='add' color='black' size={40} />
-      <Text style={styles.count}>{numHearts}</Text>
-      <Icon name='fish' color='#6280c1' size={30}/>
-    </View>
   );
 }
 
@@ -47,26 +42,10 @@ const styles = StyleSheet.create({
     marginRight: 16
   },
 
-  checkboxContainer: {
-    paddingLeft: 6,
-    paddingRight: 6,
-    alignSelf: 'center'
-  },
-
   cardContainer: {
     flex: 1,
     margin: 0,
     borderRadius: 10
-  },
-
-  removeButton: {
-    top: 1,
-    right: 1,
-    bottom: null,
-    height: 16,
-    width: 16,
-    borderRadius: 32,
-    backgroundColor: null
   },
 
   starContainer: {
@@ -74,4 +53,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default TaskItem;
+export default TaskCompleted;
