@@ -84,6 +84,10 @@ class App extends Component {
     });
   };
 
+  // decrementFish() {
+  //   fish -= 500;
+  // }
+
   onAddButtonPress = (
     { title, deadline, rating, desc, duration },
     callback
@@ -171,7 +175,8 @@ class App extends Component {
           index,
           onAddButtonPress: this.onAddButtonPress,
           onCheckBoxToggle: this.onCheckBoxToggle,
-          onDeleteTask: this.onDeleteTask
+          onDeleteTask: this.onDeleteTask,
+          // decrementFish: this.decrementFish
         }}
       />
     );
