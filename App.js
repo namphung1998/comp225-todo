@@ -7,6 +7,10 @@ import ProgressScreen from './screens/ProgressScreen';
 import GalleryScreen from './screens/GalleryScreen';
 import HistoryScreen from './screens/HistoryScreen';
 
+if (__DEV__) {
+  import('./ReactotronConfig').then(() => console.log('Reactotron Configured'));
+}
+
 const tabNavigator = createBottomTabNavigator({
   Progress: {
     screen: ProgressScreen,
@@ -14,12 +18,6 @@ const tabNavigator = createBottomTabNavigator({
       tabBarVisible: true
     }
   },
-  // AddTask: {
-  //   screen: AddTask,
-  //   navigationOptions: {
-  //     tabBarVisible: true,
-  //   }
-  // },
   Gallery: {
     screen: GalleryScreen,
     navigationOptions: {

@@ -20,7 +20,7 @@ function Calendar({ chosenDate, setChosenDate, daysToShow }) {
         {daysToShow.map((day, i) => {
           return (
             <Day
-              disabled={day.disabled}
+              enabled={day.enabled}
               key={day.date}
               day={day}
               dayIndex={i}
@@ -36,14 +36,14 @@ function Calendar({ chosenDate, setChosenDate, daysToShow }) {
   );
 }
 
-function Day({ day, dayIndex, style, disabled }) {
+function Day({ day, dayIndex, style, enabled }) {
   return (
     <View style={styles.dayContainer}>
       <Text>{DAYS_OF_WEEK[dayIndex][0]}</Text>
-      <TouchableOpacity disabled={disabled} style={style}>
+      <TouchableOpacity disabled={!enabled} style={style}>
         <Text style={styles.monthText}>{day.date}</Text>
       </TouchableOpacity>
-      {!disabled && <View style={styles.dot}></View>}
+      {enabled && <View style={styles.dot} />}
     </View>
   );
 }

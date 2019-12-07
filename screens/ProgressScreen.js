@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Modal } from 'react-native';
+import { View, Modal, StyleSheet, Dimensions, TouchableOpacity, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import moment from 'moment';
@@ -11,22 +11,22 @@ import TaskDetail from '../components/TaskDetail';
 import FloatingButton from '../components/FloatingButton';
 import Calendar from '../components/Calendar';
 import { getFullWeek } from '../utils';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 function ProgressScreen({
   screenProps: { fish, onAddButtonPress, onCheckBoxToggle, tasks, onDeleteTask }
 }) {
   const [visible, setVisible] = useState(false);
   const [detailVisible, setDetailVisible] = useState(false);
+  
   const today = moment();
   const [chosenDate, setChosenDate] = useState(today);
 
-  const floatingButtonPress = () => {
-    setVisible(!visible);
-  };
+  const [detailId, setDetailId] = useState(null);
 
-  const taskDetailPress = () => {
-    setDetailVisible(!detailVisible);
-  };
+  const floatingButtonPress = () => setVisible(!visible);
+
+  const taskDetailPress = id => setDetailId(id);
 
   const addTaskButtonPress = (title, deadline, rating, desc, duration) => {
     onAddButtonPress({ title, deadline, rating, desc, duration }, () =>
@@ -51,8 +51,10 @@ function ProgressScreen({
   const daysInWeek = getFullWeek(chosenDate);
   const daysToShow = daysInWeek.map(day => {
     const key = moment(day).format('YYYY-MM-DD');
-    return { ...day, disabled: tasksByDate[key] ? false : true }
+    return { ...day, enabled: !!tasksByDate[key] }
   });
+
+  console.log(detailId);
 
   return (
     <View style={styles.container}>
@@ -61,18 +63,24 @@ function ProgressScreen({
         numTotal={tasks.length}
         numHearts={fish}
       />
-      <Modal visible={visible}>
+      <Modal animationType='slide' visible={visible}>
         <AddTask
           addTaskButtonPress={addTaskButtonPress}
           cancelButtonPress={cancelButtonPress}
         />
       </Modal>
 
-      <Modal visible={detailVisible}>
-        <TaskDetail
-          // addTaskButtonPress={addTaskButtonPress}
-          // cancelButtonPress={cancelButtonPress}
-        />
+      <Modal transparent={true} animationType='fade' visible={!!detailId}>
+
+        <TouchableOpacity activeOpacity={1} onPress={() => setDetailId(null)} style={styles.modalOverlay}></TouchableOpacity>
+          
+          <View style={styles.detail}>
+            <TaskDetail
+              item={tasks.find(item => item.id === detailId)}
+              // addTaskButtonPress={addTaskButtonPress}
+              // cancelButtonPress={cancelButtonPress}
+            />
+          </View>
       </Modal>
 
       <Calendar
@@ -96,7 +104,7 @@ function ProgressScreen({
   );
 }
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     height: '100%',
     backgroundColor: '#fff'
@@ -106,7 +114,22 @@ const styles = {
   },
   addTaskButton: {
     borderWidth: 1.5
+  },
+  detail: {
+    backgroundColor: 'red',
+    height: 160,
+    top: Dimensions.get('screen').height / 2 - 80,
+    marginLeft: 24,
+    marginRight: 24
+  },
+  modalOverlay: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'rgba(0,0,0,0.5)'
   }
-};
+});
 
 export default ProgressScreen;

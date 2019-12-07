@@ -11,9 +11,10 @@ function TaskItem({ item, onCheckBoxToggle, onDelete, onPress }) {
 
   const onIconPress = () => onCheckBoxToggle(id);
   const onDeletePress = () => onDelete(id);
+  const onItemPress = () => onPress(id);
 
   return (
-    <TouchableOpacity onPress={onPress} style={styles.container}>
+    <TouchableOpacity onPress={onItemPress} style={styles.container}>
       <View style={styles.checkboxContainer}>
         <CheckBox
           checked={completed}

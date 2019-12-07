@@ -7,7 +7,7 @@ function TaskDetail({ item, onDelete }) {
 
     return (
         <View>
-            <Text>Task Detail</Text>
+            <Text>{item.title}</Text>
         </View>
     );
 }
