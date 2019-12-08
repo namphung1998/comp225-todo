@@ -1,14 +1,15 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Card, Divider, CheckBox } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import StarRating from 'react-native-star-rating';
 
 function TaskCompleted({ item }) {
   const { id, completed, title, deadline, rating } = item;
 
   return (
-    <TouchableOpacity onPress={onPress} style={styles.container}>
+    <TouchableOpacity style={styles.container}>
       <Card
         titleStyle={{ textAlign: 'left' }}
         containerStyle={styles.cardContainer}
@@ -26,9 +27,9 @@ function TaskCompleted({ item }) {
       </Card>
 
       <View style={styles.fishContainer}>
-        <Icon name='add' color='black' size={40} />
-        <Text style={styles.count}>{numHearts}</Text>
-        <Icon name='fish' color='#6280c1' size={30}/>
+        <MaterialIcon name='add' color='black' size={24} />
+        <Text style={styles.count}>{rating*100}</Text>
+        <Icon name='fish' color='#6280c1' size={24}/>
       </View>
     </TouchableOpacity>
   );
@@ -37,9 +38,7 @@ function TaskCompleted({ item }) {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    marginTop: 16,
-    marginBottom: 16,
-    marginRight: 16
+    margin: 16
   },
 
   cardContainer: {
@@ -50,6 +49,17 @@ const styles = StyleSheet.create({
 
   starContainer: {
     width: '50%'
+  },
+
+  fishContainer: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+
+  count: {
+    fontSize: 18,
+    marginLeft: 3,
+    marginRight: 6
   }
 });
 

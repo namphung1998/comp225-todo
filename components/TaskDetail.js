@@ -6,9 +6,8 @@ function TaskDetail({ item, onDelete }) {
     // const onDeletePress = () => onDelete(id);
 
     return (
-        <View styles={styles.modalView}>
-            <Text>Task Detail</Text>
-            
+        <View>
+            <Text>{item.title}</Text>
         </View>
     );
 }

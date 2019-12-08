@@ -27,7 +27,7 @@ function ProgressBar({ numCompleted, numTotal, width }) {
             styles.progress,
             { width: widthStyle }
           ]}
-        ></Animated.View>
+        />
       </View>
     </View>
   );

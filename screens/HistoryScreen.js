@@ -1,12 +1,27 @@
 import React, { useRef }  from 'react';
 import { View, Text, Modal, StyleSheet, SectionList } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+import moment from 'moment';
 
 import TaskCompleted from '../components/TaskCompleted';
 import TaskDetail from '../components/TaskDetail';
+import ProgressHeader from '../components/ProgressHeader';
 
-function HistoryScreen(tasksByDate) {
+function HistoryScreen({
+  screenProps: { fish, tasks }
+}) {
+
   const listRef = useRef(null);
+
+  const tasksByDate = tasks.reduce((obj, item) => {
+    if (obj[item.deadline]) {
+      obj[item.deadline].push(item);
+    } else {
+      obj[item.deadline] = [item];
+    }
+
+    return obj;
+  }, {});
 
   const data = Object.keys(tasksByDate).map(date => {
     return { title: date, data: tasksByDate[date] };
@@ -14,16 +29,33 @@ function HistoryScreen(tasksByDate) {
 
   const keyExtractor = item => String(item.id);
 
+  const renderSectionHeader = ({ section: { title: date } }) => {
+    const currDate = moment(date);
+    const dateString = (currDate.isSame(new Date(), 'day') ? 'Today - ' : '') + currDate.format('ddd, MMM D');
+
+    return (
+      <View style={styles.dateContainer}>
+        <Text>{dateString}</Text>
+      </View>
+    )
+  }
+
   const renderItem = ({ item: task }) => (
     <TaskCompleted
       key={task.id}
       item={task}
-      onPress={onPress}
     />
   );
 
   return (
     <View style={styles.screen}>
+
+      <ProgressHeader
+        numCompleted={tasks.filter(item => item.completed).length}
+        numTotal={tasks.length}
+        numHearts={fish}
+      />
+
       <Text style={styles.titleStyle}>
         History
       </Text>
@@ -31,6 +63,7 @@ function HistoryScreen(tasksByDate) {
       <SectionList
         ref={listRef}
         sections={data}
+        renderSectionHeader={renderSectionHeader}
         renderItem={renderItem}
         keyExtractor={keyExtractor}
       />
@@ -45,6 +78,13 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     padding: 10,
     fontWeight: 'bold'
+  },
+
+  dateContainer: {
+    backgroundColor: '#dddddd',
+    height: 24,
+    borderWidth: 2,
+    borderColor: '#cccccc'
   }
 });
 
