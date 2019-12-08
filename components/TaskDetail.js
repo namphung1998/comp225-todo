@@ -15,10 +15,10 @@ function TaskDetail({ item, onDelete }) {
 }
 
 const styles = StyleSheet.create({
-    modalView: {
-        backgroundColor: "white",
-        margin: 40,
-       },
+  modalView: {
+      backgroundColor: "white",
+      margin: 40,
+     }
 })
 
 export default TaskDetail;

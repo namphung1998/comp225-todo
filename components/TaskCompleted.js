@@ -2,8 +2,11 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Card, Divider, CheckBox } from 'react-native-elements';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import BackIcon from 'react-native-vector-icons/AntDesign';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import StarRating from 'react-native-star-rating';
+
+import FloatingButton from './FloatingButton';
 
 function TaskCompleted({ item, onCheckBoxToggle }) {
   const { id, completed, title, deadline, rating } = item;
@@ -11,13 +14,16 @@ function TaskCompleted({ item, onCheckBoxToggle }) {
   const onPress = () => onCheckBoxToggle(id);
 
   return (
-    <TouchableOpacity onPress={onPress} style={styles.container}>
+    <TouchableOpacity style={styles.container}>
       <Card
         titleStyle={{ textAlign: 'left' }}
         containerStyle={styles.cardContainer}
         title={title}
         dividerStyle={{ display: 'none' }}
       >
+        <FloatingButton onPress={onPress} style={styles.backButton}>
+          <BackIcon name='back' size={16} />
+        </FloatingButton>
         <StarRating
           containerStyle={styles.starContainer}
           starSize={24}
@@ -62,6 +68,16 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginLeft: 3,
     marginRight: 6
+  },
+
+  backButton: {
+    top: 1,
+    right: 1,
+    bottom: null,
+    height: 16,
+    width: 16,
+    borderRadius: 32,
+    backgroundColor: null
   }
 });
 
