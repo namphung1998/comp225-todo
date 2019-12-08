@@ -5,11 +5,13 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import StarRating from 'react-native-star-rating';
 
-function TaskCompleted({ item }) {
+function TaskCompleted({ item, onCheckBoxToggle }) {
   const { id, completed, title, deadline, rating } = item;
 
+  const onPress = () => onCheckBoxToggle(id);
+
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity onPress={onPress} style={styles.container}>
       <Card
         titleStyle={{ textAlign: 'left' }}
         containerStyle={styles.cardContainer}

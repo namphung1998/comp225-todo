@@ -61,7 +61,7 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
           confirmBtnText='Confirm'
           cancelBtnText='Cancel'
           customStyles={{
-            dateIcon: { 
+            dateIcon: {
               position: 'absolute',
               right: 0,
               top: 4,
@@ -82,7 +82,7 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
       <View style = {{borderColor: '#6280c1', borderWidth: 2.5, padding: 5}}>
         <Text style={styles.textStyle}> Difficulty </Text>
         <View style={{padding: 10}}>
-        <StarRating     
+        <StarRating
           disabled={false}
           maxStars={5}
           rating={starRating}
@@ -108,7 +108,7 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
         <Text style={styles.textStyle3}>   min </Text>
         </View>
       <View style={{paddingTop: 10}}>
-        <TextInput 
+        <TextInput
           placeholder={"Optional Description"}
           numberOfLines={5}
           multiline={true}
@@ -118,17 +118,17 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
           value={enteredDescription}
         />
       </View>
-      <View 
-        flex={1}  
+      <View
+        flex={1}
         justifyContent= {'flex-end'}
-        marginBottom= {0}> 
+        marginBottom= {0}>
         <AddCancelButton
           onAddPress={() => {
             if(enteredTask == '') {
               Alert.alert('Please give your task a name!', 'Enter a name for your task before continuing.');
             }
             else {
-            addTaskButtonPress(enteredTask, currentDate, starRating, enteredDescription);
+              addTaskButtonPress(enteredTask, currentDate, starRating, enteredDescription, enteredDuration);
             }
           }}
           onCancelPress={cancelButtonPress}
@@ -155,14 +155,14 @@ const styles = StyleSheet.create({
     padding: 10
   },
   textStyle: {
-    color: 'black', 
-    fontSize: 16, 
-    left: -5, 
+    color: 'black',
+    fontSize: 16,
+    left: -5,
   },
   textStyle2: {
-    color: 'black', 
-    fontSize: 16, 
-    left: -20, 
+    color: 'black',
+    fontSize: 16,
+    left: -20,
     top: 7
   },
   textStyle3: {
@@ -172,22 +172,22 @@ const styles = StyleSheet.create({
     top: 5
   },
   titleStyle: {
-    fontSize: 36, 
-    color: '#eaabbe', 
-    alignSelf: 'center', 
+    fontSize: 36,
+    color: '#eaabbe',
+    alignSelf: 'center',
     padding: 10,
     fontWeight: 'bold'
   },
   duration: {
-    width: '15%', 
-    borderColor: '#6280c1', 
+    width: '15%',
+    borderColor: '#6280c1',
     borderWidth: 2.5
   },
   description:{
-    width: '100%', 
-    height: 150, 
-    borderColor: '#6280c1', 
-    borderWidth: 2.5, 
+    width: '100%',
+    height: 150,
+    borderColor: '#6280c1',
+    borderWidth: 2.5,
     padding: 10
   }
 });

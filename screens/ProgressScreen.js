@@ -18,7 +18,7 @@ function ProgressScreen({
 }) {
   const [visible, setVisible] = useState(false);
   const [detailVisible, setDetailVisible] = useState(false);
-  
+
   const today = moment();
   const [chosenDate, setChosenDate] = useState(today);
 
@@ -38,7 +38,9 @@ function ProgressScreen({
     setVisible(!visible);
   };
 
-  const tasksByDate = tasks.reduce((obj, item) => {
+  const tasksByDate = tasks
+  .filter(item => !item.completed)
+  .reduce((obj, item) => {
     if (obj[item.deadline]) {
       obj[item.deadline].push(item);
     } else {
@@ -69,7 +71,7 @@ function ProgressScreen({
       </Modal>
 
       <Modal transparent={true} animationType='fade' visible={!!detailId}>
-        <TouchableOpacity activeOpacity={1} onPress={overlayPress} style={styles.modalOverlay} /> 
+        <TouchableOpacity activeOpacity={1} onPress={overlayPress} style={styles.modalOverlay} />
           <View style={styles.detail}>
             <TaskDetail
               item={tasks.find(item => item.id === detailId)}

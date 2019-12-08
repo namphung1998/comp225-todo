@@ -8,12 +8,14 @@ import TaskDetail from '../components/TaskDetail';
 import ProgressHeader from '../components/ProgressHeader';
 
 function HistoryScreen({
-  screenProps: { fish, tasks }
+  screenProps: { fish, tasks, onCheckBoxToggle }
 }) {
 
   const listRef = useRef(null);
 
-  const tasksByDate = tasks.reduce((obj, item) => {
+  const tasksByDate = tasks
+  .filter(item => item.completed)
+  .reduce((obj, item) => {
     if (obj[item.deadline]) {
       obj[item.deadline].push(item);
     } else {
@@ -44,6 +46,7 @@ function HistoryScreen({
     <TaskCompleted
       key={task.id}
       item={task}
+      onCheckBoxToggle={onCheckBoxToggle}
     />
   );
 

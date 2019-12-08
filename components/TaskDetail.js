@@ -8,6 +8,8 @@ function TaskDetail({ item, onDelete }) {
     return (
         <View>
             <Text>{item.title}</Text>
+            <Text>{item.desc}</Text>
+            <Text>{item.duration}</Text>
         </View>
     );
 }
