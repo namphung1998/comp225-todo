@@ -47,7 +47,7 @@ masterImageArray=[
 
 
 
-function GalleryScreen({ screenProps: { fish, tasks } }) { //decrementFish
+function GalleryScreen({ screenProps: { fish, tasks, decrementFish } }) { //decrementFish
 
   const [imageArray, setImageArray] = useState(masterImageArray);
   
@@ -91,7 +91,6 @@ function GalleryScreen({ screenProps: { fish, tasks } }) { //decrementFish
     } else {
       sticker = rArray[Math.floor(Math.random()*rArray.length)]; //8
     }
-    console.log(sticker);
     openSticker(sticker);
   }
 
@@ -101,7 +100,7 @@ function GalleryScreen({ screenProps: { fish, tasks } }) { //decrementFish
       Alert.alert("Try again later", "You don't have enough fish to draw in any cats!");
     } else {
       chooseSticker();
-      // decrementFish();
+      decrementFish();
     }
   }
   

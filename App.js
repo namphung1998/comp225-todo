@@ -46,6 +46,14 @@ state = {
     
   };
 
+  decrementFish = () => {
+    this.setState(state => {
+      return {
+        fish: state.fish - 500
+      }
+    })
+  }
+
   onDeleteTask = id => {
     const { tasks } = this.state;
     const toDelete = tasks.find(item => item.id === id);
@@ -176,7 +184,7 @@ state = {
           onAddButtonPress: this.onAddButtonPress,
           onCheckBoxToggle: this.onCheckBoxToggle,
           onDeleteTask: this.onDeleteTask,
-          // decrementFish: this.decrementFish
+          decrementFish: this.decrementFish
         }}
       />
     );
