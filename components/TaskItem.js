@@ -24,10 +24,10 @@ function TaskItem({ item, onCheckBoxToggle, onDelete, onPress }) {
         />
       </View>
       <Card
-        titleStyle={{ textAlign: 'left' }}
+        titleStyle={styles.cardTitle}
         containerStyle={styles.cardContainer}
         title={title}
-        dividerStyle={{ display: 'none' }}
+        dividerStyle={styles.divider}
       >
         <FloatingButton onPress={onDeletePress} style={styles.removeButton}>
           <Icon name='highlight-off' size={16} />
@@ -63,6 +63,12 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 0,
     borderRadius: 10
+  },
+  cardTitle: {
+    textAlign: 'left'
+  },
+  divider: {
+    display: 'none'
   },
 
   removeButton: {

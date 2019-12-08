@@ -25,8 +25,8 @@ function ProgressScreen({
   const [detailId, setDetailId] = useState(null);
 
   const floatingButtonPress = () => setVisible(!visible);
-
   const taskDetailPress = id => setDetailId(id);
+  const overlayPress = () => setDetailId(null);
 
   const addTaskButtonPress = (title, deadline, rating, desc, duration) => {
     onAddButtonPress({ title, deadline, rating, desc, duration }, () =>
@@ -54,8 +54,6 @@ function ProgressScreen({
     return { ...day, enabled: !!tasksByDate[key] }
   });
 
-  console.log(detailId);
-
   return (
     <View style={styles.container}>
       <ProgressHeader
@@ -71,9 +69,7 @@ function ProgressScreen({
       </Modal>
 
       <Modal transparent={true} animationType='fade' visible={!!detailId}>
-
-        <TouchableOpacity activeOpacity={1} onPress={() => setDetailId(null)} style={styles.modalOverlay}></TouchableOpacity>
-          
+        <TouchableOpacity activeOpacity={1} onPress={overlayPress} style={styles.modalOverlay} /> 
           <View style={styles.detail}>
             <TaskDetail
               item={tasks.find(item => item.id === detailId)}
