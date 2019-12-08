@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Modal } from 'react-native';
+import { Overlay } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import moment from 'moment';
@@ -68,12 +69,15 @@ function ProgressScreen({
         />
       </Modal>
 
-      <Modal visible={detailVisible}>
+      <Overlay  
+        isVisible ={detailVisible}
+        onBackdropPress={() => setDetailVisible(!detailVisible)}
+        >
         <TaskDetail
           // addTaskButtonPress={addTaskButtonPress}
           // cancelButtonPress={cancelButtonPress}
         />
-      </Modal>
+      </Overlay>
 
       <Calendar
         chosenDate={chosenDate}
@@ -106,7 +110,7 @@ const styles = {
   },
   addTaskButton: {
     borderWidth: 1.5
-  }
+  },
 };
 
 export default ProgressScreen;

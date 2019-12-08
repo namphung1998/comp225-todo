@@ -10,7 +10,7 @@ function DrawButton({onDrawPress}) {
           onPress={onDrawPress}
           style={styles.container}>
             <Text>
-              Draw
+              DRAW (500)
             </Text>
           </TouchableOpacity>
     // </SafeAreaView>

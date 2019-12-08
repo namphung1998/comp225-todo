@@ -38,12 +38,14 @@ const tabNavigator = createBottomTabNavigator({
 const AppContainer = createAppContainer(tabNavigator);
 
 class App extends Component {
-  state = {
+state = {    
+    fontLoaded: false,
     fish: null,
     tasks: [],
     archivedTask: [],
     index: 1,
     loading: true
+    
   };
 
   onDeleteTask = id => {
@@ -113,7 +115,7 @@ class App extends Component {
       };
     }, callback);
   };
-
+  
   componentDidMount() {
     // AsyncStorage.clear();
     // return;

@@ -47,7 +47,7 @@ masterImageArray=[
 
 
 
-function GalleryScreen({ screenProps: { fish } }) { //decrementFish
+function GalleryScreen({ screenProps: { fish, tasks } }) { //decrementFish
 
   const [imageArray, setImageArray] = useState(masterImageArray);
   
@@ -109,8 +109,8 @@ function GalleryScreen({ screenProps: { fish } }) { //decrementFish
       return (
           <View>
             <ProgressHeader
-              numCompleted={0}
-              numTotal={0}
+              numCompleted={tasks.filter(item => item.completed).length}
+              numTotal={tasks.length}
               numHearts={fish}
             />
           </View>

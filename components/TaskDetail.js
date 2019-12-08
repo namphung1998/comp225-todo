@@ -1,15 +1,23 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, Alert } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 
 function TaskDetail({ item, onDelete }) {
     // const { id, completed, title, deadline, rating } = item;
     // const onDeletePress = () => onDelete(id);
 
     return (
-        <View>
+        <View styles={styles.modalView}>
             <Text>Task Detail</Text>
+            
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    modalView: {
+        backgroundColor: "white",
+        margin: 40,
+       },
+})
 
 export default TaskDetail;
