@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { AsyncStorage, ActivityIndicator } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createAppContainer } from 'react-navigation';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 import ProgressScreen from './screens/ProgressScreen';
 import GalleryScreen from './screens/GalleryScreen';
@@ -16,12 +17,14 @@ const tabNavigator = createBottomTabNavigator({
   Progress: {
     screen: ProgressScreen,
     navigationOptions: {
+      tabBarIcon:({tintColor}) => {return <Icon name='home' size={24} color={tintColor}/>},
       tabBarVisible: true
     }
   },
   Gallery: {
     screen: GalleryScreen,
     navigationOptions: {
+      tabBarIcon:({tintColor}) => {return <Icon name='paint-brush' size={24} color={tintColor}/>},
       tabBarVisible: true
     }
   },
@@ -29,22 +32,31 @@ const tabNavigator = createBottomTabNavigator({
   History: {
     screen: HistoryScreen,
     navigationOptions: {
+      tabBarIcon:({tintColor}) => {return <Icon name='trophy' size={24} color={tintColor}/>},
       tabBarVisible: true
     }
+  }
+}, {
+  tabBarOptions: {
+    // tabStyle: {paddingTop: 16, paddingBottom: 16},
+    activeTintColor: '#674ea4',
+    inactiveTintColor: '#000000',
+    inactiveBackgroundColor: '#d8d7f4',
+    activeBackgroundColor: '#d8d7f4'
   }
 });
 
 const AppContainer = createAppContainer(tabNavigator);
 
 class App extends Component {
-state = {    
+state = {
     fontLoaded: false,
     fish: null,
     tasks: [],
     archivedTask: [],
     index: 1,
     loading: true
-    
+
   };
 
   decrementFish = () => {
@@ -122,7 +134,7 @@ state = {
       };
     }, callback);
   };
-  
+
   componentDidMount() {
     // AsyncStorage.clear();
     // return;
