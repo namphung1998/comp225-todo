@@ -6,6 +6,7 @@ import { createAppContainer } from 'react-navigation';
 import ProgressScreen from './screens/ProgressScreen';
 import GalleryScreen from './screens/GalleryScreen';
 import HistoryScreen from './screens/HistoryScreen';
+import * as Font from 'expo-font';
 
 if (__DEV__) {
   import('./ReactotronConfig').then(() => console.log('Reactotron Configured'));
