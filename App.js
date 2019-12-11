@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AsyncStorage, ActivityIndicator } from 'react-native';
+import { AsyncStorage, ActivityIndicator, View, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createAppContainer } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -67,10 +67,11 @@ class App extends Component {
   };
 
   onDeleteTask = (id, callback) => {
+    callback();
     const { tasks } = this.state;
     const newTasks = tasks.filter(item => item.id !== id);
 
-    this.setState({ tasks: newTasks }, callback);
+    this.setState({ tasks: newTasks });
   };
 
   onCheckBoxToggle = id => {
@@ -97,10 +98,6 @@ class App extends Component {
       };
     });
   };
-
-  // decrementFish() {
-  //   fish -= 500;
-  // }
 
   onAddButtonPress = (
     { title, deadline, rating, desc, duration },
@@ -153,25 +150,29 @@ class App extends Component {
     const { index, fish, tasks } = prevState;
 
     if (index !== this.state.index) {
-      AsyncStorage.setItem('index', String(this.state.index)).catch(
-        console.log
-      );
+      AsyncStorage.setItem('index', String(this.state.index))
+        .catch(console.log);
     }
 
     if (tasks !== this.state.tasks) {
-      AsyncStorage.setItem('tasks', JSON.stringify(this.state.tasks)).catch(
-        console.log
-      );
+      AsyncStorage.setItem('tasks', JSON.stringify(this.state.tasks))
+        .catch(console.log);
     }
 
     if (fish !== this.state.fish) {
-      AsyncStorage.setItem('coins', String(this.state.fish)).catch(console.log);
+      AsyncStorage.setItem('coins', String(this.state.fish))
+        .catch(console.log);
     }
   }
 
   render() {
     if (this.state.loading) {
-      return <ActivityIndicator />;
+      return (
+        <View style={styles.loadingScreen}>
+          <ActivityIndicator size='large'/>
+        </View>
+        
+      );
     }
 
     const { fish, tasks, archivedTask, index } = this.state;
@@ -192,5 +193,12 @@ class App extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  loadingScreen: {
+    justifyContent: 'center',
+    flex: 1,
+  }
+});
 
 export default App;
