@@ -114,11 +114,14 @@ const styles = StyleSheet.create({
     borderWidth: 1.5
   },
   detail: {
-    backgroundColor: 'red',
+    backgroundColor: 'white',
     height: 160,
     top: Dimensions.get('screen').height / 2 - 80,
     marginLeft: 24,
-    marginRight: 24
+    marginRight: 24,
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: 'black'
   },
   modalOverlay: {
     position: 'absolute',
