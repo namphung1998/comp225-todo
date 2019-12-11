@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Alert, AsyncStorage } from 'react-native';
+import { View, Alert, AsyncStorage, StyleSheet } from 'react-native';
 import ImageLayout from 'react-native-image-layout';
 import ProgressHeader from '../components/ProgressHeader';
 import DrawButton from '../components/DrawButton';

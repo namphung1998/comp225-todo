@@ -20,7 +20,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'pink',
     alignItems: 'center',
     justifyContent: 'center',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    marginBottom: 10
   }
 });
 
