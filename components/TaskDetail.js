@@ -24,8 +24,8 @@ function TaskDetail({ item, onDelete, setDetailId }) {
 
 const styles = StyleSheet.create({
   modalView: {
-      backgroundColor: 'white',
-      margin: 40,
+    backgroundColor: 'white',
+    margin: 40,
   },
   titleView: {
     fontSize: 20,
