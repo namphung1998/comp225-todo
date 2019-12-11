@@ -12,19 +12,20 @@ function TaskItem({ item, onCheckBoxToggle, onDelete, onPress }) {
   const onIconPress = () => onCheckBoxToggle(id);
   const onDeletePress = () => onDelete(id);
   const onItemPress = () => onPress(id);
-  const starColor = () => {
+  
+  const cardColor = () => {
     if (item.rating <= 2) {
-      return '#bb1e8'
-    } else if (item.rating <= 3) {
-      return '#f4cbd9'
+        return '#bbe1e8'
+    } else if (item.rating <= 3.5) {
+        return '#f4cbd9'
     } else {
-      return '#ffcdc8'
+        return '#ffcdc8'
     }
   }
 
   return (
-    <TouchableOpacity onPress={onItemPress} style={styles.container}>
-      <View style={styles.checkboxContainer}>
+    <TouchableOpacity onPress={onItemPress} style={styles(this.props).container}>
+      <View style={styles(this.props).checkboxContainer}>
         <CheckBox
           checked={completed}
           checkedColor='black'
@@ -33,17 +34,16 @@ function TaskItem({ item, onCheckBoxToggle, onDelete, onPress }) {
         />
       </View>
       <Card
-        // backgroundColor= {starColor()}
-        titleStyle={styles.cardTitle}
-        containerStyle= {styles.cardContainer}
+        titleStyle={styles(this.props).cardTitle}
+        containerStyle={styles(cardColor()).cardContainer}
         title={title}
-        dividerStyle={styles.divider}
+        dividerStyle={styles(this.props).divider}
       >
-        <FloatingButton onPress={onDeletePress} style={styles.removeButton}>
+        <FloatingButton onPress={onDeletePress} style={styles(this.props).removeButton}>
           <Icon name='highlight-off' size={16} />
         </FloatingButton>
         <StarRating
-          containerStyle={styles.starContainer}
+          containerStyle={styles(this.props).starContainer}
           starSize={24}
           disabled={true}
           maxStars={5}
@@ -55,7 +55,7 @@ function TaskItem({ item, onCheckBoxToggle, onDelete, onPress }) {
   );
 }
 
-const styles = StyleSheet.create({
+const styles = (cardColor) => StyleSheet.create({
   container: {
     flexDirection: 'row',
     marginTop: 16,
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 0,
     borderRadius: 10,
-    backgroundColor: starColor()
+    backgroundColor: cardColor
   },
   cardTitle: {
     textAlign: 'left'
