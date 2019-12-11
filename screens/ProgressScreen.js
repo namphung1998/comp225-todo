@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import { View, Modal, StyleSheet, Dimensions, TouchableOpacity, Text } from 'react-native';
+import {
+  View,
+  Modal,
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+  Text
+} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import moment from 'moment';
@@ -17,7 +24,6 @@ function ProgressScreen({
   screenProps: { fish, onAddButtonPress, onCheckBoxToggle, tasks, onDeleteTask }
 }) {
   const [visible, setVisible] = useState(false);
-  const [detailVisible, setDetailVisible] = useState(false);
 
   const today = moment();
   const [chosenDate, setChosenDate] = useState(today);
@@ -27,6 +33,8 @@ function ProgressScreen({
   const floatingButtonPress = () => setVisible(!visible);
   const taskDetailPress = id => setDetailId(id);
   const overlayPress = () => setDetailId(null);
+
+  const isEmpty = tasks.filter(item => !item.completed).length === 0;
 
   const addTaskButtonPress = (title, deadline, rating, desc, duration) => {
     onAddButtonPress({ title, deadline, rating, desc, duration }, () =>
@@ -39,21 +47,21 @@ function ProgressScreen({
   };
 
   const tasksByDate = tasks
-  .filter(item => !item.completed)
-  .reduce((obj, item) => {
-    if (obj[item.deadline]) {
-      obj[item.deadline].push(item);
-    } else {
-      obj[item.deadline] = [item];
-    }
+    .filter(item => !item.completed)
+    .reduce((obj, item) => {
+      if (obj[item.deadline]) {
+        obj[item.deadline].push(item);
+      } else {
+        obj[item.deadline] = [item];
+      }
 
-    return obj;
-  }, {});
+      return obj;
+    }, {});
 
   const daysInWeek = getFullWeek(chosenDate);
   const daysToShow = daysInWeek.map(day => {
     const key = moment(day).format('YYYY-MM-DD');
-    return { ...day, enabled: !!tasksByDate[key] }
+    return { ...day, enabled: !!tasksByDate[key] };
   });
 
   return (
@@ -71,14 +79,18 @@ function ProgressScreen({
       </Modal>
 
       <Modal transparent={true} animationType='fade' visible={!!detailId}>
-        <TouchableOpacity activeOpacity={1} onPress={overlayPress} style={styles.modalOverlay} />
-          <View style={styles.detail}>
-            <TaskDetail
-              item={tasks.find(item => item.id === detailId)}
-              // addTaskButtonPress={addTaskButtonPress}
-              // cancelButtonPress={cancelButtonPress}
-            />
-          </View>
+        <TouchableOpacity
+          activeOpacity={1}
+          onPress={overlayPress}
+          style={styles.modalOverlay}
+        />
+        <View style={styles.detail}>
+          <TaskDetail
+            item={tasks.find(item => item.id === detailId)}
+            // addTaskButtonPress={addTaskButtonPress}
+            // cancelButtonPress={cancelButtonPress}
+          />
+        </View>
       </Modal>
 
       <Calendar
@@ -88,6 +100,7 @@ function ProgressScreen({
         daysToShow={daysToShow}
       />
 
+      {isEmpty && <Text>No Tasks!</Text>}
       <TaskList
         onCheckBoxToggle={onCheckBoxToggle}
         onDeleteTask={onDeleteTask}
@@ -95,7 +108,10 @@ function ProgressScreen({
         onPress={taskDetailPress}
       />
 
-      <FloatingButton onPress={floatingButtonPress} style={styles.addTaskButton}>
+      <FloatingButton
+        onPress={floatingButtonPress}
+        style={styles.addTaskButton}
+      >
         <Icon name='add' color='black' size={40} />
       </FloatingButton>
     </View>
