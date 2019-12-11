@@ -138,6 +138,10 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
   );
 }
 
+AddTask.defaultProps = {
+
+};
+
 const styles = StyleSheet.create({
   screen: {
     padding: 50,

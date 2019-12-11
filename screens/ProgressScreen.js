@@ -32,8 +32,6 @@ function ProgressScreen({
   const taskDetailPress = id => setDetailId(id);
   const overlayPress = () => setDetailId(null);
 
-  const isEmpty = tasks.filter(item => !item.completed).length === 0;
-
   const addTaskButtonPress = (title, deadline, rating, desc, duration) => {
     onAddButtonPress({ title, deadline, rating, desc, duration }, () =>
       setVisible(!visible)
@@ -44,8 +42,10 @@ function ProgressScreen({
     setVisible(!visible);
   };
 
-  const tasksByDate = tasks
-    .filter(item => !item.completed)
+  const incompletedTasks = tasks.filter(item => !item.completed);
+  const isEmpty = incompletedTasks.length === 0;
+
+  const tasksByDate = incompletedTasks
     .reduce((obj, item) => {
       if (obj[item.deadline]) {
         obj[item.deadline].push(item);
@@ -61,6 +61,8 @@ function ProgressScreen({
     const key = moment(day).format('YYYY-MM-DD');
     return { ...day, enabled: !!tasksByDate[key] };
   });
+
+  console.log(detailId);
 
   return (
     <View style={styles.container}>
