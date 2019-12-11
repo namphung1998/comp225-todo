@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { View, Modal, StyleSheet, Dimensions, TouchableOpacity, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-
 import moment from 'moment';
-
 import ProgressHeader from '../components/ProgressHeader';
 import TaskList from '../components/TaskList';
 import AddTask from './AddTask';

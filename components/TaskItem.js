@@ -12,6 +12,15 @@ function TaskItem({ item, onCheckBoxToggle, onDelete, onPress }) {
   const onIconPress = () => onCheckBoxToggle(id);
   const onDeletePress = () => onDelete(id);
   const onItemPress = () => onPress(id);
+  const starColor = () => {
+    if (item.rating <= 2) {
+      return '#bb1e8'
+    } else if (item.rating <= 3) {
+      return '#f4cbd9'
+    } else {
+      return '#ffcdc8'
+    }
+  }
 
   return (
     <TouchableOpacity onPress={onItemPress} style={styles.container}>
@@ -24,8 +33,9 @@ function TaskItem({ item, onCheckBoxToggle, onDelete, onPress }) {
         />
       </View>
       <Card
+        // backgroundColor= {starColor()}
         titleStyle={styles.cardTitle}
-        containerStyle={styles.cardContainer}
+        containerStyle= {styles.cardContainer}
         title={title}
         dividerStyle={styles.divider}
       >
@@ -62,7 +72,8 @@ const styles = StyleSheet.create({
   cardContainer: {
     flex: 1,
     margin: 0,
-    borderRadius: 10
+    borderRadius: 10,
+    backgroundColor: starColor()
   },
   cardTitle: {
     textAlign: 'left'

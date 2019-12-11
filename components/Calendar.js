@@ -80,7 +80,6 @@ const styles = StyleSheet.create({
   },
 
   monthText: {
-    fontSize: 'comic',
     textAlign: 'center',
     fontWeight: 'bold'
   },
