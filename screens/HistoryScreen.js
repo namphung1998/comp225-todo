@@ -1,29 +1,25 @@
-import React, { useRef }  from 'react';
-import { View, Text, Modal, StyleSheet, SectionList } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import React from 'react';
+import { View, Text, StyleSheet, SectionList } from 'react-native';
 import moment from 'moment';
 
 import TaskCompleted from '../components/TaskCompleted';
-import TaskDetail from '../components/TaskDetail';
 import ProgressHeader from '../components/ProgressHeader';
 
 function HistoryScreen({
   screenProps: { fish, tasks, onCheckBoxToggle }
 }) {
 
-  const listRef = useRef(null);
-
   const tasksByDate = tasks
-  .filter(item => item.completed)
-  .reduce((obj, item) => {
-    if (obj[item.deadline]) {
-      obj[item.deadline].push(item);
-    } else {
-      obj[item.deadline] = [item];
-    }
+    .filter(item => item.completed)
+    .reduce((obj, item) => {
+      if (obj[item.deadline]) {
+        obj[item.deadline].push(item);
+      } else {
+        obj[item.deadline] = [item];
+      }
 
-    return obj;
-  }, {});
+      return obj;
+    }, {});
 
   const data = Object.keys(tasksByDate).map(date => {
     return { title: date, data: tasksByDate[date] };
@@ -52,7 +48,6 @@ function HistoryScreen({
 
   return (
     <View style={styles.screen}>
-
       <ProgressHeader
         numCompleted={tasks.filter(item => item.completed).length}
         numTotal={tasks.length}
@@ -64,7 +59,6 @@ function HistoryScreen({
       </Text>
 
       <SectionList
-        ref={listRef}
         sections={data}
         renderSectionHeader={renderSectionHeader}
         renderItem={renderItem}
@@ -88,6 +82,10 @@ const styles = StyleSheet.create({
     height: 24,
     borderWidth: 2,
     borderColor: '#cccccc'
+  },
+
+  screen: {
+    height: '100%'
   }
 });
 

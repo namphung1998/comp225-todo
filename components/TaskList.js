@@ -5,8 +5,6 @@ import moment from 'moment';
 import TaskItem from './TaskItem.js';
 
 function TaskList({ tasksByDate, onCheckBoxToggle, onDeleteTask, onPress }) {
-  const listRef = useRef(null);
-
   const data = Object.keys(tasksByDate).map(date => {
     return { title: date, data: tasksByDate[date] };
   });
@@ -37,7 +35,6 @@ function TaskList({ tasksByDate, onCheckBoxToggle, onDeleteTask, onPress }) {
   return (
     <View style={styles.container}>
       <SectionList
-        ref={listRef}
         sections={data}
         renderItem={renderItem}
         renderSectionHeader={renderSectionHeader}

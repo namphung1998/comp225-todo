@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { Card, Divider, CheckBox } from 'react-native-elements';
+import { View, Text, StyleSheet } from 'react-native';
+import { Card } from 'react-native-elements';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import BackIcon from 'react-native-vector-icons/AntDesign';
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -9,12 +9,12 @@ import StarRating from 'react-native-star-rating';
 import FloatingButton from './FloatingButton';
 
 function TaskCompleted({ item, onCheckBoxToggle }) {
-  const { id, completed, title, deadline, rating } = item;
+  const { id, title, rating } = item;
 
   const onPress = () => onCheckBoxToggle(id);
 
   return (
-    <TouchableOpacity style={styles.container}>
+    <View style={styles.container}>
       <Card
         titleStyle={{ textAlign: 'left' }}
         containerStyle={styles.cardContainer}
@@ -39,7 +39,7 @@ function TaskCompleted({ item, onCheckBoxToggle }) {
         <Text style={styles.count}>{rating*100}</Text>
         <Icon name='fish' color='#6280c1' size={24}/>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 }
 
