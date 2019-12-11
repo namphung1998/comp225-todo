@@ -66,11 +66,11 @@ class App extends Component {
     });
   };
 
-  onDeleteTask = id => {
+  onDeleteTask = (id, callback) => {
     const { tasks } = this.state;
     const newTasks = tasks.filter(item => item.id !== id);
 
-    this.setState({ tasks: newTasks });
+    this.setState({ tasks: newTasks }, callback);
   };
 
   onCheckBoxToggle = id => {

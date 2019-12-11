@@ -85,6 +85,8 @@ function ProgressScreen({
         <View style={styles.detail}>
           <TaskDetail
             item={tasks.find(item => item.id === detailId)}
+            onDelete={onDeleteTask}
+            setDetailId={setDetailId}
             // addTaskButtonPress={addTaskButtonPress}
             // cancelButtonPress={cancelButtonPress}
           />
@@ -128,11 +130,14 @@ const styles = StyleSheet.create({
     borderWidth: 1.5
   },
   detail: {
-    backgroundColor: 'red',
-    height: 160,
-    top: Dimensions.get('screen').height / 2 - 80,
+    backgroundColor: 'white',
+    height: Dimensions.get('screen').height / 3,
+    top: Dimensions.get('screen').height / 2 - 100,
     marginLeft: 24,
-    marginRight: 24
+    marginRight: 24,
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: 'black'
   },
   modalOverlay: {
     position: 'absolute',
