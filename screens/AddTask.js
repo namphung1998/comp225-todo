@@ -3,8 +3,7 @@ import { View, Text, TextInput, StyleSheet, Alert, ScrollView,  } from 'react-na
 import AddCancelButton from '../components/AddCancelButton';
 import DatePicker from 'react-native-datepicker';
 import StarRating from 'react-native-star-rating';
-import KeyboardSpacer from 'react-native-keyboard-spacer';
-
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 function AddTask({ addTaskButtonPress, cancelButtonPress }) {
   const [enteredTask, setEnteredTask] = useState('');
@@ -38,7 +37,7 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
   }
 
   return (
-    <ScrollView style={styles.screen}>
+    <KeyboardAwareScrollView style={styles.screen}>
       <Text style={styles.titleStyle}>
          Add Task
       </Text>
@@ -103,9 +102,8 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
           onChangeText={descriptionInputHandler}
           value={enteredDescription}
         />
-        <KeyboardSpacer/>
         </View>
-    </ScrollView>
+    </KeyboardAwareScrollView>
   );
 }
 
