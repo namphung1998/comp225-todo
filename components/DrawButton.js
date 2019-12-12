@@ -17,10 +17,13 @@ const styles = StyleSheet.create({
     height: 55,
     width: 120,
     borderRadius: 22,
+    borderWidth: 1.25,
+    borderColor: 'black',
     backgroundColor: 'pink',
     alignItems: 'center',
     justifyContent: 'center',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    marginBottom: 10
   }
 });
 

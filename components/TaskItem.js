@@ -1,16 +1,12 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
-import { Card, Divider, CheckBox } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { Card, CheckBox } from 'react-native-elements';
 import StarRating from 'react-native-star-rating';
 
-import FloatingButton from './FloatingButton';
-
-function TaskItem({ item, onCheckBoxToggle, onDelete, onPress }) {
-  const { id, completed, title, deadline, rating } = item;
+function TaskItem({ item, onCheckBoxToggle, onPress }) {
+  const { id, completed, title, rating } = item;
 
   const onIconPress = () => onCheckBoxToggle(id);
-  const onDeletePress = () => onDelete(id);
   const onItemPress = () => onPress(id);
   
   const cardColor = () => {
@@ -39,9 +35,6 @@ function TaskItem({ item, onCheckBoxToggle, onDelete, onPress }) {
         title={title}
         dividerStyle={styles(this.props).divider}
       >
-        <FloatingButton onPress={onDeletePress} style={styles(this.props).removeButton}>
-          <Icon name='highlight-off' size={16} />
-        </FloatingButton>
         <StarRating
           containerStyle={styles(this.props).starContainer}
           starSize={24}
