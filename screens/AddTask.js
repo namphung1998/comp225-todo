@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Alert, ScrollView,  } from 'react-native';
 import AddCancelButton from '../components/AddCancelButton';
 import DatePicker from 'react-native-datepicker';
 import StarRating from 'react-native-star-rating';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
+
 
 function AddTask({ addTaskButtonPress, cancelButtonPress }) {
   const [enteredTask, setEnteredTask] = useState('');
@@ -36,9 +38,9 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
   }
 
   return (
-    <View style={styles.screen}>
+    <ScrollView style={styles.screen}>
       <Text style={styles.titleStyle}>
-        Add Task
+         Add Task
       </Text>
       <View style={styles.inputContainer}>
         <TextInput
@@ -48,8 +50,8 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
           value={enteredTask}
         />
       </View>
-      <View style={{ flexDirection: 'row', padding: 15 }}>
-        <Text style={styles.textStyle2}> Deadline</Text>
+       <View style={{ flexDirection: 'row', padding: 15 }}>
+         <Text style={styles.textStyle2}> Deadline</Text>
         <DatePicker
           style={{ width: 200 }}
           date={currentDate}
@@ -79,25 +81,9 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
           }}
         />
       </View>
-      <View style = {{borderColor: '#6280c1', borderWidth: 2.5, padding: 5}}>
-        <Text style={styles.textStyle}> Difficulty </Text>
-        <View style={{padding: 10}}>
-        <StarRating
-          disabled={false}
-          maxStars={5}
-          rating={starRating}
-          selectedStar={rating => {
-            setStarRating(rating);
-          }}
-          halfStarEnabled={true}
-          emptyStarColor={'#87acf4'}
-          fullStarColor={'#87acf4'}
-        />
-      </View>
-      </View>
-      <View style={{flexDirection: 'row', paddingTop: 10}}>
-      <Text style={styles.textStyle3}> This task will take about</Text>
-      <TextInput
+      <View style={{ flexDirection: 'row', paddingTop: 10 }}>
+        <Text style={styles.textStyle3}> This task will take about</Text>
+        <TextInput
           style={styles.duration}
           placeholder={'0'}
           keyboardType={'numeric'}
@@ -106,9 +92,9 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
           textAlign={'center'}
         />
         <Text style={styles.textStyle3}>   min </Text>
-        </View>
-      <View style={{paddingTop: 10}}>
-        <TextInput
+      </View>
+      <View>
+      <TextInput
           placeholder={"Optional Description"}
           numberOfLines={5}
           multiline={true}
@@ -117,26 +103,118 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
           onChangeText={descriptionInputHandler}
           value={enteredDescription}
         />
-      </View>
-      <View
-        flex={1}
-        justifyContent= {'flex-end'}
-        marginBottom= {0}>
-        <AddCancelButton
-          onAddPress={() => {
-            if(enteredTask == '') {
-              Alert.alert('Please give your task a name!', 'Enter a name for your task before continuing.');
-            }
-            else {
-              addTaskButtonPress(enteredTask, currentDate, starRating, enteredDescription, enteredDuration);
-            }
-          }}
-          onCancelPress={cancelButtonPress}
-        />
-      </View>
-    </View>
+        <KeyboardSpacer/>
+        </View>
+    </ScrollView>
   );
 }
+
+//   return (
+//     <View style={styles.screen}>
+//       <Text style={styles.titleStyle}>
+//         Add Task
+//       </Text>
+//       <View style={styles.inputContainer}>
+//         <TextInput
+//           placeholder='Enter Task Name'
+//           style={styles.input}
+//           onChangeText={taskInputHandler}
+//           value={enteredTask}
+//         />
+//       </View>
+//       <View style={{ flexDirection: 'row', padding: 15 }}>
+//         <Text style={styles.textStyle2}> Deadline</Text>
+//         <DatePicker
+//           style={{ width: 200 }}
+//           date={currentDate}
+//           mode='date'
+//           placeholder='select date'
+//           format='YYYY-MM-DD'
+//           //minDate="2016-05-15"
+//           //maxDate="2016-06-01"
+//           confirmBtnText='Confirm'
+//           cancelBtnText='Cancel'
+//           customStyles={{
+//             dateIcon: {
+//               position: 'absolute',
+//               right: 0,
+//               top: 4,
+//               marginRight: -15
+//             },
+//             dateInput: {
+//               marginLeft: -10,
+//               marginRight: 25,
+//               borderColor: '#6280c1',
+//               borderWidth: 2.5,
+//             }
+//           }}
+//           onDateChange={date => {
+//             setCurrentDate(date);
+//           }}
+//         />
+//       </View>
+//       <View style = {{borderColor: '#6280c1', borderWidth: 2.5, padding: 5}}>
+//         <Text style={styles.textStyle}> Difficulty </Text>
+//         <View style={{padding: 10}}>
+//         <StarRating
+//           disabled={false}
+//           maxStars={5}
+//           rating={starRating}
+//           selectedStar={rating => {
+//             setStarRating(rating);
+//           }}
+//           halfStarEnabled={true}
+//           emptyStarColor={'#87acf4'}
+//           fullStarColor={'#87acf4'}
+//         />
+//       </View>
+//       </View>
+//       <View style={{flexDirection: 'row', paddingTop: 10}}>
+//       <Text style={styles.textStyle3}> This task will take about</Text>
+//       <TextInput
+//           style={styles.duration}
+//           placeholder={'0'}
+//           keyboardType={'numeric'}
+//           onChangeText={durationInputHandler}
+//           value={enteredDuration}
+//           textAlign={'center'}
+//         />
+//         <Text style={styles.textStyle3}>   min </Text>
+//         </View>
+//       <ScrollView
+//           keyboardShouldPersistTaps={'never'}
+//           style={{paddingTop: 10}}
+//           scrollEnabled={false}
+//           keyboardDismissMode={'on-drag'}>
+//           <TextInput
+//             placeholder={"Optional Description"}
+//             numberOfLines={5}
+//             multiline={true}
+//             textAlignVertical={'top'}
+//             style={styles.description}
+//             onChangeText={descriptionInputHandler}
+//             value={enteredDescription}
+//           />
+//         </ScrollView>
+//       <View
+//         flex={1}
+//         justifyContent= {'flex-end'}
+//         marginBottom= {0}>
+//         <AddCancelButton
+//           onAddPress={() => {
+//             if(enteredTask == '') {
+//               Alert.alert('Please give your task a name!', 'Enter a name for your task before continuing.');
+//             }
+//             else {
+//               addTaskButtonPress(enteredTask, currentDate, starRating, enteredDescription, enteredDuration);
+//             }
+//           }}
+//           onCancelPress={cancelButtonPress}
+//         />
+//       </View>
+//     </View>
+//   );
+// }
 
 const styles = StyleSheet.create({
   screen: {
@@ -183,7 +261,7 @@ const styles = StyleSheet.create({
     borderColor: '#6280c1',
     borderWidth: 2.5
   },
-  description:{
+  description: {
     width: '100%',
     height: 150,
     borderColor: '#6280c1',
