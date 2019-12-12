@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import { View, Text, StyleSheet, SectionList, Button } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet, SectionList } from 'react-native';
 import moment from 'moment';
 
 import TaskItem from './TaskItem.js';
@@ -11,15 +11,17 @@ function TaskList({ tasksByDate, onCheckBoxToggle, onDeleteTask, onPress }) {
 
   const keyExtractor = item => String(item.id);
 
-  const renderItem = ({ item: task }) => (
-    <TaskItem
-      key={task.id}
-      onCheckBoxToggle={onCheckBoxToggle}
-      onDelete={onDeleteTask}
-      item={task}
-      onPress={onPress}
-    />
-  );
+  const renderItem = ({ item: task }) => {
+    return (
+      <TaskItem
+        key={task.id}
+        onCheckBoxToggle={onCheckBoxToggle}
+        onDelete={onDeleteTask}
+        item={task}
+        onPress={onPress}
+      />
+    )
+  };
 
   const renderSectionHeader = ({ section: { title: date } }) => {
     const currDate = moment(date);

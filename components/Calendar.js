@@ -1,8 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import moment from 'moment';
 
-import { MONTHS, DAYS_OF_WEEK, getFullWeek } from '../utils';
+import { MONTHS, DAYS_OF_WEEK } from '../utils';
 
 function Calendar({ chosenDate, setChosenDate, daysToShow }) {
   const isChosen = day => {
@@ -43,7 +42,7 @@ function Day({ day, dayIndex, style, enabled }) {
       <TouchableOpacity disabled={!enabled} style={style}>
         <Text style={styles.monthText}>{day.date}</Text>
       </TouchableOpacity>
-      {enabled && <View style={styles.dot} />}
+      <View style={enabled ? styles.dot : styles.noDot} />
     </View>
   );
 }
@@ -91,6 +90,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#8e7cc3',
     borderWidth: 1,
     borderColor: '#fff',
+    marginTop: 6,
+  },
+
+  noDot: {
+    height: 8,
+    width: 8,
     marginTop: 6,
   }
 });
