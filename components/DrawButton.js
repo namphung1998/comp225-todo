@@ -4,7 +4,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 function DrawButton({ onDrawPress }) {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{padding: 5}}>
       <TouchableOpacity onPress={onDrawPress} style={styles.container}>
         <Text>DRAW (500)</Text>
       </TouchableOpacity>

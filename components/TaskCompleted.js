@@ -13,19 +13,29 @@ function TaskCompleted({ item, onCheckBoxToggle }) {
 
   const onPress = () => onCheckBoxToggle(id);
 
+  const cardColor = () => {
+    if (item.rating <= 2) {
+        return '#bbe1e8'
+    } else if (item.rating <= 3.5) {
+        return '#f4cbd9'
+    } else {
+        return '#ffcdc8'
+    }
+  }
+
   return (
-    <View style={styles.container}>
+    <View style={styles(this.props).container}>
       <Card
         titleStyle={{ textAlign: 'left' }}
-        containerStyle={styles.cardContainer}
+        containerStyle={styles(cardColor()).cardContainer}
         title={title}
         dividerStyle={{ display: 'none' }}
       >
-        <FloatingButton onPress={onPress} style={styles.backButton}>
+        <FloatingButton onPress={onPress} style={styles(this.props).backButton}>
           <BackIcon name='back' size={16} />
         </FloatingButton>
         <StarRating
-          containerStyle={styles.starContainer}
+          containerStyle={styles(this.props).starContainer}
           starSize={24}
           disabled={true}
           maxStars={5}
@@ -34,16 +44,16 @@ function TaskCompleted({ item, onCheckBoxToggle }) {
         />
       </Card>
 
-      <View style={styles.fishContainer}>
+      <View style={styles(this.props).fishContainer}>
         <MaterialIcon name='add' color='black' size={24} />
-        <Text style={styles.count}>{rating*100}</Text>
+        <Text style={styles(this.props).count}>{rating*100}</Text>
         <Icon name='fish' color='#6280c1' size={24}/>
       </View>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
+const styles = (cardColor) => StyleSheet.create({
   container: {
     flexDirection: 'row',
     margin: 16
@@ -52,7 +62,8 @@ const styles = StyleSheet.create({
   cardContainer: {
     flex: 1,
     margin: 0,
-    borderRadius: 10
+    borderRadius: 10,
+    backgroundColor: cardColor
   },
 
   starContainer: {

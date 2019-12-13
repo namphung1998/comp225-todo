@@ -175,14 +175,18 @@ function GalleryScreen({ screenProps: { fish, tasks, decrementFish } }) {
   return (
     <ImageLayout
       // renderPageHeader={this._renderPageHeader}
+      resizeMode={'cover'}
+      enableScale={false}
+      enableResistance={false}
       renderMainHeader={_renderMainHeader}
       renderMainFooter={_renderMainFooter}
       images={transformArray(imageArray)}
       rerender={true}
-      sorted={true}
       columns={3}
       spacing={5}
+      
     />
+    
   );
 }
 

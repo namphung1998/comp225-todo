@@ -126,7 +126,7 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
         flex={1}
         justifyContent= {'flex-end'}
         marginBottom= {0}
-        paddingTop={20}
+        paddingTop={50}
         >
         <AddCancelButton
           onAddPress={() => {

@@ -65,7 +65,8 @@ const styles = StyleSheet.create({
     borderWidth: 1.25,
     borderColor: 'black',
     backgroundColor: 'pink',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    marginBottom: 0
   },
   textContainer: {
     textAlign: 'center',

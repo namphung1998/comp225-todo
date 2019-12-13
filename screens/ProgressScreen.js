@@ -102,7 +102,7 @@ function ProgressScreen({
         daysToShow={daysToShow}
       />
 
-      {isEmpty && <Text>No Tasks!</Text>}
+      {isEmpty && <Text style={styles.noTaskText}>No Tasks!</Text>}
       <TaskList
         onCheckBoxToggle={onCheckBoxToggle}
         onDeleteTask={onDeleteTask}
@@ -148,6 +148,12 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     backgroundColor: 'rgba(0,0,0,0.5)'
+  },
+  noTaskText: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 18,
+    marginTop: 150
   }
 });
 
