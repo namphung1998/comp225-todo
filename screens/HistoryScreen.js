@@ -54,10 +54,6 @@ function HistoryScreen({
         numHearts={fish}
       />
 
-      <Text style={styles.titleStyle}>
-        History
-      </Text>
-
       <SectionList
         sections={data}
         renderSectionHeader={renderSectionHeader}

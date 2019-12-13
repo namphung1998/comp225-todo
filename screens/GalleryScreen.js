@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Alert, AsyncStorage, StyleSheet } from 'react-native';
+import { View, Alert, AsyncStorage } from 'react-native';
 import ImageLayout from 'react-native-image-layout';
 import ProgressHeader from '../components/ProgressHeader';
 import DrawButton from '../components/DrawButton';
@@ -97,7 +97,7 @@ function GalleryScreen({ screenProps: { fish, tasks, decrementFish } }) {
       .catch(console.log);
   }, [imageArray]);
 
-  function transformArray(newImageArray) {
+  const transformArray = newImageArray => {
     const updatedArray = newImageArray.map(image => {
       if (image.open == false) {
         return {
@@ -111,10 +111,10 @@ function GalleryScreen({ screenProps: { fish, tasks, decrementFish } }) {
     return updatedArray;
   }
 
-  function openSticker(sticker) {
-    if (sticker.open == false) {
+  const openSticker = sticker => {
+    if (!sticker.open) {
       const updatedArray = imageArray.map(image => {
-        if (image.id == sticker.id) {
+        if (image.id === sticker.id) {
           return { ...image, open: true };
         }
         return image;
@@ -125,12 +125,15 @@ function GalleryScreen({ screenProps: { fish, tasks, decrementFish } }) {
     }
   }
 
-  function chooseSticker() {
-    rarity = Math.random();
-    urArray = imageArray.slice(0, 1);
-    ssrArray = imageArray.slice(2, 4);
-    srArray = imageArray.slice(5, 7);
-    rArray = imageArray.slice(8, 12);
+  const chooseSticker = () => {
+    const rarity = Math.random();
+    const urArray = imageArray.slice(0, 1);
+    const ssrArray = imageArray.slice(2, 4);
+    const srArray = imageArray.slice(5, 7);
+    const rArray = imageArray.slice(8, 12);
+
+    let sticker;
+
     if (rarity < 0.01) {
       sticker = urArray[Math.floor(Math.random() * urArray.length)]; //2
     } else if (rarity < 0.05) {
@@ -143,7 +146,7 @@ function GalleryScreen({ screenProps: { fish, tasks, decrementFish } }) {
     openSticker(sticker);
   }
 
-  function drawButtonPress() {
+  const drawButtonPress = () => {
     if (fish < 500) {
       Alert.alert(
         'Try again later',
@@ -171,11 +174,10 @@ function GalleryScreen({ screenProps: { fish, tasks, decrementFish } }) {
     return <DrawButton onDrawPress={drawButtonPress} />;
   };
 
-  //console.log(imageArray)
   return (
     <ImageLayout
       // renderPageHeader={this._renderPageHeader}
-      resizeMode={'cover'}
+      resizeMode='cover'
       enableScale={false}
       enableResistance={false}
       renderMainHeader={_renderMainHeader}
@@ -184,9 +186,7 @@ function GalleryScreen({ screenProps: { fish, tasks, decrementFish } }) {
       rerender={true}
       columns={3}
       spacing={5}
-      
     />
-    
   );
 }
 

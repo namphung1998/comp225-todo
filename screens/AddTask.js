@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, Alert, ScrollView, } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  Alert,
+  ScrollView
+} from 'react-native';
 import AddCancelButton from '../components/AddCancelButton';
 import DatePicker from 'react-native-datepicker';
 import StarRating from 'react-native-star-rating';
-import Icon from 'react-native-vector-icons/FontAwesome'
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 function AddTask({ addTaskButtonPress, cancelButtonPress }) {
   const [enteredTask, setEnteredTask] = useState('');
@@ -17,7 +24,7 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
   if (day < 10) {
     day = '0' + day;
   }
-  var todayDate = year + "-" + month + "-" + day;
+  var todayDate = year + '-' + month + '-' + day;
 
   const [currentDate, setCurrentDate] = useState(todayDate);
   const [starRating, setStarRating] = useState(2.5);
@@ -27,20 +34,18 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
   };
 
   const [enteredDescription, setEnteredDescription] = useState('');
-  const descriptionInputHandler = (enteredDescription) => {
+  const descriptionInputHandler = enteredDescription => {
     setEnteredDescription(enteredDescription);
-  }
+  };
 
   const [enteredDuration, setEnteredDuration] = useState('');
-  const durationInputHandler = (enteredDuration) => {
+  const durationInputHandler = enteredDuration => {
     setEnteredDuration(enteredDuration);
-  }
+  };
 
   return (
     <ScrollView style={styles.screen}>
-      <Text style={styles.titleStyle}>
-        Add Task
-      </Text>
+      <Text style={styles.titleStyle}>Add Task</Text>
       <View style={styles.inputContainer}>
         <TextInput
           placeholder='Enter Task Name'
@@ -62,21 +67,20 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
           //maxDate="2016-06-01"
           confirmBtnText='Confirm'
           cancelBtnText='Cancel'
-          allowFontScaling= {true}
-          iconComponent= {<Icon name='calendar' size= {25}/>}
+          allowFontScaling={true}
+          iconComponent={<Icon name='calendar' size={25} />}
           customStyles={{
             dateIcon: {
               position: 'absolute',
               right: 100,
-              top: 4,
+              top: 4
             },
             dateInput: {
               marginLeft: -10,
               marginRight: 15,
               borderColor: '#6280c1',
-              borderWidth: 2.5,
+              borderWidth: 2.5
             }
-            
           }}
           onDateChange={date => {
             setCurrentDate(date);
@@ -109,11 +113,11 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
           value={enteredDuration}
           textAlign={'center'}
         />
-        <Text style={styles.textStyle3}>   min </Text>
+        <Text style={styles.textStyle3}> min </Text>
       </View>
-      <View style={{paddingTop: 10}}>
+      <View style={{ paddingTop: 10 }}>
         <TextInput
-          placeholder={"Optional Description"}
+          placeholder={'Optional Description'}
           numberOfLines={5}
           multiline={true}
           textAlignVertical={'top'}
@@ -124,17 +128,25 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
       </View>
       <View
         flex={1}
-        justifyContent= {'flex-end'}
-        marginBottom= {0}
+        justifyContent={'flex-end'}
+        marginBottom={0}
         paddingTop={50}
-        >
+      >
         <AddCancelButton
           onAddPress={() => {
-            if(enteredTask == '') {
-              Alert.alert('Please give your task a name!', 'Enter a name for your task before continuing.');
-            }
-            else {
-              addTaskButtonPress(enteredTask, currentDate, starRating, enteredDescription, enteredDuration);
+            if (enteredTask == '') {
+              Alert.alert(
+                'Please give your task a name!',
+                'Enter a name for your task before continuing.'
+              );
+            } else {
+              addTaskButtonPress(
+                enteredTask,
+                currentDate,
+                starRating,
+                enteredDescription,
+                enteredDuration
+              );
             }
           }}
           onCancelPress={cancelButtonPress}
@@ -144,9 +156,7 @@ function AddTask({ addTaskButtonPress, cancelButtonPress }) {
   );
 }
 
-AddTask.defaultProps = {
-
-};
+AddTask.defaultProps = {};
 
 const styles = StyleSheet.create({
   screen: {
@@ -156,7 +166,7 @@ const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   input: {
     width: '100%',
@@ -168,7 +178,7 @@ const styles = StyleSheet.create({
   textStyle: {
     color: 'black',
     fontSize: 18,
-    left: -5,
+    left: -5
   },
   textStyle2: {
     color: 'black',
