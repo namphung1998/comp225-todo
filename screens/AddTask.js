@@ -192,7 +192,8 @@ const styles = StyleSheet.create({
   duration: {
     width: '15%',
     borderColor: '#6280c1',
-    borderWidth: 2.5
+    borderWidth: 2.5,
+    fontSize: 18
   },
   description: {
     width: '100%',

@@ -175,7 +175,7 @@ function GalleryScreen({ screenProps: { fish, tasks, decrementFish } }) {
   return (
     <ImageLayout
       // renderPageHeader={this._renderPageHeader}
-      resizeMode={'cover'}
+      resizeMode={'contain'}
       enableScale={false}
       enableResistance={false}
       renderMainHeader={_renderMainHeader}
