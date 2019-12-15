@@ -1,8 +1,8 @@
 # Taskitty
 
-#### Authors: Linda Lu, Bibiane Morakotkarn, Kieu-Giang Nguyen, Nam Phhung
+#### Authors: Linda Lu, Bibiane Morakotkarn, Kieu-Giang Nguyen, Nam Phung
 
-This is a mobile to-do list application with a gamified aspect that makes it more rewarding for users to complete their tasks. 
+This is a mobile to-do list application with a gamified aspect that makes it more rewarding for users to complete their tasks.
 The app is geared towards students and other people who desire a more enjoyable way to keep track of their tasks and celebrate their completion.
 
 The project is bootstrapped using the [Expo](https://expo.io/) toolchain.
@@ -31,4 +31,3 @@ npm run start
 ```
 
 Follow either the instructions in the command line, or the UI debugger (which should pop up in your browser) to start a simulator.
-
