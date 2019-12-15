@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import { AsyncStorage, ActivityIndicator, View, StyleSheet } from 'react-native';
+import {
+  AsyncStorage,
+  ActivityIndicator,
+  View,
+  StyleSheet,
+  Alert
+} from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createAppContainer } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -18,21 +24,27 @@ const tabNavigator = createBottomTabNavigator(
     Progress: {
       screen: ProgressScreen,
       navigationOptions: {
-        tabBarIcon: ({ tintColor }) => <Icon name='home' size={24} color={tintColor} />,
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name='home' size={24} color={tintColor} />
+        ),
         tabBarVisible: true
       }
     },
     Gallery: {
       screen: GalleryScreen,
       navigationOptions: {
-        tabBarIcon: ({ tintColor }) => <Icon name='paint-brush' size={24} color={tintColor} />,
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name='paint-brush' size={24} color={tintColor} />
+        ),
         tabBarVisible: true
       }
     },
     History: {
       screen: HistoryScreen,
       navigationOptions: {
-        tabBarIcon: ({ tintColor }) => <Icon name='trophy' size={24} color={tintColor} />,
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name='trophy' size={24} color={tintColor} />
+        ),
         tabBarVisible: true
       }
     }
@@ -75,28 +87,40 @@ class App extends Component {
   };
 
   onCheckBoxToggle = id => {
-    this.setState(({ tasks, fish }) => {
-      const newTasks = tasks.map(item => {
-        if (item.id === id) {
-          return { ...item, completed: !item.completed };
+    Alert.alert('Confirm', 'Are you sure you have completed this task?', [
+      {
+        text: 'Yes',
+        onPress: () => {
+          this.setState(({ tasks, fish }) => {
+            const newTasks = tasks.map(item => {
+              if (item.id === id) {
+                return { ...item, completed: !item.completed };
+              }
+
+              return item;
+            });
+
+            const newFish = tasks.reduce((result, item) => {
+              if (item.id === id) {
+                return result + (item.completed ? -1 : 1) * 100 * item.rating;
+              }
+
+              return result;
+            }, fish);
+
+            return {
+              tasks: newTasks,
+              fish: newFish
+            };
+          });
         }
-
-        return item;
-      });
-
-      const newFish = tasks.reduce((result, item) => {
-        if (item.id === id) {
-          return result + (item.completed ? -1 : 1) * 100 * item.rating;
-        }
-
-        return result;
-      }, fish);
-
-      return {
-        tasks: newTasks,
-        fish: newFish
-      };
-    });
+      },
+      {
+        text: 'Cancel',
+        onPress: () => {},
+        style: 'cancel'
+      }
+    ]);
   };
 
   onAddButtonPress = (
@@ -150,18 +174,19 @@ class App extends Component {
     const { index, fish, tasks } = prevState;
 
     if (index !== this.state.index) {
-      AsyncStorage.setItem('index', String(this.state.index))
-        .catch(console.log);
+      AsyncStorage.setItem('index', String(this.state.index)).catch(
+        console.log
+      );
     }
 
     if (tasks !== this.state.tasks) {
-      AsyncStorage.setItem('tasks', JSON.stringify(this.state.tasks))
-        .catch(console.log);
+      AsyncStorage.setItem('tasks', JSON.stringify(this.state.tasks)).catch(
+        console.log
+      );
     }
 
     if (fish !== this.state.fish) {
-      AsyncStorage.setItem('coins', String(this.state.fish))
-        .catch(console.log);
+      AsyncStorage.setItem('coins', String(this.state.fish)).catch(console.log);
     }
   }
 
@@ -169,9 +194,8 @@ class App extends Component {
     if (this.state.loading) {
       return (
         <View style={styles.loadingScreen}>
-          <ActivityIndicator size='large'/>
+          <ActivityIndicator size='large' />
         </View>
-        
       );
     }
 
@@ -197,7 +221,7 @@ class App extends Component {
 const styles = StyleSheet.create({
   loadingScreen: {
     justifyContent: 'center',
-    flex: 1,
+    flex: 1
   }
 });
 

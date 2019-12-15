@@ -2,16 +2,11 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Card } from 'react-native-elements';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import BackIcon from 'react-native-vector-icons/AntDesign';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import StarRating from 'react-native-star-rating';
 
-import FloatingButton from './FloatingButton';
-
-function TaskCompleted({ item, onCheckBoxToggle }) {
+function TaskCompleted({ item }) {
   const { id, title, rating } = item;
-
-  const onPress = () => onCheckBoxToggle(id);
 
   const cardColor = () => {
     if (item.rating <= 2) {
@@ -31,9 +26,6 @@ function TaskCompleted({ item, onCheckBoxToggle }) {
         title={title}
         dividerStyle={{ display: 'none' }}
       >
-        <FloatingButton onPress={onPress} style={styles(this.props).backButton}>
-          <BackIcon name='back' size={16} />
-        </FloatingButton>
         <StarRating
           containerStyle={styles(this.props).starContainer}
           starSize={24}

@@ -6,7 +6,7 @@ import TaskCompleted from '../components/TaskCompleted';
 import ProgressHeader from '../components/ProgressHeader';
 
 function HistoryScreen({
-  screenProps: { fish, tasks, onCheckBoxToggle }
+  screenProps: { fish, tasks }
 }) {
 
   const tasksByDate = tasks
@@ -42,7 +42,6 @@ function HistoryScreen({
     <TaskCompleted
       key={task.id}
       item={task}
-      onCheckBoxToggle={onCheckBoxToggle}
     />
   );
 
