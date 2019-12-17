@@ -1,8 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-
-import FloatingButton from './FloatingButton';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 function TaskDetail({ item, onDelete, setDetailId }) {
     // const { id, completed, title, deadline, rating } = item;
@@ -50,10 +47,10 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     backgroundColor: 'pink',
     justifyContent: 'center',
-    marginTop: 40
+    marginTop: 40,
   },
   textContainer: {
-    textAlign: 'center'
+    textAlign: 'center',
   }
 })
 
